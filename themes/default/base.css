@@ -1,0 +1,29 @@
+@media screen and (min-width: 400px) {
+}
+@media print {
+    
+}
+
+body {
+    background-color: white;
+}
+
+.invisible {visibility:hidden};
+.visible {visibility:visible};
+
+/*Some test stuff by Matt while playing. Ok to delete:*/
+.userProfile label {font-style:normal; font-weight:bold;}
+.userProfile input {border:none; float: right}
+
+.tableBadges tr {
+	height: 150px;
+}
+
+.tableBadges tr td {
+	width: 33%;
+	text-align: center;
+}
+
+.tableBadges tr td img {
+	width: 100%;
+}

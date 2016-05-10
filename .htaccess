@@ -1,0 +1,23 @@
+#This file is used for apache commands.  It is especially useful when you don't have access to your apache server (for instance you are
+#running on an ISP and they don't give you access).
+
+#use these commands to turn on mod rewrite (consider that it's use has overhead):
+#mod rewrite forces any url entered by the user to redirect, in this case back to the index.php.  This is useful for security and
+#stops users from phishing around for files on your site.
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+#this section displays a site maintenance message if message.enable exists
+#RewriteCond %{DOCUMENT_ROOT}/maintenance.html -f
+#RewriteCond %{DOCUMENT_ROOT}/site.isdown -f
+#RewriteCond %{SCRIPT_FILENAME} !sitedown.html
+#RewriteRule ^.*$ /sitedown.html [R=503,L]
+#ErrorDocument 503 /maintenance.html
+#Header Set Cache-Control "max-age=0, no-store"
+#end section for displaying maintenance message
+
+#Don't redirect calls to index.php, files under the assets or css folders, or robots.txt
+RewriteCond $1 !^(index\.php|media|images|themes|css|robots\.txt|js|favicon\.ico)
+#Redirect calls to any files except those in the above rewritecond to index.php
+RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>

@@ -1,0 +1,3 @@
+SET FOREIGN_KEY_CHECKS = 0;TRUNCATE teams; ALTER TABLE teams AUTO_INCREMENT = 1;INSERT INTO teams value
+
+("1","Team 1")

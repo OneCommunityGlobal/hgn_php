@@ -1,0 +1,44 @@
+/*An example header for any files created for the project:
+/**
+ * xxx
+ *
+ * A web application for xxx
+ *
+ * @package	package
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) xxx.
+ * @license
+ * @link
+ * @since	Version 1.0
+ * @filesource
+ */
+
+// ------------------------------------------------------------------------
+
+/*An example documentation stub for classes:
+/**
+ * Example Class
+ *
+ * This class enables you to etc..
+ *
+ *
+ * @package	package
+ * @subpackage	Libraries
+ * @category	Libraries
+ * @author	The HGN Development Team
+ * @link
+ */
+class example {}
+
+
+/*An example documentation for methods:
+// --------------------------------------------------------------------
+
+/**
+ * Set Reply-to
+ *
+ * @access	public
+ * @param	string
+ * @param	string
+ * @return	void
+ */

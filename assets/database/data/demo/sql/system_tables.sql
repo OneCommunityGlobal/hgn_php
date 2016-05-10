@@ -1,0 +1,23 @@
+SET FOREIGN_KEY_CHECKS = 0; TRUNCATE system_tables; ALTER TABLE system_tables AUTO_INCREMENT = 1; INSERT INTO system_tables VALUES
+
+("1","users","id","1","ID","1","0","0","1","","int(11)"),
+("2","users","title","2","Title","0","1","0","5","","varchar(30)"),
+("3","users","description","3","Description","0","1","0","5","","varchar(255)"),
+("4","users","userName","4","User Name","0","1","0","5","","varchar(16)"),
+("5","users","password","5","Password","0","1","0","5","","varchar(16)"),
+("6","users","type","6","Type","0","1","0","1","3","tinyint(2)"),
+("7","users","firstName","7","First Name","0","1","0","5","","varchar(30)"),
+("8","users","lastName","8","Last Name","0","1","0","5","","varchar(30)"),
+("9","users","email","9","Email","0","1","0","5","","varchar(30)"),
+("10","users","phoneHome","10","Home Phone","0","1","0","4","","varchar(15)"),
+("11","users","phoneMobile","11","Mobile Phone","0","1","0","4","","varchar(15)"),
+("12","users","language","12","Language","0","1","0","1","1","tinyint(1)"),
+("13","users","timeZone","13","Time Zone","0","1","0","1","1","tinyint(1)"),
+("14","users","role","14","Role","0","1","0","1","1","tinyint(1)"),
+("15","users","disableNotifications","15","Disable Notifications","0","1","0","7","0","tinyint(1)"),
+("16","users","disableLogin","16","Disable Login","0","1","0","7","0","tinyint(1)"),
+("17","users","admin","17","Admin","0","1","0","7","0","tinyint(1)"),
+("18","users","active","18","Active","0","1","0","7","1","tinyint(1)"),
+("19","users","photoProfile","19","Large Photo Path","0","1","0","5","","varchar(64)"),
+("20","users","photoThumb","20","Thumb Photo Path","0","1","0","5","","varchar(64)"),
+("21","users","avatar","21","Avatar Path","0","1","0","5","","varchar(64)")
