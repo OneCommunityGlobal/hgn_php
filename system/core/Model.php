@@ -58,6 +58,140 @@ class CI_Model {
         
     }
 
+    /* Begin code not belonging to CodeIgniter. Put all the standard CRUD functions here so they only have to
+     * be written once and will be inherited by all models. 
+     */
+
+    //Recommended method of getting/setting properties is in array and use get/set.
+    protected $_properties = [];
+
+    //Standard record creation.  Will fail if index already exists.
+    public function create($table) {
+        $sql = 'Insert into ' . $table;
+        $sqlCols = '(';
+        $sqlVals = ' VALUES (';
+        foreach ($this->_properties as $k => $v) {
+            if ($v) {
+                $sqlCols .= '`' . $k . '`,';
+                $sqlVals .= $this->db->escape($v) . ',';
+            }
+        }
+        $sqlCols = rtrim($sqlCols, ',');
+        $sqlVals = rtrim($sqlVals, ',');
+        $sqlCols .= ')';
+        $sqlVals .= ')';
+        $sql .= $sqlCols . $sqlVals;
+
+        $result = $this->db->query($sql);
+        $inserted_id = $this->db->insert_id();
+        return $result ? $inserted_id : false;
+    }
+
+    //Select a single row from a table.
+    public function read($table, $lookupColumn = null, $lookupValue = null) {
+        if(!$lookupColumn or !$lookupValue) return false;
+        $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
+        $result = $this->db->query($sql);
+        $row = $result->row_array();
+        return ($result->num_rows() > 0) ? $row : false;
+    }
+
+    //Returns multiple rows from a table
+    public function readMulti($table, $tableColumn = null, $columnValue = null) {
+        $sql = 'SELECT * ';
+        $sql .= ' FROM ' . $table;
+        if ($tableColumn and $columnValue) {
+            $sql .= ' where ' . $tableColumn . ' = "' . $table . '"';
+        }
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) return false;
+        foreach ($result->result_array() as $row) {
+            $tableRows[$row['id']] = $row;
+        }
+        return $tableRows;
+    }
+
+    //Returns all rows from a table
+    public function readAll($table, $columns=null) {
+        $sql = 'SELECT * ';
+        $sql .= ' FROM ' . $table;
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) return false;
+        foreach ($result->result_array() as $row) {
+            $tableRows[$row['id']] = $row;
+        }
+        return $tableRows;
+    }
+
+    //Standard update function. Will create new record if index doesn't exist, updates record if it does exist.
+    function update($table, $data = null) {
+        $this->load->model('database_model');
+        $updated = $this->updateRow($table, $data);
+        return $updated ? $this->db->insert_id() : false;
+    }
+
+    //update a row in a table
+    function updateRow($table, $data) {
+        $columns = ' (';
+        $values = ' (';
+        $updValues = ' ';
+        foreach ($data as $k => $v) {
+            $colName = $k;
+            if ($colName === 'Submit' or $colName === 'actionInput') continue;
+            $columns .= $colName . ',';
+            $values .= '"' . $v . '"' . ',';
+            if ($colName === 'id') continue;
+            $updValues .= $k . '= "' . $v . '"' . ',';
+        }
+
+        $columns = rtrim($columns, ",") . ')';
+        $values = rtrim($values, ",") . ')';
+        $updValues = rtrim($updValues, ",");
+
+        $sql = 'INSERT';
+        $sql .= ' INTO ' . $table;
+        $sql .= $columns;
+        $sql .= ' VALUES ' . $values;
+        $sql .= ' ON DUPLICATE KEY UPDATE';
+        $sql .= $updValues;
+        $result = $this->db->query($sql);
+        return $result ? $this->db->insert_id() : false;
+    }
+    //Standard delete function. Deletes a single record.
+    public function delete($table, $id) {
+        $sql = 'DELETE FROM ' . $table . ' where id = "' . $id . '"';
+        $result = $this->db->query($sql);
+        return $result ? true : false;
+    }
+
+    //Property getter
+    public function get($property) {
+        //array_key_exists ( mixed $key , array $array )
+        if (array_key_exists($property, $this->_properties)) {
+            return $this->_properties[$property];
+        } else {
+            return false;
+        }
+    }
+
+    //Property setter
+    public function set($property, $value = null) {
+        if (is_array($property)) {
+            $arrkeys = array_keys($this->_properties);
+            foreach ($property as $k => $v) {
+                if (is_numeric($k)) {
+                    $key = $arrkeys[$k];
+                    $this->_properties[$key] = $v;
+                } else {
+                    $this->_properties[$k] = $v;
+                }
+            }
+            return true;
+        } else {
+            $this->_properties[$property] = $value;
+        }
+    }
+
     // --------------------------------------------------------------------
 
     /**

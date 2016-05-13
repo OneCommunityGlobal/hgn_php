@@ -4,9 +4,17 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Database_model extends CI_Model {
 
+    public function __construct() {
+        // Call the CI_Model constructor
+        parent::__construct();
+    }
+
     public function readTableMetaData($table) {
         $metaRows = null;
-        $sql = 'SELECT * FROM system_tables where tableName = "' . $table . '"';
+        $sql = 'SELECT * ';
+        $sql .= ' FROM system_tables as `st`';
+        $sql .= ' JOIN system_table_columns as `stc` on stc.systemTableId = st.id';
+        $sql .= ' where st.title = "' . $table . '"';
         $result = $this->db->query($sql);
         if (!$result->num_rows() > 0) return false;
         $metaRows['tableName'] = $table;
@@ -31,63 +39,12 @@ class Database_model extends CI_Model {
         return $selectors;
     }
 
-    public function readTableLookups($tableMeta) {
-        $lookupRows = null;
-        $table = $tableMeta['tableName'];
-        foreach ($tableMeta as $mk => $mv) {
-            if ($mk === 'tableName') continue;
-//            switch ($mv['lookupType']) {
-//                case 1 :
-//                    break;
-//                case 2 :
-                    $sql = 'SELECT * FROM system_lookups where id = "' . $mv['lookupId'] . '"';
-                    $result = $this->db->query($sql);
-//                    if (!$result->num_rows() > 0) return false;
-//                    $lookupRows['tableName'] = $table;
-                    foreach ($result->result_array() as $row) {
-                        $lookupRows[$row["lookupId"]][$row["id"]] = $row;
-                    }
-//                    break;
-//                default :
-//                    break;
-//            }
-        }
-        return $lookupRows;
-    }
-
-    //update a row in a table
-    function updateRow($table, $data) {
-        $columns = ' (';
-        $values = ' (';
-        $updValues = ' ';
-        foreach ($data as $k => $v) {
-            $colName = $k;
-            if($colName === 'Submit' or $colName === 'actionInput') continue;
-            $columns .= $colName . ',';
-            $values .= '"' . $v . '"' . ',';
-            if ($colName === 'id') continue;
-            $updValues .= $k . '= "' . $v . '"' . ',';
-        }
-
-        $columns = rtrim($columns, ",") . ')';
-        $values = rtrim($values, ",") . ')';
-        $updValues = rtrim($updValues, ",");
-
-        $sql = 'INSERT';
-        $sql .= ' INTO ' . $table;
-        $sql .= $columns;
-        $sql .= ' VALUES ' . $values;
-        $sql .= ' ON DUPLICATE KEY UPDATE';
-        $sql .= $updValues;
-        $result = $this->db->query($sql);
-        return $result ? $this->db->insert_id() : false;
-    }
-
     function setDefaultData($tableMeta) {
-        foreach($tableMeta as $k=>$v) {
-            if($k === 'tableName') continue;
-            $tableData[$v['columnName']] = $v['defaultValue'];
+        foreach ($tableMeta as $k => $v) {
+            if ($k === 'tableName') continue;
+            $tableData[$v['title']] = $v['defaultValue'];
         }
         return $tableData;
     }
+
 }

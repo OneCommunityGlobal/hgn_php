@@ -21,8 +21,8 @@ $userName = $_SESSION["userName"];
                 <li class="active"><a href="/home">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/project">Project</a></li>
-                <li><a href="/user/timesheet">Timesheet</a></li>
+                <li><a href="/project/display">Project</a></li>
+                <li><a href="/project/timesheet">Timesheet</a></li>
                 <li><a href="/report">Report</a></li>
                 <?php if ($admin) { ?>
                     <li class="dropdown">

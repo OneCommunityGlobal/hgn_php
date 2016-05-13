@@ -89,12 +89,6 @@ class User extends CI_Controller {
         exit;
     }
 
-    public function timesheet() {
-        $data['title'] = PAGE_TITLE;
-        $this->load->view('common/navbar', $data);
-        $this->load->view('timesheet', $data);
-    }
-
     //old logic may use later?
 //    public function signup() {
 //        if (false) {

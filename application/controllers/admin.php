@@ -24,6 +24,10 @@ class Admin extends CI_Controller {
                 $this->data['model'] = $this->model = 'community_model';
                 $this->data['table'] = $this->table = 'communities';
                 break;
+            case 'lookup_value' :
+                $this->data['model'] = $this->model = 'lookup_model';
+                $this->data['table'] = $this->table = 'lookup_values';
+                break;
             default :
                 $this->data['model'] = $this->model = $this->module . '_model';
                 $this->data['table'] = $this->table = strtolower($this->module) . 's';
@@ -60,16 +64,13 @@ class Admin extends CI_Controller {
         $view = 'admin/' . $this->module;
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
-        $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-//        $this->data['tableLookups'] = $this->database_model->readTableLookups($tableMeta);
-
-//        $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
 
         $this->load->view($view, $this->data);
     }
     
     public function add() {
         $this->load->model('database_model');
+        $this->load->model('lookup_model');
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'add';
         $view = 'admin/' . $this->module;
@@ -77,7 +78,7 @@ class Admin extends CI_Controller {
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-//        $this->data['tableLookups'] = $this->database_model->readTableLookups($tableMeta);
+        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
 
@@ -86,6 +87,7 @@ class Admin extends CI_Controller {
 
     public function display() {
         $this->load->model('database_model');
+        $this->load->model('lookup_model');
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'display';
 
@@ -94,7 +96,7 @@ class Admin extends CI_Controller {
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-//        $this->data['tableLookups'] = $this->database_model->readTableLookups($tableMeta);
+        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $tableColumn = 'id';
 
@@ -112,7 +114,6 @@ class Admin extends CI_Controller {
 
     public function update() {
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
-
         
         $model = $this->model;
         $this->load->model($model);
