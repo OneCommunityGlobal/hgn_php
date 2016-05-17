@@ -11,32 +11,19 @@ Page.prototype = {
             this.hideDeleteButton();
         }
     },
-    hideDataDiv : function () {
-        var dataDiv = document.getElementById('dataDiv');
-        dataDiv.classList.add("invisible");
+    hideElement : function (elementId) {
+        var element = document.getElementById(elementId);
+        element.classList.add("invisible");
     },
-    hideEditButton : function () {
-        var editButton = document.getElementById('editButton');
-        editButton.classList.add("invisible");
+    showElement : function (elementId) {
+        var element = document.getElementById(elementId);
+        element.classList.remove("invisible");
     },
-    hideDeleteButton : function () {
-        var deleteButton = document.getElementById('deleteButton');
-        deleteButton.classList.add("invisible");
-    },
-    showDataDiv : function () {
-        var dataDiv = document.getElementById('dataDiv');
-        dataDiv.classList.remove("invisible");
-    },
-    showEditButton : function () {
-        var editButton = document.getElementById('editButton');
-        editButton.classList.remove("invisible");
-    },
-    showDeleteButton : function () {
-        var deleteButton = document.getElementById('deleteButton');
-        deleteButton.classList.remove("invisible");
-    },
-    disableEdit : function () {
-        var inputs = document.querySelectorAll("#dataDiv input, #dataDiv select");
+    disableFormEdit : function (formId) {
+        var form = document.getElementById(formId);
+        form.classList.add("formDisabled");
+        var qs = "#" + formId + " input, #dataDiv select";
+        var inputs = document.querySelectorAll(qs);
         for(var i in inputs) {
             var input = inputs[i];
             if(typeof (input.type) === 'undefined' || input.type === 'submit' || input.type === 'hidden') {
@@ -44,10 +31,14 @@ Page.prototype = {
             }
             input.disabled = true;
         }
+        this.hideElement('submitButton');
         return;
     },
-    enableEdit : function () {
-        var inputs = document.querySelectorAll("#dataDiv input, #dataDiv select");
+    enableFormEdit : function (formId) {
+        var form = document.getElementById(formId);
+        form.classList.remove("formDisabled");
+        var qs = "#" + formId + " input, #dataDiv select";
+        var inputs = document.querySelectorAll(qs);
         for(var i in inputs) {
             var input = inputs[i];
             if(typeof (input.type) === 'undefined' || input.type === 'submit' || input.type === 'hidden') {
@@ -58,8 +49,8 @@ Page.prototype = {
         return;
     },
     validateData : function () {
-        return true;
 //TODO complete this section to validate inputs
+        return true;
         if(validData) {
             return true;
         }else {

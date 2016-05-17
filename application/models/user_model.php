@@ -1,8 +1,30 @@
 <?php
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-//Standard CRUD section
+/**
+ * HGN short description here
+ *
+ * This class long description here
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	models
+ * @author	HGN Dev Team
+ */
 class User_model extends CI_Model {
 
     public function isLoggedIn() {

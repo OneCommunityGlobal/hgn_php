@@ -1,13 +1,42 @@
 <?php
 
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * HGN Admin controller
+ *
+ * The Admin controller is a single entry point for managing all master data. By passing a module name to it, e.g. "user" or "community" 
+ * it automatically knows which model and database table to access. In the current version you must create a view for each model.
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	Contollers
+ * @author	HGN Dev Team
+ */
 class Admin extends CI_Controller {
-    /* by declaring this _remap function, it forces all calls to the Template controller
+
+    /** _remap
+     * 
+     * by declaring this _remap function, it forces all calls to the Template controller
      * to first call this function.  This allows displaying the header page and the
      * footer page once. This is CodeIgniter functionality
+     *
+     * @param string    $method     The method to be called passed as part of the route.
+     * @param mixed     $params     Any paramaters passed as part of the route.
      */
-
     public function _remap($method, $params = array()) {
         //Check to see if user is already logged in.
         $this->load->model('user_model');
@@ -46,17 +75,34 @@ class Admin extends CI_Controller {
             $this->index();
         }
 
+        //since this is an internal admin function, you don't need to show the footer
 //        if (DISPLAY_FOOTER) {
 //            $this->load->view('common/footer', $this->data);
 //        }
         $this->load->view('common/wrapper_bottom', $this->data);
     }
 
+    /**
+     * Index method
+     * 
+     * This is the standard method defaulted to if no method is specifiec in the url e.g. index.php/admin. Currently all calls
+     * to this controller should include a method, so index does nothing.
+     *
+     * @access	public
+     * @return	null
+     */
     public function index() {
         $this->data = null;
         return;
     }
 
+    /**
+     * Display an initial blank page with selectors for the module
+     * 
+     * This method displays an initial blank page with a selector for the current module e.g. a drop down list of all users.
+     * @access	public
+     * @return	null
+     */
     public function home() {
         $this->load->model('database_model');
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
@@ -66,8 +112,19 @@ class Admin extends CI_Controller {
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
 
         $this->load->view($view, $this->data);
+        return;
     }
-    
+
+    /**
+     * Display a form with blanks or defaults for adding new records
+     * 
+     * Outputs a form with either blank fields or default values for user to fill in when adding a new record
+     * 
+     * @todo
+     *
+     * @access	public
+     * @return  null
+     */
     public function add() {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
@@ -83,8 +140,21 @@ class Admin extends CI_Controller {
         $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
 
         $this->load->view($view, $this->data);
+        return;
     }
 
+    /**
+     * Display data in vertical format
+     * 
+     * When a user selects a value from the module selector, this method displays the data in a vertical form
+     * 
+     * @todo
+     *
+     * @access	public
+     * @global 	$_POST  Value of selector selected by user e.g. projectId
+     * @name    $_POST  $columnValue
+     * @return  null
+     */
     public function display() {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
@@ -110,11 +180,24 @@ class Admin extends CI_Controller {
 
         $view = 'admin/' . $this->module;
         $this->load->view($view, $this->data);
+        return;
     }
 
+    /**
+     * Update a database record
+     * 
+     * Takes values in form submitted by user and either creates a new record if the id doesn't exist, or updates
+     * an existing record if the id does already exist
+     * 
+     * @todo
+     *
+     * @access	public
+     * @global 	$_POST  Values of form fields when user hits submit button
+     * @return  null
+     */
     public function update() {
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
-        
+
         $model = $this->model;
         $this->load->model($model);
 
@@ -125,8 +208,20 @@ class Admin extends CI_Controller {
         }
 
         $this->home();
+        return;
     }
 
+    /**
+     * Delete a record from the database
+     * 
+     * Deletes a record from a table in the database based on the id of the record currently being viewed
+     * 
+     * @todo
+     *
+     * @access	public
+     * @global 	$_POST  Value of the id of the record currently being viewed
+     * @return  null
+     */
     public function delete() {
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
 
@@ -140,6 +235,7 @@ class Admin extends CI_Controller {
         }
 
         $this->home();
+        return;
     }
 
 }

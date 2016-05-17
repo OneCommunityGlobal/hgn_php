@@ -1,28 +1,30 @@
-/*An example header for any files created for the project:
+// ------------------------------------------------------------------------
+// An example documentation stub for file headers:
+
 /**
- * xxx
+ * Highest Good Network
  *
- * A web application for xxx
+ * An open source project management tool for managing global communities.
  *
- * @package	package
+ * @package	HGN
  * @author	The HGN Development Team
- * @copyright	Copyright (c) xxx.
- * @license
- * @link
- * @since	Version 1.0
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
  * @filesource
  */
 
 // ------------------------------------------------------------------------
+// An example documentation stub for classes:
 
-/*An example documentation stub for classes:
 /**
  * Example Class
  *
  * This class enables you to etc..
  *
  *
- * @package	package
+ * @package	HGN
  * @subpackage	Libraries
  * @category	Libraries
  * @author	The HGN Development Team
@@ -30,9 +32,8 @@
  */
 class example {}
 
-
-/*An example documentation for methods:
-// --------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// An example documentation stub for functions/methods:
 
 /**
  * Set Reply-to
@@ -42,3 +43,42 @@ class example {}
  * @param	string
  * @return	void
  */
+
+// ------------------------------------------------------------------------
+// An example showing most tags:
+
+/**
+* The short description
+*
+* As many lines of extendend description as you want {@link element} links to an element
+* {@link http://www.example.com Example hyperlink inline link} links to a website
+* Below this goes the tags to further describe element you are documenting
+*
+* @abstract                                       Documents an abstract class, class variable or method
+* @access 	public, private or protected 	Documents access control for an element. @access private indicates that documentation of element be prevented
+* @author 	author name <author@email> 	Documents the author of the current element
+* @copyright 	date name                       Documents copyright information
+* @deprecated 	version                         Documents a method as deprecated
+* @deprec                                         Same as @deprecated
+* @example 	/path/to/example                Documents the location of an external saved example file
+* @exception                                      Documents an exception thrown by a method — also see @throws
+* @global 	type $globalvarname             Documents a global variable or its use in a function or method
+* @ignore                                         Prevents the documentation of an element
+* @internal                                       Private information for advanced developers
+* @license                                        Documents license information
+* @link           URL[Depr in favour of @see]     Displays a hyperlink to a URL in the documentation
+* @name           global variable name            Specifies an alias for a variable. For example, $GLOBALS['myvariable'] becomes $myvariable
+* @magic 		phpdoc.de                       compatibility "phpDocumentor tags".
+* @package 	name of a package               Documents a group of related classes and functions
+* @param          type [$varname] description 	Documents a function parameter
+* @return 	type description                Recommended use is with every method and function, though may be omitted for constructors or methods that have no return value (where @return self and @return void are implied respectively).[2]
+* @see            element                         Documents an association to any element (global variable, include, page, class, function, define, method, variable)
+* @since          version                         Documents when a method was added to a class
+* @static                                         Documents a static class or method
+* @staticvar 	type                            Documents a static variable's use in a function or class
+* @subpackage                                     Specifies sub-package to group classes or functions and defines into. Requires @package tag
+* @throws                                         Documents an exception thrown by a method
+* @todo                                           Documents things that need to be done to the code at a later date
+* @var            type                            A data type for a class variable
+* @version                                        Provides the version number of a class or method
+*/

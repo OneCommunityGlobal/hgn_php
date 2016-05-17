@@ -1,11 +1,33 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
 <?php
 
-//controller for running utilities such as loading tables
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * HGN Database utilities
+ *
+ * This class contains/will contain misc. utilities for the database, e.g. creating tables and loading
+ * with data.
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	contollers
+ * @author	HGN Dev Team
+ */
 class Database extends CI_Controller {
 
-    //example utility for adding records to a Mysql table
     public function createMysql() {
         $this->db->truncate('system_tables');
         $this->load->model('database_model');

@@ -1,13 +1,42 @@
 <?php
 
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * HGN user controller
+ *
+ * This controller manages the functionality of the user page
+ * e.g. logging in/out
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	contollers
+ * @author	HGN Dev Team
+ */
 class User extends CI_Controller {
-    /* by declaring this _remap function, it forces all calls to the Home controller
-     * to first call this function.  This allows displaying the header page and the
-     * footer page once.
-     */
 
+    /** _remap
+     * 
+     * by declaring this _remap function, it forces all calls to the Template controller
+     * to first call this function.  This allows displaying the header page and the
+     * footer page once. This is CodeIgniter functionality
+     *
+     * @param string    $method     The method to be called passed as part of the route.
+     * @param mixed     $params     Any paramaters passed as part of the route.
+     */
     public function _remap($method, $params = array()) {
         $data['title'] = PAGE_TITLE;
         $data['loggedIn'] = $loggedIn = false;
@@ -29,6 +58,16 @@ class User extends CI_Controller {
         $this->load->view('common/wrapper_bottom', $data);
     }
 
+    /**
+     * Short description
+     * 
+     * Longer description
+     *
+     * @access	public
+     * @param	type    short description
+     * @param	type    short description
+     * @return	type    short descriptino
+     */
     public function index() {
         return;
     }
