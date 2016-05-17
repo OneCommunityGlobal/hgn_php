@@ -16,10 +16,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * HGN short description here
+ * HGN Admin user view
  *
- * This class long description here
+ * Manage users 
  *
+ * This class contains any methods for managing data in the user module.
+ * I added the standard CRUD (create, read, update, delete) methods for database
+ * functions to the CodeIgniter model parent class (system/core/model) since they are consistent across 
+ * all models
+ * 
  * @package     HGN
  * @subpackage	
  * @category	views
@@ -64,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class='col-md-12'>
                             <div class="col-md-4">Description</div>
-                            <div class="col-md-6"><input name="description" value="<?php echo $tableData['description']; ?>"/></div>
+                            <div class="col-md-6"><textarea name="description" rows="1" cols="30" ><?php echo $tableData['description']; ?></textarea></div>
                         </div>
                         <div class='col-md-12'>
                             <div class="col-md-4">User Name</div>

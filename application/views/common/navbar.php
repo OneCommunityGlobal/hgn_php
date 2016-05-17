@@ -56,6 +56,7 @@ $userName = $_SESSION["userName"];
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Master Data</li>
+                           <li><a href="/admin/home/community">Manage Communities</a></li>
                            <li><a href="/admin/home/user">Manage Users</a></li>
                         </ul>
                     </li>

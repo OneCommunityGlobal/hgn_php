@@ -135,7 +135,7 @@ class Admin extends CI_Controller {
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+//        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
 
@@ -166,7 +166,7 @@ class Admin extends CI_Controller {
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+//        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $tableColumn = 'id';
 

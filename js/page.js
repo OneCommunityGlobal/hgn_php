@@ -1,4 +1,27 @@
-/* This is the base library */
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
+
+/**
+ * HGN short description here
+ *
+ * This class long description here
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	contollers
+ * @author	HGN Dev Team
+ */
 var Page = function () {
     this.originalData = new Object();
 };

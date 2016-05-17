@@ -1,8 +1,44 @@
+/**
+ * Highest Good Network
+ *
+ * An open source project management tool for managing global communities.
+ *
+ * @package	HGN
+ * @author	The HGN Development Team
+ * @copyright	Copyright (c) 2016.
+ * @license     TBD
+ * @link        https://github.com/OneCommunityGlobal/hgn_dev.git
+ * @version	0.8a
+ * @filesource
+ */
+
+/**
+ * HGN AJAX library
+ *
+ * This class performs the basic AJAX functions of sending or receiving data asynchronously
+ *
+ * @package     HGN
+ * @subpackage	
+ * @category	javascript libraries
+ * @author	HGN Dev Team
+ */
 var Ajax = function () {
     var data = null;
 };
 
 Ajax.prototype = {
+    /**
+     * Get data using AJAX
+     * 
+     * Sends an http request for data to a server. The request is processed asynch, in other
+     * words processing continues before data is returned. Once the status indicates the data has been
+     * returned successfully, the callback method in the callback object is triggered
+     * 
+     * @param object callBackObject
+     * @param method callBackMethod
+     * @param string model which is a php mvc model in the form "/ajax/index/model/method/table/lookupColumn/lookupValue"
+     * @returns mixed JSON encoded data
+     */
     getJsonData : function (callBackObject, callBackMethod, model) {
         var httpRequest;
         httpRequest = new XMLHttpRequest();
@@ -17,6 +53,19 @@ Ajax.prototype = {
         httpRequest.open("POST", model, true);
         httpRequest.send();
     },
+    /**
+     * Send data using AJAX
+
+     * Sends an http request with data to a server. The request is processed asynch, in other
+     * words processing continues before data is processed on the back end. Once the status indicates the data has been
+     * processed successfully, the callback method in the callback object is triggered
+     * 
+     * @param object callBackObject
+     * @param method callBackMethod
+     * @param string phpUri in the form '/ajax/index/model/method/table'
+     * @param JSON   data
+     * @returns boolean Success or failure code
+     */
     sendJsonData : function (callBackObject, callBackMethod, phpUri, data) {
         var params = "data=" + encodeURIComponent(data);
         var httpRequest2 = new XMLHttpRequest();
