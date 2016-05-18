@@ -38,7 +38,6 @@ class Template extends CI_Library {
      * @global 	type $globlvarname  Documents a global variable or its use in a function or method
      * @name    global var name     Specifies an alias for a variable. For example, $GLOBALS['myvariable'] becomes $myvariable
      * @param	type                short description
-     * @param	type                short description
      * @return	type                short descriptino
      */
     public function myfunc() {
