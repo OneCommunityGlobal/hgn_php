@@ -15,10 +15,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * HGN short description here
+ * HGN Admin user_preference view
  *
- * This class long description here
+ * Manage user_preferences
  *
+ * This class contains any methods for managing data in the user_preference module.
+ * I added the standard CRUD (create, read, update, delete) methods for database
+ * functions to the CodeIgniter model parent class (system/core/model) since they are consistent across 
+ * all models
+ * 
  * @package     HGN
  * @subpackage	
  * @category	views
@@ -30,14 +35,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md-3"></div>
         <div id="selectorDiv" class="col-md-5">
-            <form action="/admin/display/community" method="POST">
+            <form action="/admin/display/user_preference" method="POST">
                 <span class = "">Select <?php echo ucfirst($module) ?></span>
                 <select id="mySelect" name="hgnSelect" onchange='this.form.submit()'> <?php echo $model ?>
                     <option value="0">---</option>
                     <?php foreach ($tableSelectors as $tsk => $tsv) { ?>
                         <option value="<?php echo $tsv['value'] ?>">
                             <?php echo $tsv['title'] ?></option>
-                        <?php } ?>
+                    <?php } ?>
                 </select>
             </form>
         </div>
@@ -54,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md-3"></div>
         <div id="dataDiv" class="col-md-5">
-            <form id="dataForm" name="dataForm" action="/admin/update/community" method="POST">
+            <form id="dataForm" name="dataForm" action="/admin/update/user_preference" method="POST">
                 <?php if ($action === 'display' or $action === 'add') { ?>
                     <input id="id" name="id" type="hidden" value="<?php echo $tableData['id']; ?>"/>
                     <div class='col-md-12'>
@@ -66,21 +71,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-6"><textarea name="description" rows="1" cols="30" ><?php echo $tableData['description']; ?></textarea></div>
                     </div>
                     <div class='col-md-12'>
-                        <div class="col-md-4">Owner </div>
+                        <div class="col-md-4">User</div>
                         <div class="col-md-6">
-                            <select name="ownerId">
+                            <select name="userId">
                                 <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['User'];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
-                                    if ($tableData['ownerId'] === $v["value"]) echo 'selected="true"';
+                                    if ($tableData['userId'] === $v["value"]) echo 'selected="true"';
                                     echo '>' . $v['title'];
                                     echo '</option>';
                                 }
                                 ?>
                             </select>
                         </div>
+                    </div>
+                    <div class='col-md-12'>
+                        <div class="col-md-4">Value Type</div>
+                        <div class="col-md-6">
+                            <select name="valueType">
+                                <option value="0">Select</option>
+                                <?php
+                                $tableLookup = $tableLookups['Value Type'];
+                                foreach ($tableLookup as $k => $v) {
+                                    echo '<option value= "' . $v["value"] . '"';
+                                    if ($tableData['valueType'] === $v["value"]) echo 'selected="true"';
+                                    echo '>' . $v['title'];
+                                    echo '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class='col-md-12'>
+                        <div class="col-md-4">Value</div>
+                        <div class="col-md-6"><input name="value" value="<?php echo $tableData['value']; ?>"/></div>
                     </div>
                     <div class='col-md-12'>
                         <div colspan="2" class="text-center"><input id="dataSubmitButton" type="submit" name="Submit" value="Submit" /></div>

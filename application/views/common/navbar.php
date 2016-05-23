@@ -56,8 +56,16 @@ $userName = $_SESSION["userName"];
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Master Data</li>
-                           <li><a href="/admin/home/community">Manage Communities</a></li>
-                           <li><a href="/admin/home/user">Manage Users</a></li>
+                            <li><a href="/admin/home/community">Manage Communities</a></li>
+                            <li><a href="/admin/home/user">Manage Users</a></li>
+                            <li><a href="/admin/home/user_preference">Manage User Preferences</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">System Data</li>
+                            <li><a href="/admin/home/lookup">Manage Lookups</a></li>
+                            <li><a href="/admin/home/lookup_value">Manage Lookup Values</a></li>
+                            <li><a href="/admin/home/system_table">Manage Tables</a></li>
+                            <li><a href="/admin/home/system_table_column">Manage Table Columns</a></li>
+                            <li><a href="/admin/home/system_setting">Manage System Settings</a></li>
                         </ul>
                     </li>
                 <?php } ?>

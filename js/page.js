@@ -225,7 +225,7 @@ Page.prototype = {
     deleteData : function () {
         this.action = 'delete';
         var dataForm = document.getElementById('dataForm');
-        dataForm.action = '/admin/delete/user';
+        dataForm.action = '/admin/delete/' + this.module;
         dataForm.submit();
         return;
     }

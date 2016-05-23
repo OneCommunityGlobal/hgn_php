@@ -52,7 +52,7 @@ class Database_model extends CI_Model {
         $sql = 'SELECT id, title FROM ' . $table;
         $result = $this->db->query($sql);
         if (!$result->num_rows() > 0) {
-            return $this->failMessage;
+            return false;
         }
         foreach ($result->result_array() as $row) {
             $selectors[$row["id"]]["value"] = $row["id"];
@@ -63,6 +63,7 @@ class Database_model extends CI_Model {
     }
 
     function setDefaultData($tableMeta) {
+        if(!$tableMeta) return false;
         foreach ($tableMeta as $k => $v) {
             if ($k === 'tableName') continue;
             $tableData[$v['title']] = $v['defaultValue'];

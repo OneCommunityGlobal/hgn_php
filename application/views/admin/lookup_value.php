@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php foreach ($tableSelectors as $tsk => $tsv) { ?>
                         <option value="<?php echo $tsv['value'] ?>">
                             <?php echo $tsv['title'] ?></option>
-                        <?php } ?>
+                    <?php } ?>
                 </select>
             </form>
         </div>
@@ -74,12 +74,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-6"><input name="value" value="<?php echo $tableData['value']; ?>"/></div>
                     </div>
                     <div class="col-md-12">
-                        <td colspan="2" class="text-center"><input id="dataSubmitButton" type="submit" name="Submit" value="Submit"></div>
-            </div>
-        <?php } ?>
-        </form>
+                        <td colspan="2" class="text-center"><input id="dataSubmitButton" type="submit" name="Submit" value="Submit">
+                    </div>
+                <?php } ?>
+            </form>
+        </div>
     </div>
-</div>
 </main>
 <script type="text/javascript">
     hgnPage.module = "<?php echo $module; ?>";

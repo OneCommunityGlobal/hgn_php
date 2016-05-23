@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php foreach ($tableSelectors as $tsk => $tsv) { ?>
                         <option value="<?php echo $tsv['value'] ?>">
                             <?php echo $tsv['title'] ?></option>
-                        <?php } ?>
+                    <?php } ?>
                 </select>
             </form>
         </div>
@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="dataDiv" class="col-md-5">
             <form id="dataForm" name="dataForm" action="/admin/update/lookup" method="POST">
                 <?php if ($action === 'display' or $action === 'add') { ?>
-        <!--                        <input id="id" name="id" type="hidden" value="<?php //echo $tableData['id'];  ?>"/>-->
+            <!--                        <input id="id" name="id" type="hidden" value="<?php //echo $tableData['id'];   ?>"/>-->
                     <div class="col-md-12">
                         <div class="col-md-4">ID</div>
                         <div class="col-md-6"><input name="id" value="<?php echo $tableData['id']; ?>" disabled/></div>
@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-4">Lookup Type</div>
                         <div class="col-md-6">
                             <select name="lookupType">
+                                <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['Lookup Type'];
                                 foreach ($tableLookup as $k => $v) {
@@ -89,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-4">Lookup Table</div>
                         <div class="col-md-6">
                             <select name="lookupTable">
+                                <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['Lookup Table'];
                                 foreach ($tableLookup as $k => $v) {
@@ -105,12 +107,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-4">Value Column</div>
                         <div class="col-md-6">
                             <select name="valueColumn">
+                                <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['Value Column'];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                    echo '>' . $v['lv.title'];
+                                    echo '>' . $v['title'];
                                     echo '</option>';
                                 }
                                 ?>
@@ -121,12 +124,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-4">Title Column</div>
                         <div class="col-md-6">
                             <select name="titleColumn">
+                                <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['Title Column'];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                    echo '>' . $v['lv.title'];
+                                    echo '>' . $v['title'];
                                     echo '</option>';
                                 }
                                 ?>
@@ -134,12 +138,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <td colspan="2" class="text-center"><input id="dataSubmitButton" type="submit" name="Submit" value="Submit"></div>
-            </div>
-        <?php } ?>
-        </form>
+                        <td colspan="2" class="text-center"><input id="dataSubmitButton" type="submit" name="Submit" value="Submit">
+                    </div>
+                <?php } ?>
+            </form>
+        </div>
     </div>
-</div>
 </main>
 <script type="text/javascript">
     hgnPage.module = "<?php echo $module; ?>";

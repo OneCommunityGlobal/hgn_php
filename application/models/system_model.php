@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	models
  * @author	HGN Dev Team
  */
-class Template extends CI_Model {
+class System_model extends CI_Model {
 
     /**
      * Short description

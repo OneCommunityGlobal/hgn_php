@@ -52,14 +52,37 @@ class Admin extends CI_Controller {
             case 'community' :
                 $this->data['model'] = $this->model = 'community_model';
                 $this->data['table'] = $this->table = 'communities';
+                $this->view = 'admin/' . $this->module;
                 break;
             case 'lookup_value' :
                 $this->data['model'] = $this->model = 'lookup_model';
                 $this->data['table'] = $this->table = 'lookup_values';
+                $this->view = 'admin/' . $this->module;
+                break;
+            case 'system_setting' :
+                $this->data['model'] = $this->model = 'system_model';
+                $this->data['table'] = $this->table = 'system_settings';
+                $this->view = 'admin/' . $this->module;
+                break;
+            case 'system_table' :
+                $this->data['model'] = $this->model = 'database_model';
+                $this->data['table'] = $this->table = 'system_tables';
+                $this->view = 'admin/' . $this->module;
+                break;
+            case 'system_table_columns' :
+                $this->data['model'] = $this->model = 'database_model';
+                $this->data['table'] = $this->table = 'system_table_columns';
+                $this->view = 'admin/' . $this->module;
+                break;
+            case 'user_preference' :
+                $this->data['model'] = $this->model = 'user_model';
+                $this->data['table'] = $this->table = 'user_preferences';
+                $this->view = 'admin/' . $this->module;
                 break;
             default :
                 $this->data['model'] = $this->model = $this->module . '_model';
                 $this->data['table'] = $this->table = strtolower($this->module) . 's';
+                $this->view = 'admin/' . $this->module;
                 break;
         }
 
@@ -105,13 +128,13 @@ class Admin extends CI_Controller {
      */
     public function home() {
         $this->load->model('database_model');
+        
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'home';
-        $view = 'admin/' . $this->module;
 
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
 
-        $this->load->view($view, $this->data);
+        $this->load->view($this->view, $this->data);
         return;
     }
 
@@ -128,18 +151,18 @@ class Admin extends CI_Controller {
     public function add() {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
+        $this->load->model($this->model);
+        
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'add';
-        $view = 'admin/' . $this->module;
-
-
+        
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-//        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
 
-        $this->load->view($view, $this->data);
+        $this->load->view($this->view, $this->data);
         return;
     }
 
@@ -158,17 +181,17 @@ class Admin extends CI_Controller {
     public function display() {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
+        $this->load->model($this->model);
+        
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'display';
 
-        $model = $this->model;
-        $this->load->model($model);
-
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-//        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
 
         $tableColumn = 'id';
+        $model = $this->model;
 
         if (isset($_POST) and isset($_POST['hgnSelect']) and $_POST['hgnSelect']) {
             $columnValue = $_POST['hgnSelect'];
@@ -178,8 +201,7 @@ class Admin extends CI_Controller {
             $this->data['tableData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         }
 
-        $view = 'admin/' . $this->module;
-        $this->load->view($view, $this->data);
+        $this->load->view($this->view, $this->data);
         return;
     }
 
@@ -198,8 +220,8 @@ class Admin extends CI_Controller {
     public function update() {
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
 
+        $this->load->model($this->model);
         $model = $this->model;
-        $this->load->model($model);
 
         $tableColumn = 'id';
         if (isset($_POST) and isset($_POST['id'])) {
@@ -225,8 +247,8 @@ class Admin extends CI_Controller {
     public function delete() {
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
 
+        $this->load->model($this->model);
         $model = $this->model;
-        $this->load->model($model);
 
         $tableColumn = 'id';
         if (isset($_POST) and isset($_POST['id'])) {

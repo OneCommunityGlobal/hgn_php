@@ -5,6 +5,18 @@ body {
 .invisible {visibility:hidden;}
 .visible {visibility:visible;}
 
+.timeClock {
+    display: block;
+    height: 80px;
+    margin: 4px;
+    padding-top: 35px;
+    font-size: 24px;
+    color: green;
+    line-height: 13px;
+    background: url("/images/timeclock.jpg") no-repeat;
+}
+.timeClock > span {
+}
 .tasksForm .taskLevelZero {
     font-size: larger;
 }

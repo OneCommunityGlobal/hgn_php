@@ -47,12 +47,31 @@ class Project_model extends CI_Model {
 
     public function readProjectsByUser($userId) {
         $sql = 'SELECT *';
-        $sql .= ' FROM projects';
-        $sql .= ' WHERE id = "' . $userId . '"';
+        $sql .= ' FROM projects as pr';
+        $sql .= ' JOIN project_to_users as p2u on p2u.projectId = pr.id';
+        $sql .= ' WHERE p2u.userId = "' . $userId . '"';
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) return false;
+        foreach ($result->result_array() as $row) {
+            $tableRows[$row['id']] = $row;
+        }
+        return $tableRows;
     }
 
     public function readTasksByUser($userId) {
-        
+        $sql = 'SELECT';
+        $sql .= ' pr.id as pr_id, pr.title as pr_title, pr.description as pr_description, pr.*';
+        $sql .= ' ,ta.id as ta_id, ta.title as ta_title, ta.description as ta_description, ta.*';
+        $sql .= ' FROM projects as pr';
+        $sql .= ' JOIN tasks as ta on ta.projectId = pr.id';
+        $sql .= ' JOIN task_to_users as t2u on t2u.taskId = ta.id';
+        $sql .= ' WHERE t2u.userId = "' . $userId . '"';
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) return false;
+        foreach ($result->result_array() as $row) {
+            $tableRows[$row['ta_id']] = $row;
+        }
+        return $tableRows;
     }
 
 }

@@ -45,7 +45,8 @@ class Lookup_model extends CI_Model {
         return $lookupRows;
     }
 
-    public function readLookupAll($tableMeta) {
+    public function readLookupAll($tableMeta=null) {
+        if(!$tableMeta) return false;
         $lookupRows = null;
         foreach ($tableMeta as $mk => $mv) {
             if ($mk === 'tableName' or $mv['lookupId'] == 0) continue;
@@ -63,7 +64,7 @@ class Lookup_model extends CI_Model {
                     $lookupRows[$row["title"]][$row["lv.id"]]['value'] = $row['value'];
                     $lookupRows[$row["title"]][$row["lv.id"]]['title'] = $row['lv.title'];
                 } else {
-                    $tmpRows = $this->database_model->readMulti('system_tables');
+                    $tmpRows = $this->database_model->readMulti($row['lookupTable']);
                     foreach ($tmpRows as $tk => $tv) {
                         $lookupRows[$row["title"]][$tv["id"]]['value'] = $tv['id'];
                         $lookupRows[$row["title"]][$tv["id"]]['title'] = $tv['title'];
