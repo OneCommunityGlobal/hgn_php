@@ -114,20 +114,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-6">
                             <select name="language">
                                 <option value="0">Select</option>
-                                <option value="1" <?php if ($tableData['language'] === 'English-US') echo 'selected="true"'; ?>>English - US</option>
-                                <option value="2" <?php if ($tableData['language'] === 'French') echo 'selected="true"'; ?>>French</option>
-                                <option value="3" <?php if ($tableData['language'] === 'Japanese') echo 'selected="true"'; ?>>Japanese</option>
+                                <?php
+                                $tableLookup = $tableLookups['Language'];
+                                foreach ($tableLookup as $k => $v) {
+                                    echo '<option value= "' . $v["value"] . '"';
+                                    if ($tableData['language'] === $v["value"]) echo 'selected="true"';
+                                    echo '>' . $v['title'];
+                                    echo '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-12'>
                         <div class="col-md-4">Time Zone</div>
                         <div class="col-md-6">
-                            <select name="timeZone">
+                            <select name="timezone">
                                 <option value="0">Select</option>
-                                <option value="1" <?php if ($tableData['timeZone'] == 'America/New_York') echo 'selected="true"'; ?>>America/New_York</option>
-                                <option value="2" <?php if ($tableData['timeZone'] == 'America/Chicago') echo 'selected="true"'; ?>>America/Chicago</option>
-                                <option value="3" <?php if ($tableData['timeZone'] == 'America/Los_Angeles') echo 'selected="true"'; ?>>America/Los_Angeles</option>
+                                <?php
+                                $tableLookup = $tableLookups['Timezone'];
+                                foreach ($tableLookup as $k => $v) {
+                                    echo '<option value= "' . $v["value"] . '"';
+                                    if ($tableData['timezone'] === $v["value"]) echo 'selected="true"';
+                                    echo '>' . $v['title'];
+                                    echo '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -135,7 +147,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="col-md-4">Role</div>
                         <div class="col-md-6">
                             <select name="role">
-                            <option value="0">Select</option>
+                                <option value="0">Select</option>
                                 <?php
                                 $tableLookup = $tableLookups['User Role'];
                                 foreach ($tableLookup as $k => $v) {
@@ -145,6 +157,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     echo '</option>';
                                 }
                                 ?>
+                            </select>
                         </div>
                     </div>
                     <div class='col-md-12'>

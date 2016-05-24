@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php
                             foreach ($projectsData as $k => $v) {
                                 echo '<option value= "' . $v["id"] . '"';
-//                                        if ($projectsData['id'] === $v["id"]) echo 'selected="true"';
+//                                  if ($projectsData['id'] === $v["id"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php
                             foreach ($tasksData as $k => $v) {
                                 echo '<option value= "' . $v["id"] . '"';
-//                                        if ($projectsData['id'] === $v["id"]) echo 'selected="true"';
+//                                        if ($tasksData['id'] === $v["id"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }

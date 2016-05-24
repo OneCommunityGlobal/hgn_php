@@ -24,7 +24,7 @@
  * @category	javascript
  * @author	HGN Dev Team
  */
-var Page = function () {
+var Page = function() {
     this.originalData = new Object();
 };
 
@@ -43,7 +43,7 @@ Page.prototype = {
      *                          so we don't show certain page elements such as a delete button initially
      * @return	null
      */
-    init : function () {
+    init : function() {
         if(this.action === 'home') {
             this.hideDataDiv();
             this.hideEditButton();
@@ -62,7 +62,7 @@ Page.prototype = {
      * @param   text    elementId   An elements HTML id tag value
      * @return	null
      */
-    hideElement : function (elementId) {
+    hideElement : function(elementId) {
         var element = document.getElementById(elementId);
         element.classList.add("invisible");
         return;
@@ -78,7 +78,7 @@ Page.prototype = {
      * @param   text    elementId   An elements HTML id tag value
      * @return	null
      */
-    showElement : function (elementId) {
+    showElement : function(elementId) {
         var element = document.getElementById(elementId);
         element.classList.remove("invisible");
         return;
@@ -94,7 +94,7 @@ Page.prototype = {
      * @param   text    formId  An elements HTML id tag value
      * @return	null
      */
-    disableFormEdit : function (formId) {
+    disableFormEdit : function(formId) {
         var form = document.getElementById(formId);
         form.classList.add("formDisabled");
         var qs = "#" + formId + " input, #dataDiv select";
@@ -120,7 +120,7 @@ Page.prototype = {
      * @param   text    formId  An elements HTML id tag value
      * @return	null
      */
-    enableFormEdit : function (formId) {
+    enableFormEdit : function(formId) {
         var form = document.getElementById(formId);
         form.classList.remove("formDisabled");
         var qs = "#" + formId + " input, #dataDiv select";
@@ -147,7 +147,7 @@ Page.prototype = {
      * @param	TBD
      * @return	TBD
      */
-    validateData : function () {
+    validateData : function() {
         //just return true for now until this section is written
         return true;
         if(validData) {
@@ -173,7 +173,7 @@ Page.prototype = {
      * @global 	string  action  Determines which action is currently being processed e.g. "display", add" etc
      * @return	null
      */
-    displayData : function () {
+    displayData : function() {
         this.action = 'display';
         var dataForm = document.getElementById('dataForm');
         dataForm.action = '/admin/delete/display';
@@ -198,7 +198,7 @@ Page.prototype = {
      * @global 	string  action  Determines which action is currently being processed e.g. "display", add" etc
      * @return	null
      */
-    addData : function () {
+    addData : function() {
         this.action = 'add';
         var dataForm = document.getElementById('dataForm');
         dataForm.action = '/admin/add/' + this.module;
@@ -222,11 +222,92 @@ Page.prototype = {
      * @global 	string  action  Determines which action is currently being processed e.g. "delete", add" etc
      * @return	null
      */
-    deleteData : function () {
+    deleteData : function() {
         this.action = 'delete';
         var dataForm = document.getElementById('dataForm');
         dataForm.action = '/admin/delete/' + this.module;
         dataForm.submit();
+        return;
+    },
+    renderTabularData : function(elemObj, colArray, colTitleArray, colSizeArray) {
+        for(var idx in elemObj) {
+            elem = elemObj[idx];
+
+            if(elem["id"] === null) {
+                continue;
+            }
+
+            if(document.getElementById(elem["id"])) {
+                continue;
+            }
+
+            if(+(elem["parentId"]) !== 0 && !document.getElementById(elem["parentId"])) {
+                var parentElem = elemObj[elem["parentId"]];
+                renderElem(elemObj, parentElem);
+            }
+
+            var elemsTbody = document.getElementById('dataTbody');
+
+            var tempRow = document.createElement('tr');
+            tempRow.setAttribute("data-sequence", elem.position);
+            tempRow.setAttribute("id", elem["id"]);
+
+            //***
+
+            var plus = document.createElement('img');
+            plus.src = "/images/icons/plus_sign.jpg";
+            var tempTd = document.createElement('td');
+            var tempElement = document.createElement('button');
+            tempElement.href = 'javascript:void(0)';
+            that = this;
+            tempElement.addEventListener("click", function(evt) {
+                evt.preventDefault();
+                that.addNewRow(that.bodyData);
+            }, false);
+            tempElement.appendChild(plus);
+            tempTd.appendChild(tempElement);
+            tempRow.appendChild(tempTd);
+
+            var minus = document.createElement('img');
+            minus.src = "/images/icons/minus_sign.jpg";
+            var tempElement = document.createElement('button');
+            tempElement.href = 'javascript:void(0)';
+            that = this;
+            tempElement.addEventListener("click", function(evt) {
+                evt.preventDefault();
+                that.deleteRow(that.bodyData);
+            }, false);
+            tempElement.appendChild(minus);
+            tempTd.appendChild(tempElement);
+            tempRow.appendChild(tempTd);
+
+            //***
+
+            for(var tidx in colArray) {
+                if(colArray[tidx] == "") continue;
+                var tempCol = document.createElement('td');
+                var tempInp = document.createElement("input");
+                tempInp.setAttribute('type', "text");
+                tempInp.id = elem[colArray[tidx]] + ':' + colArray[tidx];
+                tempInp.name = elem[colArray[tidx]] + ':' + colArray[tidx];
+                tempInp.value = elem[colArray[tidx]];
+                tempInp.setAttribute('size', colSizeArray[tidx]);
+                tempCol.appendChild(tempInp);
+                tempRow.appendChild(tempCol);
+            }
+
+            if(+(elem.parentId) === 0) {
+                elemsTbody.appendChild(tempRow);
+            }else {
+                var parentElement = document.getElementById(elem.parentId);
+                var parentElementId = parentElement.id;
+                var nextSequence = +(elem.position) + 1;
+                var qs1 = '[data-sequence="' + nextSequence + '"]';
+                var qs2 = '[id="' + parentElementId + '"] > [data-sequence="' + nextSequence + '"]';
+                var beforeElem = document.querySelector(qs2);
+                elemsTbody.insertBefore(tempRow, beforeElem);
+            }
+        }
         return;
     }
 };

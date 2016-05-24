@@ -117,6 +117,8 @@ class User extends CI_Controller {
         $_SESSION["userName"] = $this->user_model->get('userName');
         $_SESSION["password"] = $this->user_model->get('password');
         $_SESSION["admin"] = $this->user_model->get('admin');
+        $_SESSION["language"] = $this->user_model->get('language');
+        $_SESSION["timezone"] = $this->user_model->get('timezone');
 
         header('Location: ' . BASE_URL . 'home');
         exit;

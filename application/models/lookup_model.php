@@ -31,16 +31,16 @@ class Lookup_model extends CI_Model {
         $this->read('lookups', 'id', $lookupId);
         $lookupRows = null;
         $sql = 'SELECT';
-        $sql .= ' l.*';
-        $sql .= ' ,lv.id as `lv.id`, lv.title as `lv.title`, lv.description as `lv.description`';
-        $sql .= ' ,lv.value';
-        $sql .= ' FROM lookups as l';
-        $sql .= ' INNER JOIN lookup_values as lv on lv.lookupId = l.id';
+        $sql .= ' sl.*';
+        $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
+        $sql .= ' ,slv.value';
+        $sql .= ' FROM system_lookups as sl';
+        $sql .= ' INNER JOIN system_lookup_values as slv on slv.lookupId = l.id';
         $sql .= ' where l.id = "' . $mv['lookupId'] . '"';
         $result = $this->db->query($sql);
         if (!$result->num_rows() > 0) return false;
         foreach ($result->result_array() as $row) {
-            $lookupRows[$row["title"]][$row["lv.id"]] = $row;
+            $lookupRows[$row["title"]][$row["slv.id"]] = $row;
         }
         return $lookupRows;
     }
@@ -51,18 +51,18 @@ class Lookup_model extends CI_Model {
         foreach ($tableMeta as $mk => $mv) {
             if ($mk === 'tableName' or $mv['lookupId'] == 0) continue;
             $sql = 'SELECT';
-            $sql .= ' lu.*';
-            $sql .= ' ,lv.id as `lv.id`, lv.title as `lv.title`, lv.description as `lv.description`';
-            $sql .= ' ,lv.value';
-            $sql .= ' FROM lookups as lu';
-            $sql .= ' LEFT JOIN lookup_values as lv on lv.lookupId = lu.id';
-            $sql .= ' where lu.id = "' . $mv['lookupId'] . '"';
+            $sql .= ' sl.*';
+            $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
+            $sql .= ' ,slv.value';
+            $sql .= ' FROM system_lookups as sl';
+            $sql .= ' LEFT JOIN system_lookup_values as slv on slv.lookupId = sl.id';
+            $sql .= ' where sl.id = "' . $mv['lookupId'] . '"';
             $result = $this->db->query($sql);
             if (!$result->num_rows() > 0) return false;
             foreach ($result->result_array() as $row) {
                 if ($row['lookupType'] == 1) {
-                    $lookupRows[$row["title"]][$row["lv.id"]]['value'] = $row['value'];
-                    $lookupRows[$row["title"]][$row["lv.id"]]['title'] = $row['lv.title'];
+                    $lookupRows[$row["title"]][$row["slv.id"]]['value'] = $row['value'];
+                    $lookupRows[$row["title"]][$row["slv.id"]]['title'] = $row['slv.title'];
                 } else {
                     $tmpRows = $this->database_model->readMulti($row['lookupTable']);
                     foreach ($tmpRows as $tk => $tv) {

@@ -26,6 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <main>
+    <img name="plusSign" src="/images/icons/plus_sign.jpg" alt="Add"/>
     <div class="row col-md-12 text-center"><h1>Project</h1></div>
 
     <div class="row">
@@ -41,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <table id="tasksTable" class="table">
                 <thead id="tasksThead">
                 </thead>
-                <tbody id="tasksTbody">
+                <tbody id="dataTbody">
                 </tbody>
             </table>
             <div class='col-md-12 invisible'>

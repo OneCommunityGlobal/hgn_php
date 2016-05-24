@@ -55,6 +55,7 @@ class User_model extends CI_Model {
 //TODO  Add password hashing
         if (isset($result->row_array()['password']) and $result->row_array()['password'] === $password) {
             foreach ($result->row_array() as $k => $v) {
+                //this->set is in parent
                 $this->set($k, $v);
             }
             return true;

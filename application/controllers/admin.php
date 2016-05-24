@@ -128,7 +128,7 @@ class Admin extends CI_Controller {
      */
     public function home() {
         $this->load->model('database_model');
-        
+
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'home';
 
@@ -152,10 +152,10 @@ class Admin extends CI_Controller {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
         $this->load->model($this->model);
-        
+
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'add';
-        
+
         $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
         $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
@@ -182,7 +182,7 @@ class Admin extends CI_Controller {
         $this->load->model('database_model');
         $this->load->model('lookup_model');
         $this->load->model($this->model);
-        
+
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'display';
 

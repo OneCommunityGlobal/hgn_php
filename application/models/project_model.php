@@ -46,7 +46,7 @@ class Project_model extends CI_Model {
     }
 
     public function readProjectsByUser($userId) {
-        $sql = 'SELECT *';
+        $sql = 'SELECT pr.*';
         $sql .= ' FROM projects as pr';
         $sql .= ' JOIN project_to_users as p2u on p2u.projectId = pr.id';
         $sql .= ' WHERE p2u.userId = "' . $userId . '"';
