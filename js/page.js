@@ -255,7 +255,7 @@ Page.prototype = {
             //***
 
             var plus = document.createElement('img');
-            plus.src = "/images/icons/plus_sign.jpg";
+            plus.src = "/images/icons/small_plus.jpg";
             var tempTd = document.createElement('td');
             var tempElement = document.createElement('button');
             tempElement.href = 'javascript:void(0)';
@@ -269,7 +269,7 @@ Page.prototype = {
             tempRow.appendChild(tempTd);
 
             var minus = document.createElement('img');
-            minus.src = "/images/icons/minus_sign.jpg";
+            minus.src = "/images/icons/small_minus.jpg";
             var tempElement = document.createElement('button');
             tempElement.href = 'javascript:void(0)';
             that = this;

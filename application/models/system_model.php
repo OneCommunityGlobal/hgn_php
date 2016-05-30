@@ -40,6 +40,79 @@ class System_model extends CI_Model {
      * @param	type    name            short description
      * @return	type    name            short description
      */
+
+    public function readSelectors($table) {
+        $selectors = null;
+        $sql = 'SELECT id, title FROM ' . $table;
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) {
+            return false;
+        }
+        foreach ($result->result_array() as $row) {
+            $selectors[$row["id"]]["value"] = $row["id"];
+            $selectors[$row["id"]]["title"] = $row["title"];
+        }
+        $row['selectors'] = $selectors;
+        return $selectors;
+    }
+
+    public function readLookup($lookupId) {
+        $this->read('lookups', 'id', $lookupId);
+        $lookupRows = null;
+        $sql = 'SELECT';
+        $sql .= ' sl.*';
+        $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
+        $sql .= ' ,slv.value';
+        $sql .= ' FROM system_lookups as sl';
+        $sql .= ' INNER JOIN system_lookup_values as slv on slv.lookupId = l.id';
+        $sql .= ' where l.id = "' . $mv['lookupId'] . '"';
+        $result = $this->db->query($sql);
+        if (!$result->num_rows() > 0) return false;
+        foreach ($result->result_array() as $row) {
+            $lookupRows[$row["title"]][$row["slv.id"]] = $row;
+        }
+        return $lookupRows;
+    }
+
+    public function readLookupAll($tableMeta = null) {
+        if (!$tableMeta) return false;
+        $lookupRows = null;
+        foreach ($tableMeta as $mk => $mv) {
+            if ($mk === 'tableName' or $mv['lookupId'] == 0) continue;
+            $sql = 'SELECT';
+            $sql .= ' sl.*';
+            $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
+            $sql .= ' ,slv.value';
+            $sql .= ' FROM system_lookups as sl';
+            $sql .= ' LEFT JOIN system_lookup_values as slv on slv.lookupId = sl.id';
+            $sql .= ' where sl.id = "' . $mv['lookupId'] . '"';
+            $result = $this->db->query($sql);
+            if (!$result->num_rows() > 0) return false;
+            foreach ($result->result_array() as $row) {
+                if ($row['lookupType'] == 1) {
+                    $lookupRows[$row["id"]][$row["slv.id"]]['value'] = $row['value'];
+                    $lookupRows[$row["id"]][$row["slv.id"]]['title'] = $row['slv.title'];
+                } else {
+                    $tmpRows = $this->system_model->readMulti($row['lookupTable']);
+                    foreach ($tmpRows as $tk => $tv) {
+                        $lookupRows[$row["id"]][$tv["id"]]['value'] = $tv['id'];
+                        $lookupRows[$row["id"]][$tv["id"]]['title'] = $tv['title'];
+                    }
+                }
+            }
+        }
+        return $lookupRows;
+    }
+
+    //Select a single row from a table.
+    public function readModule($module) {
+        if (!$module or ! $module) return false;
+        $sql = 'SELECT * FROM system_modules where title = "' . $module . '" LIMIT 1';
+        $result = $this->db->query($sql);
+        $row = $result->row_array();
+        return ($result->num_rows() > 0) ? $row : false;
+    }
+
     //Select a single row from a table.
     public function sampleReadSingleRow($table, $lookupColumn = null, $lookupValue = null) {
         if (!$lookupColumn or ! $lookupValue) return false;

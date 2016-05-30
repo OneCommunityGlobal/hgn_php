@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
                 $this->view = 'admin/' . $this->module;
                 break;
             case 'lookup_value' :
-                $this->data['model'] = $this->model = 'lookup_model';
+                $this->data['model'] = $this->model = 'system_model';
                 $this->data['table'] = $this->table = 'lookup_values';
                 $this->view = 'admin/' . $this->module;
                 break;
@@ -65,12 +65,12 @@ class Admin extends CI_Controller {
                 $this->view = 'admin/' . $this->module;
                 break;
             case 'system_table' :
-                $this->data['model'] = $this->model = 'database_model';
+                $this->data['model'] = $this->model = 'system_model';
                 $this->data['table'] = $this->table = 'system_tables';
                 $this->view = 'admin/' . $this->module;
                 break;
             case 'system_table_columns' :
-                $this->data['model'] = $this->model = 'database_model';
+                $this->data['model'] = $this->model = 'system_model';
                 $this->data['table'] = $this->table = 'system_table_columns';
                 $this->view = 'admin/' . $this->module;
                 break;
@@ -127,12 +127,12 @@ class Admin extends CI_Controller {
      * @return	null
      */
     public function home() {
-        $this->load->model('database_model');
+        $this->load->model('system_model');
 
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'home';
 
-        $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
+        $this->data['tableSelectors'] = $tableSelectors = $this->system_model->readSelectors($this->table);
 
         $this->load->view($this->view, $this->data);
         return;
@@ -150,17 +150,17 @@ class Admin extends CI_Controller {
      */
     public function add() {
         $this->load->model('database_model');
-        $this->load->model('lookup_model');
+        $this->load->model('system_model');
         $this->load->model($this->model);
 
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'add';
 
-        $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
+        $this->data['tableSelectors'] = $tableSelectors = $this->system_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+        $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
-        $this->data['tableData'] = $this->database_model->setDefaultData($tableMeta);
+        $this->data['tableData'] = $this->system_model->setDefaultData($tableMeta);
 
         $this->load->view($this->view, $this->data);
         return;
@@ -180,15 +180,15 @@ class Admin extends CI_Controller {
      */
     public function display() {
         $this->load->model('database_model');
-        $this->load->model('lookup_model');
+        $this->load->model('system_model');
         $this->load->model($this->model);
 
         $this->data['title'] = PAGE_TITLE . ' - Admin Page';
         $this->data['action'] = $action = 'display';
 
-        $this->data['tableSelectors'] = $tableSelectors = $this->database_model->readSelectors($this->table);
+        $this->data['tableSelectors'] = $tableSelectors = $this->system_model->readSelectors($this->table);
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
-        $this->data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+        $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
         $tableColumn = 'id';
         $model = $this->model;

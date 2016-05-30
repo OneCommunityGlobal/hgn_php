@@ -29,33 +29,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <img name="plusSign" src="/images/icons/plus_sign.jpg" alt="Add"/>
     <div class="row col-md-12 text-center"><h1>Project</h1></div>
 
-    <div class="row">
-        <div id="dataDiv" class="col-md-12">
-            <div class="col-md-12">
-                <div class="col-md-4">Project</div>
-                <div class="col-md-6"><?php echo $projectData['title']; ?></div>
-            </div>
-        </div>
+    <div id="headerDiv" class="row">
+        <div class="col-md-4">Project</div>
+        <div class="col-md-6"><?php echo $projectData['title']; ?></div>
     </div>
-    <div id="tasksDiv">
-        <form id="tasksForm" class="tasksForm" name="tasksForm" action="/project/update" method="POST">
-            <table id="tasksTable" class="table">
-                <thead id="tasksThead">
-                </thead>
-                <tbody id="dataTbody">
-                </tbody>
-            </table>
-            <div class='col-md-12 invisible'>
-                <div colspan="2" class="text-center"><input id="submitButton" type="submit" name="Submit" value="Submit" /></div>
-            </div>
-        </form>
+    <div id="messageArea" class="row col-md-12 text-center"></div>
+    <div id="dataDiv" style="width:1200px;">
     </div>
 </main>
 <script src="/js/project.js"></script>
+<script src="/js/test.js"></script>
 <script type="text/javascript">
-    var project = new Project();
-    project.projectObj = <?php echo json_encode($projectData); ?>;
-    project.tasksObj = <?php echo json_encode($tasksData); ?>;
-    project.renderProject();
-    hgnPage.disableFormEdit('tasksForm');
+    var hgntest = new Test();
+    hgntest.headerData = <?php echo json_encode($projectData); ?>;
+    hgntest.detailData = <?php echo json_encode($tasksData); ?>;
+    hgntest.headerMeta = <?php echo json_encode($projectsMeta); ?>;
+    hgntest.detailMeta = <?php echo json_encode($tasksMeta); ?>;
+    hgntest.headerLookups = <?php echo json_encode($projectsLookups); ?>;
+    hgntest.detailLookups = <?php echo json_encode($tasksLookups); ?>;
+    hgntest.colArr = <?php echo json_encode($colArr); ?>;
+    hgntest.init();
+    hgntest.renderData('table');
 </script>

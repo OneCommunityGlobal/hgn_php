@@ -54,8 +54,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <!-- Load Base JS Library-->
         <script src="/js/page.js"></script>
+        <!-- Load AJAX JS Library-->
+        <script src="/js/ajax.js"></script>
     </head>
 
     <body>
-        <script>hgnPage = new Page();</script>
+        <script>
+            hgnPage = new Page();
+            hgnAjax = new Ajax();
+        </script>
         <div class="container">

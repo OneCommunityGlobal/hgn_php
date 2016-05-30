@@ -30,7 +30,7 @@ class Database extends CI_Controller {
 
     public function createMysql() {
         $this->db->truncate('system_tables');
-        $this->load->model('database_model');
+        $this->load->model('system_model');
         $tableMeta = [
             ["id" => "1", "tableName" => "categories", "columnName" => "id", "position" => "1", "label" => "Category Id", "keyType" => "1", "visible" => "0", "dataType" => "int(11)"],
             ["id" => "2", "tableName" => "categories", "columnName" => "title", "position" => "2", "label" => "Title", "keyType" => "2", "visible" => "1", "dataType" => "varchar(30)"],
@@ -42,8 +42,8 @@ class Database extends CI_Controller {
             ["3", "categories", "description", "3", "Description", "0", "1", "varchar(255)"]
         ];
         foreach ($tableMeta as $k => $v) {
-            $this->database_model->set($v);
-            $this->database_model->create('system_tables');
+            $this->system_model->set($v);
+            $this->system_model->create('system_tables');
         }
     }
 

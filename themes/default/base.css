@@ -5,6 +5,8 @@ body {
 .invisible {visibility:hidden;}
 .visible {visibility:visible;}
 
+#messageArea {color: red;}
+
 .timeClock {
     display: block;
     height: 80px;

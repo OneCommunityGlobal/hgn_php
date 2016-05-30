@@ -69,15 +69,30 @@ class Project extends CI_Controller {
         return;
     }
 
-    public function display() {
+    public function display($projectId=null) {
         $this->load->model('project_model');
+        $this->load->model('database_model');
+        $this->load->model('system_model');
 
         $userId = $_SESSION['userId'];
         $projectId = 1;
+        $dataTable = 'tasks';
+        $colArr = [
+            "position", "title", "description",
+            "creatorId", "ownerId", "type", "categoryId",
+            "priority", "startDateEstimate", "startDateActual", "endDateEstimate",
+            "endDateActual", "dueDate", "status", "active",
+            "timeRequiredEstimate", "timeRequiredActual"
+        ];
 
         $data['title'] = PAGE_TITLE;
+        $data['colArr'] = $colArr;
         $data['projectData'] = $this->project_model->read('projects', 'id', $projectId);
         $data['tasksData'] = $this->project_model->readTasksByProject($projectId);
+        $data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
+        $data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');
+        $data['projectsLookups'] = $this->system_model->readLookupAll($projectsMeta);
+        $data['tasksLookups'] = $this->system_model->readLookupAll($tasksMeta);
 
         $this->load->view('project', $data);
         
@@ -86,7 +101,7 @@ class Project extends CI_Controller {
     public function timesheet() {
         $this->load->model('project_model');
         $this->load->model('database_model');
-        $this->load->model('lookup_model');
+        $this->load->model('system_model');
 
         $userId = $_SESSION['userId'];
         $table = 'timesheets';
@@ -96,12 +111,13 @@ class Project extends CI_Controller {
         $data['projectsData'] = $this->project_model->readProjectsByUser($userId);
         $data['tasksData'] = $this->project_model->readTasksByUser($userId);
         $data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($table);
-        $data['tableLookups'] = $this->lookup_model->readLookupAll($tableMeta);
+        $data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
         $this->load->view('timesheet', $data);
     }
 
     public function update() {
+        //stub needs to be filled out
         $tmp = 1;
     }
 }

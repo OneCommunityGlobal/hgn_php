@@ -23,7 +23,6 @@
  * @author	HGN Dev Team
  */
 var Project = function() {
-    this.useHtml5 = false;
 
 };
 
@@ -40,30 +39,18 @@ Project.prototype = {
      * @return	null
      */
     renderProject : function() {
-        var colArray = ["", "title", "description", "creatorId", "ownerId", "type", "categoryId",
-            "priority", "startDateEstimate", "startDateActual", "endDateEstimate", "endDateActual", "dueDate", "status",
-            "active", "timeRequiredEstimate", "timeRequiredActual"];
-        var colTitleArray = ["+/-", "Task Title", "Description", "Creator", "Owner", "Type", "Category",
-            "Priority", "Est. Start", "Act. Start", "Est. End", "Actual End", "Due Date", "Status",
-            "Active", "Est. Hours", "Act. Hours"];
-        var colSizeArray = [10, 20, 2, 2, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
-        var task = this.tasksObj[1];
-        renderTaskHeader(task);
+        var colArr = [
+            "position", "title", "description",
+            "creatorId", "ownerId", "type", "categoryId",
+            "priority", "startDateEstimate", "startDateActual", "endDateEstimate",
+            "endDateActual", "dueDate", "status", "active",
+            "timeRequiredEstimate", "timeRequiredActual"
+        ];
 
-        hgnPage.renderTabularData(this.tasksObj,colArray, colTitleArray, colSizeArray);
+//***
+        test.init(this.projectData, this.tasksData, this.projectsMeta, this.tasksMeta, colArr);
+        test.renderData('table');
 
         return;
-
-        function renderTaskHeader(task) {
-            //display header
-            var tHead = document.getElementById("tasksThead");
-            var headerRow = document.createElement('tr');
-            for(var tidx in colArray) {
-                var tempCol = document.createElement('th');
-                tempCol.innerHTML = colTitleArray[tidx];
-                headerRow.appendChild(tempCol);
-            }
-            tHead.appendChild(headerRow);
-        }
     }
 };

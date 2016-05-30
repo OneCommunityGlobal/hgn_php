@@ -70,8 +70,8 @@ class CI_Model {
         $sql = 'Insert into ' . $table;
         $sqlCols = '(';
         $sqlVals = ' VALUES (';
-        foreach ($this->_properties as $k => $v) {
-            if ($v) {
+        foreach($this->_properties as $k => $v) {
+            if($v){
                 $sqlCols .= '`' . $k . '`,';
                 $sqlVals .= $this->db->escape($v) . ',';
             }
@@ -89,7 +89,7 @@ class CI_Model {
 
     //Select a single row from a table.
     public function read($table, $lookupColumn = null, $lookupValue = null) {
-        if(!$lookupColumn or !$lookupValue) return false;
+        if(!$lookupColumn or ! $lookupValue) return false;
         $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
         $result = $this->db->query($sql);
         $row = $result->row_array();
@@ -100,47 +100,46 @@ class CI_Model {
     public function readMulti($table, $tableColumn = null, $columnValue = null) {
         $sql = 'SELECT * ';
         $sql .= ' FROM ' . $table;
-        if ($tableColumn and $columnValue) {
+        if($tableColumn and $columnValue){
             $sql .= ' where ' . $tableColumn . ' = "' . $table . '"';
         }
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) return false;
-        foreach ($result->result_array() as $row) {
+        if(!$result->num_rows() > 0) return false;
+        foreach($result->result_array() as $row) {
             $tableRows[$row['id']] = $row;
         }
         return $tableRows;
     }
 
     //Returns all rows from a table
-    public function readAll($table, $columns=null) {
+    public function readAll($table, $columns = null) {
         $sql = 'SELECT * ';
         $sql .= ' FROM ' . $table;
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) return false;
-        foreach ($result->result_array() as $row) {
+        if(!$result->num_rows() > 0) return false;
+        foreach($result->result_array() as $row) {
             $tableRows[$row['id']] = $row;
         }
         return $tableRows;
     }
 
-    //Standard update function. Will create new record if index doesn't exist, updates record if it does exist.
-    function update($table, $data = null) {
-        $this->load->model('database_model');
-        $updated = $this->updateRow($table, $data);
-        return $updated ? $this->db->insert_id() : false;
-    }
-
+//    //Standard update function. Will create new record if index doesn't exist, updates record if it does exist.
+//    function update($table, $data = null) {
+//        $this->load->model('system_model');
+//        $updated = $this->updateRow($table, $data);
+//        return $updated ? $this->db->insert_id() : false;
+//    }
     //update a row in a table
-    function updateRow($table, $data) {
+    function update($table, $data) {
         $columns = ' (';
         $values = ' (';
         $updValues = ' ';
-        foreach ($data as $k => $v) {
+        foreach($data as $k => $v) {
             $colName = $k;
-            if ($colName === 'Submit' or $colName === 'actionInput') continue;
+            if($colName === 'Submit' or $colName === 'actionInput') continue;
             $columns .= $colName . ',';
             $values .= '"' . $v . '"' . ',';
-            if ($colName === 'id') continue;
+            if($colName === 'id') continue;
             $updValues .= $k . '= "' . $v . '"' . ',';
         }
 
@@ -155,8 +154,68 @@ class CI_Model {
         $sql .= ' ON DUPLICATE KEY UPDATE';
         $sql .= $updValues;
         $result = $this->db->query($sql);
-        return $result ? $this->db->insert_id() : false;
+        return $result;
     }
+
+    function updateView($data) {
+        $header = $data["header"];
+        $detail = $data["detail"];
+
+        if(!count($header) > 0 and ! count($detail) > 0){
+            $response['success'] = false;
+            $response['cbMethod'] = 'redrawPage';
+            echo json_encode($response);
+            return;
+        }
+
+        $this->beginTransaction();
+
+        if(count($header) > 0){
+            $table = $data['headerTable'];
+            foreach($detail as $k => $v) {
+                $type = $v['type'];
+                unset($v['type']);
+                switch($type) {
+                    case 'u' :
+                        $headerUpdated = $this->update($table, $header);
+                        break;
+                    default :
+                        break;
+                }
+            }
+        }
+
+        if(count($detail) > 0){
+            $table = $data['detailTable'];
+            foreach($detail as $k => $v) {
+                $type = $v['type'];
+                unset($v['type']);
+                switch($type) {
+                    case 'u' :
+                        $detailUpdated = $this->update($table, $v);
+                        break;
+                    default :
+                        break;
+                }
+            }
+        }
+
+        if($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            $response['success'] = false;
+            $response['cbMethod'] = 'redrawPage';
+            return $response;
+        } else {
+            $this->commitTransaction();
+            $response['success'] = true;
+            $response['cbMethod'] = 'redrawPage';
+            return $response;
+        }
+
+        //should never get here
+        return $response;
+    }
+
     //Standard delete function. Deletes a single record.
     public function delete($table, $id) {
         $sql = 'DELETE FROM ' . $table . ' where id = "' . $id . '"';
@@ -164,10 +223,29 @@ class CI_Model {
         return $result ? true : false;
     }
 
+    function beginTransaction() {
+        $this->db->trans_begin();
+    }
+
+    function autoCommit($value) {
+        $this->db->trans_off();
+        return;
+    }
+
+    function commitTransaction() {
+        $this->db->trans_commit();
+        return;
+    }
+
+    function rollbackTransaction() {
+        $this->db->trans_rollback();
+        return;
+    }
+
     //Property getter
     public function get($property) {
         //array_key_exists ( mixed $key , array $array )
-        if (array_key_exists($property, $this->_properties)) {
+        if(array_key_exists($property, $this->_properties)){
             return $this->_properties[$property];
         } else {
             return false;
@@ -176,10 +254,10 @@ class CI_Model {
 
     //Property setter
     public function set($property, $value = null) {
-        if (is_array($property)) {
+        if(is_array($property)){
             $arrkeys = array_keys($this->_properties);
-            foreach ($property as $k => $v) {
-                if (is_numeric($k)) {
+            foreach($property as $k => $v) {
+                if(is_numeric($k)){
                     $key = $arrkeys[$k];
                     $this->_properties[$key] = $v;
                 } else {
