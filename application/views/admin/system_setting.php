@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="valueType">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Value Type'];
+                                $tableLookup = $tableLookups[9];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['valueType'] === $v["value"]) echo 'selected="true"';

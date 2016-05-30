@@ -42,57 +42,28 @@ class Admin extends CI_Controller {
         $this->load->model('user_model');
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
-        if (!$this->loggedIn) {
+        if(!$this->loggedIn){
             header('Location: ' . BASE_URL . 'login');
             exit;
         }
 
+        $this->load->model('database_model');
+        $this->load->model('system_model');
+        
         $this->data['module'] = $this->module = $this->uri->segments['3'];
-        switch ($this->module) {
-            case 'community' :
-                $this->data['model'] = $this->model = 'community_model';
-                $this->data['table'] = $this->table = 'communities';
-                $this->view = 'admin/' . $this->module;
-                break;
-            case 'lookup_value' :
-                $this->data['model'] = $this->model = 'system_model';
-                $this->data['table'] = $this->table = 'lookup_values';
-                $this->view = 'admin/' . $this->module;
-                break;
-            case 'system_setting' :
-                $this->data['model'] = $this->model = 'system_model';
-                $this->data['table'] = $this->table = 'system_settings';
-                $this->view = 'admin/' . $this->module;
-                break;
-            case 'system_table' :
-                $this->data['model'] = $this->model = 'system_model';
-                $this->data['table'] = $this->table = 'system_tables';
-                $this->view = 'admin/' . $this->module;
-                break;
-            case 'system_table_columns' :
-                $this->data['model'] = $this->model = 'system_model';
-                $this->data['table'] = $this->table = 'system_table_columns';
-                $this->view = 'admin/' . $this->module;
-                break;
-            case 'user_preference' :
-                $this->data['model'] = $this->model = 'user_model';
-                $this->data['table'] = $this->table = 'user_preferences';
-                $this->view = 'admin/' . $this->module;
-                break;
-            default :
-                $this->data['model'] = $this->model = $this->module . '_model';
-                $this->data['table'] = $this->table = strtolower($this->module) . 's';
-                $this->view = 'admin/' . $this->module;
-                break;
-        }
+        $module = $this->uri->segments['3'];
+        $moduleRecord = $this->system_model->readModule($module);
+        $this->data['model'] = $this->model = $moduleRecord['model'];
+        $this->data['table'] = $this->table = $moduleRecord['masterTable'];
+        $this->view = 'admin/' . $this->module = $moduleRecord['view'];
 
         $this->load->view('common/wrapper_top', $this->data);
-        if (DISPLAY_HEADER) {
+        if(DISPLAY_HEADER){
             $this->load->view('common/header', $this->data);
         }
         $this->load->view('common/navbar', $this->data);
 
-        if (method_exists($this, $method)) {
+        if(method_exists($this, $method)){
             isset($params[0]) ? $this->$method($params[0]) : $this->$method();
         } else {
             $this->index();
@@ -193,10 +164,10 @@ class Admin extends CI_Controller {
         $tableColumn = 'id';
         $model = $this->model;
 
-        if (isset($_POST) and isset($_POST['hgnSelect']) and $_POST['hgnSelect']) {
+        if(isset($_POST) and isset($_POST['hgnSelect']) and $_POST['hgnSelect']){
             $columnValue = $_POST['hgnSelect'];
             $this->data['tableData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
-        } else if (isset($this->id) and $this->id) {
+        } else if(isset($this->id) and $this->id){
             $columnValue = $this->id;
             $this->data['tableData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         }
@@ -224,7 +195,7 @@ class Admin extends CI_Controller {
         $model = $this->model;
 
         $tableColumn = 'id';
-        if (isset($_POST) and isset($_POST['id'])) {
+        if(isset($_POST) and isset($_POST['id'])){
             $this->id = $_POST['id'];
             $this->$model->update($this->table, $_POST);
         }
@@ -251,7 +222,7 @@ class Admin extends CI_Controller {
         $model = $this->model;
 
         $tableColumn = 'id';
-        if (isset($_POST) and isset($_POST['id'])) {
+        if(isset($_POST) and isset($_POST['id'])){
             $id = $_POST['id'];
             $this->$model->delete($this->table, $id);
         }

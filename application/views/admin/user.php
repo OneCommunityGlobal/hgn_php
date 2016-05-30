@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="language">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Language'];
+                                $tableLookup = $tableLookups[10];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['language'] === $v["value"]) echo 'selected="true"';
@@ -132,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="timezone">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Timezone'];
+                                $tableLookup = $tableLookups[11];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['timezone'] === $v["value"]) echo 'selected="true"';
@@ -149,7 +149,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="role">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['User Role'];
+                                $tableLookup = $tableLookups[5];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['role'] === $v["value"]) echo 'selected="true"';

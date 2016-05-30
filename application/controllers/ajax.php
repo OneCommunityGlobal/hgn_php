@@ -12,9 +12,9 @@ class Ajax extends CI_Controller {
         $module = $this->uri->segments['3'];
         $moduleRecord = $this->system_model->readModule($module);
         $model = $moduleRecord['model'];
+        $table = $moduleRecord['masterTable'];
         $method = $this->uri->segments['4'];
         isset($this->uri->segments['5']) ? $parms = $this->uri->segments['5'] : $parms = null;
-        $table = $moduleRecord['masterTable'];
 
         $this->load->model($model);
 

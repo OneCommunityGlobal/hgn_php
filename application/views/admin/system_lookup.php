@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md-3"></div>
         <div id="selectorDiv" class="col-md-5">
-            <form action="/admin/display/lookup" method="POST">
+            <form action="/admin/display/system_lookup" method="POST">
                 <span class = "">Select <?php echo ucfirst($module) ?></span>
                 <select id="mySelect" name="hgnSelect" onchange='this.form.submit()'> <?php echo $model ?>
                     <option value="0">---</option>
@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-md-3"></div>
         <div id="dataDiv" class="col-md-5">
-            <form id="dataForm" name="dataForm" action="/admin/update/lookup" method="POST">
+            <form id="dataForm" name="dataForm" action="/admin/update/system_lookup" method="POST">
                 <?php if ($action === 'display' or $action === 'add') { ?>
             <!--                        <input id="id" name="id" type="hidden" value="<?php //echo $tableData['id'];   ?>"/>-->
                     <div class="col-md-12">
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="lookupType">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Lookup Type'];
+                                $tableLookup = $tableLookups[1];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';
@@ -92,7 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="lookupTable">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Lookup Table'];
+                                $tableLookup = $tableLookups[2];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';
@@ -109,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="valueColumn">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Value Column'];
+                                $tableLookup = $tableLookups[3];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';
@@ -126,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="titleColumn">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['Title Column'];
+                                $tableLookup = $tableLookups[4];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['lookupType'] == $v["value"]) echo 'selected="true"';

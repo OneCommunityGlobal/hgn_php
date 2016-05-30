@@ -40,15 +40,14 @@ class System_model extends CI_Model {
      * @param	type    name            short description
      * @return	type    name            short description
      */
-
     public function readSelectors($table) {
         $selectors = null;
         $sql = 'SELECT id, title FROM ' . $table;
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) {
+        if(!$result->num_rows() > 0){
             return false;
         }
-        foreach ($result->result_array() as $row) {
+        foreach($result->result_array() as $row) {
             $selectors[$row["id"]]["value"] = $row["id"];
             $selectors[$row["id"]]["title"] = $row["title"];
         }
@@ -64,37 +63,37 @@ class System_model extends CI_Model {
         $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
         $sql .= ' ,slv.value';
         $sql .= ' FROM system_lookups as sl';
-        $sql .= ' INNER JOIN system_lookup_values as slv on slv.lookupId = l.id';
-        $sql .= ' where l.id = "' . $mv['lookupId'] . '"';
+        $sql .= ' INNER JOIN system_lookup_values as slv on slv.systemLookupId = l.id';
+        $sql .= ' where l.id = "' . $mv['systemLookupId'] . '"';
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) return false;
-        foreach ($result->result_array() as $row) {
+        if(!$result->num_rows() > 0) return false;
+        foreach($result->result_array() as $row) {
             $lookupRows[$row["title"]][$row["slv.id"]] = $row;
         }
         return $lookupRows;
     }
 
     public function readLookupAll($tableMeta = null) {
-        if (!$tableMeta) return false;
+        if(!$tableMeta) return false;
         $lookupRows = null;
-        foreach ($tableMeta as $mk => $mv) {
-            if ($mk === 'tableName' or $mv['lookupId'] == 0) continue;
+        foreach($tableMeta as $mk => $mv) {
+            if($mk === 'tableName' or $mv['systemLookupId'] == 0) continue;
             $sql = 'SELECT';
             $sql .= ' sl.*';
             $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
             $sql .= ' ,slv.value';
             $sql .= ' FROM system_lookups as sl';
-            $sql .= ' LEFT JOIN system_lookup_values as slv on slv.lookupId = sl.id';
-            $sql .= ' where sl.id = "' . $mv['lookupId'] . '"';
+            $sql .= ' LEFT JOIN system_lookup_values as slv on slv.systemLookupId = sl.id';
+            $sql .= ' where sl.id = "' . $mv['systemLookupId'] . '"';
             $result = $this->db->query($sql);
-            if (!$result->num_rows() > 0) return false;
-            foreach ($result->result_array() as $row) {
-                if ($row['lookupType'] == 1) {
+            if(!$result->num_rows() > 0) return false;
+            foreach($result->result_array() as $row) {
+                if($row['lookupType'] == 1){
                     $lookupRows[$row["id"]][$row["slv.id"]]['value'] = $row['value'];
                     $lookupRows[$row["id"]][$row["slv.id"]]['title'] = $row['slv.title'];
                 } else {
                     $tmpRows = $this->system_model->readMulti($row['lookupTable']);
-                    foreach ($tmpRows as $tk => $tv) {
+                    foreach($tmpRows as $tk => $tv) {
                         $lookupRows[$row["id"]][$tv["id"]]['value'] = $tv['id'];
                         $lookupRows[$row["id"]][$tv["id"]]['title'] = $tv['title'];
                     }
@@ -106,16 +105,25 @@ class System_model extends CI_Model {
 
     //Select a single row from a table.
     public function readModule($module) {
-        if (!$module or ! $module) return false;
+        if(!$module or ! $module) return false;
         $sql = 'SELECT * FROM system_modules where title = "' . $module . '" LIMIT 1';
         $result = $this->db->query($sql);
         $row = $result->row_array();
         return ($result->num_rows() > 0) ? $row : false;
     }
 
+    function setDefaultData($tableMeta) {
+        if(!$tableMeta) return false;
+        foreach($tableMeta as $k => $v) {
+            if($k === 'tableName') continue;
+            $tableData[$v['title']] = $v['defaultValue'];
+        }
+        return $tableData;
+    }
+
     //Select a single row from a table.
     public function sampleReadSingleRow($table, $lookupColumn = null, $lookupValue = null) {
-        if (!$lookupColumn or ! $lookupValue) return false;
+        if(!$lookupColumn or ! $lookupValue) return false;
         $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
         $result = $this->db->query($sql);
         $row = $result->row_array();
@@ -126,12 +134,12 @@ class System_model extends CI_Model {
     public function sampleReadMultiRow($table, $tableColumn = null, $columnValue = null) {
         $sql = 'SELECT * ';
         $sql .= ' FROM ' . $table;
-        if ($tableColumn and $columnValue) {
+        if($tableColumn and $columnValue){
             $sql .= ' where ' . $tableColumn . ' = "' . $table . '"';
         }
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) return false;
-        foreach ($result->result_array() as $row) {
+        if(!$result->num_rows() > 0) return false;
+        foreach($result->result_array() as $row) {
             $tableRows[$row['id']] = $row;
         }
         return $tableRows;
@@ -142,8 +150,8 @@ class System_model extends CI_Model {
         $sql = 'SELECT * ';
         $sql .= ' FROM ' . $table;
         $result = $this->db->query($sql);
-        if (!$result->num_rows() > 0) return false;
-        foreach ($result->result_array() as $row) {
+        if(!$result->num_rows() > 0) return false;
+        foreach($result->result_array() as $row) {
             $tableRows[$row['id']] = $row;
         }
         return $tableRows;

@@ -7,8 +7,8 @@ SET FOREIGN_KEY_CHECKS = 0; TRUNCATE system_tables; ALTER TABLE system_tables AU
 ("5","events","events"),
 ("6","external_links","external_links"),
 ("7","files","files"),
-("8","lookups","lookups"),
-("9","lookup_values","lookup_values"),
+("8","system_lookups","lookups"),
+("9","system_lookup_values","lookup_values"),
 ("10","notifications","notifications"),
 ("11","projects","projects"),
 ("12","project_acl","project_acl"),
@@ -25,4 +25,5 @@ SET FOREIGN_KEY_CHECKS = 0; TRUNCATE system_tables; ALTER TABLE system_tables AU
 ("23","texts","texts"),
 ("24","timesheets","timesheets"),
 ("25","users","users"),
-("26","user_preferences","user_preferences")
+("26","user_preferences","user_preferences"),
+("27","system_modules","System Modules")

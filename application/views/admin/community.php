@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <select name="ownerId">
                                 <option value="0">Select</option>
                                 <?php
-                                $tableLookup = $tableLookups['User'];
+                                $tableLookup = $tableLookups[8];
                                 foreach ($tableLookup as $k => $v) {
                                     echo '<option value= "' . $v["value"] . '"';
                                     if ($tableData['ownerId'] === $v["value"]) echo 'selected="true"';
