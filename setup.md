@@ -10,5 +10,7 @@ This file describes how to setup your development environment.  The workflow for
 
 - You will notice an ".htaccess" file at the top level of the project.  This project utilizes mod_rewrite which is an apache module and it is necessary that you configure mod_rewrite to be enabled in your http config file for the site to work properly on your local machine.
 
+- create a mysql database called hgn and import the sql file: "\assets\database\backup\hgn.sql".  If you use a different database name, change the name in the "application\config\development\database.php" file.
+
 - Modify the configuration file "application\config\development/constants" file as follows:
 --  modify the BASE_URL and BASE_SURL to reflect how you named the website.
