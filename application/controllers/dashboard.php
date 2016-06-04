@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller {
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if (!$this->loggedIn) {
-            header('Location: ' . BASE_URL . 'login');
+            header('Location: ' . BASE_URL . '/access/login');
             exit;
         }
 
@@ -66,15 +66,20 @@ class Dashboard extends CI_Controller {
     }
 
     public function index() {
+        $this->load->model('database_model');
+        $this->load->model('system_model');
         $this->load->model('user_model');
-        $data['title'] = PAGE_TITLE;
-        $userId = $this->session->userdata['userId'];
-        $data["user"] = $this->user_model->read('users', 'id', $userId);
-//        $this->user_model->get_hours_category("userid", "categ");
-//        $data["userHours"] = $this->user_model->readHours("demo");
-//        $data["userBadges"] = $this->user_model->readBadges("demo");
+        
+        $this->data['title'] = PAGE_TITLE;
+        
+        $userId = $_SESSION["userId"];
+        $this->data['title'] = PAGE_TITLE;
 
-        $this->load->view('dashboard', $data);
+        $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData('users');
+        $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
+        $this->data["masterData"] = $this->user_model->read('users', 'id', $userId);
+
+        $this->load->view('dashboard', $this->data);
         return;
     }
 

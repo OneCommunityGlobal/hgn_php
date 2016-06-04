@@ -26,4 +26,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <p> User Avatar Block </p>
-<img class="" src="<?php echo AVATAR_DIR . $user['avatar']?>" alt="Avatar">
+<img class="" src="<?php echo AVATAR_DIR . $masterData['avatar']?>" alt="Avatar">

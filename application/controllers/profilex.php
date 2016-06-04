@@ -42,7 +42,7 @@ class Profile extends CI_Controller {
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if (!$this->loggedIn) {
-            header('Location: ' . BASE_URL . 'login');
+            header('Location: ' . BASE_URL . '/access/login');
             exit;
         }
 
@@ -67,11 +67,11 @@ class Profile extends CI_Controller {
     public function index() {
         $this->load->model('user_model');
         $userId = $_SESSION["userId"];
-        $data['title'] = PAGE_TITLE;
-        $data["user"] = $this->user_model->read('users', 'id', $userId);
-        $data["profilePic"] = $this->user_model->get('photoLargePath');
+        $this->data['title'] = PAGE_TITLE;
+        $this->data["user"] = $this->user_model->read('users', 'id', $userId);
+        $this->data["profilePic"] = $this->user_model->get('photoLargePath');
 
-        $this->load->view('profile', $data);
+        $this->load->view('profile', $this->data);
     }
 
 }

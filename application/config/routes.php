@@ -43,8 +43,8 @@ if(!defined('BASEPATH'))
 
 //$route['(:any)'] = '/home';
 //$route['home'] = 'home/index';
-$route['login'] = '/user/login';
-$route['logout'] = '/user/logout';
+//$route['login'] = '/access/login';
+//$route['logout'] = '/access/logout';
 //$route['profile'] = 'profile/index';
 //$route['project'] = 'project/index';
 //$route['reports'] = 'reports/index';

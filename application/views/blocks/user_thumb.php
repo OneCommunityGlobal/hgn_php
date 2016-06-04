@@ -25,5 +25,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<p> User Photo Block </p>
-<img class="" src="<?php echo PROFILE_PICS_DIR . $user['id'] . '_thumb.jpg'?>" alt="Profile Pic">
+<p> User Small Photo Block </p>
+<img class="" src="<?php echo PROFILE_PICS_DIR . $masterData['id'] . '_thumb.jpg'?>" alt="Profile Pic">

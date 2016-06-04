@@ -19,20 +19,20 @@ class Ajax extends CI_Controller {
         $this->load->model($model);
 
         if(isset($_POST['data']) and ( $_POST['data'])){
-            $data = json_decode($_POST['data'], true);
-            $responseCode = $this->$model->$method($data);
+            $this->data = json_decode($_POST['data'], true);
+            $responseCode = $this->$model->$method($this->data);
             if($responseCode['success']){
-                $data['headerData'] = $this->project_model->read('projects', 'id', 1);
-                $data['detailData'] = $this->project_model->readTasksByProject(1);
-                $data['response'] = $responseCode;
+                $this->data['headerData'] = $this->project_model->read('projects', 'id', 1);
+                $this->data['detailData'] = $this->project_model->readTasksByProject(1);
+                $this->data['response'] = $responseCode;
             } else {
-                $data['response'] = $responseCode;
+                $this->data['response'] = $responseCode;
             }
         } else {
-            $data['tableMeta'] = $this->database_model->readTableMetaData($table);
-            $data['tableData'] = $this->$model->$method($parms);
+            $this->data['tableMeta'] = $this->database_model->readTableMetaData($table);
+            $this->data['tableData'] = $this->$model->$method($parms);
         }
-        echo json_encode($data);
+        echo json_encode($this->data);
         return;
     }
 

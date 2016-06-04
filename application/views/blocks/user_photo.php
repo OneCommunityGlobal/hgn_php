@@ -26,4 +26,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <p> User Photo Block </p>
-<img class="" src="<?php echo PROFILE_PICS_DIR . $user['id'] . '_profile.jpg'?>" alt="Profile Pic">
+<img class="" src="<?php echo PROFILE_PICS_DIR . $masterData['id'] . '_profile.jpg'?>" alt="Profile Pic">

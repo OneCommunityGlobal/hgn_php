@@ -43,7 +43,7 @@ class Home extends CI_Controller {
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if (!$this->loggedIn) {
-            header('Location: ' . BASE_URL . 'login');
+            header('Location: ' . BASE_URL . 'access/login');
             exit;
         }
 
@@ -66,9 +66,9 @@ class Home extends CI_Controller {
     }
 
     public function index() {
-        $data['title'] = PAGE_TITLE;
+        $this->data['title'] = PAGE_TITLE;
 
-        $this->load->view('home', $data);
+        $this->load->view('home', $this->data);
     }
 
 }

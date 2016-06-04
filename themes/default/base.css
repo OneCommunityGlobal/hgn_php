@@ -1,11 +1,34 @@
 body {
-    background-color:white;
+    background-color:#f2f2f2;
 }
 
 .invisible {visibility:hidden;}
 .visible {visibility:visible;}
 
+/* All the following lines were just me playing with different looks and can be deleted (Matt) */
+.userProfileBlock {
+    font-size: 8px;
+    line-height: 1;
+}
+
+.userProfileBlock .form-group {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.form-control {
+    padding: 3px;
+    height: 20px;
+    font-size: 8px;
+}
+
 #messageArea {color: red;}
+
+.adminMain {
+    background-color: white;
+}
+
+.adminMain textarea {width: 300px;}
 
 .timeClock {
     display: block;

@@ -41,7 +41,7 @@ class Template extends CI_Controller {
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if (!$this->loggedIn) {
-            header('Location: ' . BASE_URL . 'login');
+            header('Location: ' . BASE_URL . 'access/login');
             exit;
         }
 
@@ -79,9 +79,9 @@ class Template extends CI_Controller {
     public function index() {
         $this->load->model('xxx_model');
 
-        $data['title'] = PAGE_TITLE;
+        $this->data['title'] = PAGE_TITLE;
 
-        $this->load->view('xxx', $data);
+        $this->load->view('xxx', $this->data);
         return;
     }
 

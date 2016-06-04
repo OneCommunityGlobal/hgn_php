@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE lookup_values; ALTER TABLE lookup_values AUTO_INCREMENT = 1; INSERT INTO lookup_values VALUES
+SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE system_lookup_values; ALTER TABLE system_lookup_values AUTO_INCREMENT = 1; INSERT INTO system_lookup_values VALUES
 
 ("1","Lookup Table","Lookup values in the lookup table","1","1"),
 ("2","System Table","Lookup values in system table","1","2"),
@@ -10,4 +10,20 @@ SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE lookup_values; ALTER TABLE lookup_val
 ("8","Decimal","Decimal Data Type","9","4"),
 ("9","Date","Date Data Type","9","5"),
 ("10","Datetime","DateTime Data Type","9","6"),
-("11","Text","Text Data Type","9","7")
+("11","Text","Text Data Type","9","7"),
+("12","Personal","Personal Project for User","13","1"),
+("13","Complete","Project is Completed","14","1"),
+("14","Ttype 1","Task Type 1","15","1"),
+("15","Ttype 2","Task Type 2","15","2"),
+("16","Education","Education","16","1"),
+("17","Everything Else","Everything Else","16","2"),
+("18","Tpri 1","Task Priority 1","17","1"),
+("19","Tpri 2","Task Priority 2","17","2"),
+("20","Active","Task Is Active","18","1"),
+("21","Low","Low Priority","19","1"),
+("22","High","High Priority","19","2"),
+("23","Planning","Project is in Planning Stage","14","2"),
+("24","Funding & Partnership Building","Funding & Partnership Building","16","3"),
+("25","Infrastructure & Planning","Infrastructure & Planning","16","4"),
+("26","Interviews & Hospitality","Interviews & Hospitality","16","5"),
+("27","Marketing & Promotion","Marketing & Promotion","16","6")

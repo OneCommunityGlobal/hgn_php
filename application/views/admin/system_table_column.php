@@ -31,9 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-md-3"></div>
         <div id="selectorDiv" class="col-md-5">
             <form action="/admin/display/system_table_column" method="POST">
-                <span class = "">Select <?php echo ucfirst($module) ?></span>
+                <span class = ""><?php echo ucfirst($module) ?></span>
                 <select id="mySelect" name="hgnSelect" onchange='this.form.submit()'> <?php echo $model ?>
-                    <option value="0">---</option>
+                    <option value="0">Select</option>
                     <?php foreach ($tableSelectors as $tsk => $tsv) { ?>
                         <option value="<?php echo $tsv['value'] ?>">
                             <?php echo $tsv['title'] ?></option>
@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class='col-md-12'>
                         <div class="col-md-4">Description</div>
-                        <div class="col-md-6"><textarea name="description" rows="1" cols="30" ><?php echo $tableData['description']; ?></textarea></div>
+                        <div class="col-md-6"><textarea name="description" rows="1" ><?php echo $tableData['description']; ?></textarea></div>
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-4">Lookup Type</div>

@@ -46,8 +46,8 @@ $userName = $_SESSION["userName"];
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/home">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/project/display">Project</a></li>
+                <li><a href="/user/displayProfile">Profile</a></li>
+                <li><a href="/project/home">Project</a></li>
                 <li><a href="/project/timesheet">Timesheet</a></li>
                 <li><a href="/report">Report</a></li>
                 <?php if ($admin) { ?>
@@ -57,6 +57,7 @@ $userName = $_SESSION["userName"];
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Master Data</li>
                             <li><a href="/admin/home/community">Manage Communities</a></li>
+                            <li><a href="/admin/home/project">Manage Projects</a></li>
                             <li><a href="/admin/home/user">Manage Users</a></li>
                             <li><a href="/admin/home/user_preference">Manage User Preferences</a></li>
                             <li role="separator" class="divider"></li>
@@ -72,9 +73,9 @@ $userName = $_SESSION["userName"];
                 <li class="dropdown pull-xs-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $userName; ?>
                         <ul class="dropdown-menu">
-                            <li><a href="/profile">My Profile</a></li>
+                            <li><a href="/user/displayProfile">My Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/access/logout">Logout</a></li>
                         </ul>
                 </li>
             </ul>

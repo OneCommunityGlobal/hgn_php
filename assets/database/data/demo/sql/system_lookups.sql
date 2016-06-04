@@ -1,11 +1,21 @@
-SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE lookups; ALTER TABLE lookups AUTO_INCREMENT = 1; INSERT INTO lookups VALUES
+SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE system_lookups; ALTER TABLE system_lookups AUTO_INCREMENT = 1; INSERT INTO system_lookups VALUES
 
 ("1 ","Lookup Type","Lookup Types Lookups","1","","",""),
 ("2 ","Lookup Table","Lookup table","2","system_tables","id","title"),
-("3 ","Value Column","Lookup value column","2","","",""),
-("4 ","Title Column","Lookup title column","2","","",""),
+("3 ","Lookup Value Column","Lookup value column","2","system_table_columns","id","title"),
+("4 ","Lookup Title Column","Lookup title column","2","system_table_columns","id","title"),
 ("5","User Role","User Role","1","","",""),
 ("6","Project","Project ID and Title","2","projects","id","title"),
-("7","Tasks","Tasks ID and Title","2","tasks","id","title"),
+("7","Task","Tasks ID and Title","2","tasks","id","title"),
 ("8","User","User ID and Title","2","users","id","title"),
-("9","Value Type","Data type of values","1","","","")
+("9","Data Type","Data type of values","1","","",""),
+("10","Language","Language Lookup","2","system_languages","designator","title"),
+("11","Timezone","Timezone Lookup","2","system_timezones","id","title"),
+("12","Community","Community Lookup","2","communities","id","title"),
+("13","Project Type","Project Type Lookup","1","","",""),
+("14","Project Status","Project Status Lookup","1","","",""),
+("15","Task Type","Task Type Lookup","1","","",""),
+("16","Task Category","Task Category Lookup","1","","",""),
+("17","Task Priority","Task Priority Lookup","1","","",""),
+("18","Task Status","Task Status Lookup","1","","",""),
+("19","Project Priority","Project Priority Lookup","1","","","")

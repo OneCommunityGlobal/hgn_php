@@ -16,10 +16,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * HGN user controller
+ * HGN short description here
  *
- * This controller manages the functionality of the user page
- * e.g. logging in/out
+ * This class long description here
  *
  * @package     HGN
  * @subpackage	
@@ -38,115 +37,62 @@ class User extends CI_Controller {
      * @param mixed     $params     Any paramaters passed as part of the route.
      */
     public function _remap($method, $params = array()) {
-        $data['title'] = PAGE_TITLE;
-        $data['loggedIn'] = $loggedIn = false;
+        $this->load->model('user_model');
+        $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
-        $this->load->view('common/wrapper_top', $data);
-        if (DISPLAY_HEADER) {
-            $this->load->view('common/header', $data);
+        if(!$this->loggedIn){
+            header('Location: ' . BASE_URL . 'access/login');
+            exit;
         }
 
-        if (method_exists($this, $method)) {
+        $this->load->view('common/wrapper_top', $this->data);
+        if(DISPLAY_HEADER){
+            $this->load->view('common/header', $this->data);
+        }
+        $this->load->view('common/navbar', $this->data);
+
+        if(method_exists($this, $method)){
             isset($params[0]) ? $this->$method($params[0]) : $this->$method();
         } else {
             $this->index();
         }
 
-        if (DISPLAY_FOOTER) {
-            $this->load->view('common/footer', $data);
+        if(DISPLAY_FOOTER){
+            $this->load->view('common/footer', $this->data);
         }
-        $this->load->view('common/wrapper_bottom', $data);
+        $this->load->view('common/wrapper_bottom', $this->data);
     }
 
     /**
      * Short description
      * 
      * Longer description
+     * 
+     * @todo
      *
      * @access	public
-     * @param	type    short description
-     * @param	type    short description
-     * @return	type    short descriptino
+     * @global 	type $globlvarname  Documents a global variable or its use in a function or method
+     * @name    global var name     Specifies an alias for a variable. For example, $GLOBALS['myvariable'] becomes $myvariable
+     * @param	type                short description
+     * @return	type                short descriptino
      */
     public function index() {
-        return;
+        $this->data['title'] = PAGE_TITLE;
     }
 
-    public function login() {
+    public function displayProfile() {
+        $this->load->model('database_model');
+        $this->load->model('system_model');
         $this->load->model('user_model');
-        $this->load->library('user');
 
-        $data['title'] = PAGE_TITLE . ' - Login';
+        $userId = $_SESSION["userId"];
+        $this->data['title'] = PAGE_TITLE;
 
-        //this should never be true
-        if (!isset($_POST['userName'])) {
-            $this->load->view('login', $data);
-            return;
-        }
+        $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData('users');
+        $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
+        $this->data["masterData"] = $this->user_model->read('users', 'id', $userId);
 
-        $userName = (isset($_POST['userName']) and $_POST['userName']) ? $_POST['userName'] : FALSE;
-        $password = (isset($_POST['password']) and $_POST['password']) ? $_POST['password'] : FALSE;
-
-        if (!$userName or ! $password) {
-            $data['message'] = '**Username And Password Are Required**';
-            $this->load->view('login', $data);
-            return;
-        }
-
-        if (!$this->user_model->validateUsernamePassword($userName, $password)) {
-            $data['message'] = 'The Username Password Combination Is Not Valid';
-            $this->load->view('login', $data);
-            return;
-        }
-
-//        if(!$this->user_model->getPreference('verified')) {
-//                $data['message'] = 'This account has not been verified.  Please check your email for a
-//                verification message.';
-//                $this->load->view('user_login', $data);
-//                return;
-//        }
-//
-//        if(!$this->user_model->getPreference('verifiedByAdmin')) {
-//                $data['message'] = 'This account has not been approved.  Please wait for an administrator to 
-//                approve it.';
-//                $this->load->view('user_login', $data);
-//                return;
-//        }
-//
-        $_SESSION["userId"] = $this->user_model->get('id');
-        $_SESSION["userName"] = $this->user_model->get('userName');
-        $_SESSION["password"] = $this->user_model->get('password');
-        $_SESSION["admin"] = $this->user_model->get('admin');
-        $_SESSION["language"] = $this->user_model->get('language');
-        $_SESSION["timezone"] = $this->user_model->get('timezone');
-
-        header('Location: ' . BASE_URL . 'home');
-        exit;
+        $this->load->view('profile', $this->data);
     }
 
-    public function logout() {
-        $this->session->sess_destroy();
-        header('Location: ' . BASE_URL . 'home');
-        exit;
-    }
-
-    //old logic may use later?
-//    public function signup() {
-//        if (false) {
-//            //add to database
-//            $passwordHashed = $this->user_model->create();
-//            //set cookies
-//            $sessData = array(
-//                'userName' => $this->input->post('userName'),
-//                'password' => $passwordHashed,
-//                'loggedIn' => TRUE
-//            );
-//            $this->session->set_userdata($sess_data);
-//            redirect('home');
-//        } else {
-//            $data['loggedIn'] = FALSE;
-//            $data['userName'] = 'Mr. Sandman - Sign Up';
-//            $this->load->view('signup');
-//        }
-//    }
 }

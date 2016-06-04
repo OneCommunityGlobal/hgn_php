@@ -63,4 +63,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             hgnPage = new Page();
             hgnAjax = new Ajax();
         </script>
-        <div class="container">
+        <div id="wrapper" class="container">

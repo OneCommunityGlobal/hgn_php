@@ -43,7 +43,7 @@ class Admin extends CI_Controller {
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if(!$this->loggedIn){
-            header('Location: ' . BASE_URL . 'login');
+            header('Location: ' . BASE_URL . '/access/login');
             exit;
         }
 
@@ -51,11 +51,10 @@ class Admin extends CI_Controller {
         $this->load->model('system_model');
         
         $this->data['module'] = $this->module = $this->uri->segments['3'];
-        $module = $this->uri->segments['3'];
-        $moduleRecord = $this->system_model->readModule($module);
-        $this->data['model'] = $this->model = $moduleRecord['model'];
-        $this->data['table'] = $this->table = $moduleRecord['masterTable'];
-        $this->view = 'admin/' . $this->module = $moduleRecord['view'];
+        $this->data['moduleRecord'] = $this->moduleRecord = $this->system_model->readModule($this->module);
+        $this->data['model'] = $this->model = $this->moduleRecord['model'];
+        $this->data['table'] = $this->table = $this->moduleRecord['masterTable'];
+        $this->view = 'admin/' . $this->module = $this->moduleRecord['view'];
 
         $this->load->view('common/wrapper_top', $this->data);
         if(DISPLAY_HEADER){
@@ -131,7 +130,7 @@ class Admin extends CI_Controller {
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
         $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
-        $this->data['tableData'] = $this->system_model->setDefaultData($tableMeta);
+        $this->data['masterData'] = $this->system_model->setDefaultData($tableMeta);
 
         $this->load->view($this->view, $this->data);
         return;
@@ -166,10 +165,10 @@ class Admin extends CI_Controller {
 
         if(isset($_POST) and isset($_POST['hgnSelect']) and $_POST['hgnSelect']){
             $columnValue = $_POST['hgnSelect'];
-            $this->data['tableData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
+            $this->data['masterData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         } else if(isset($this->id) and $this->id){
             $columnValue = $this->id;
-            $this->data['tableData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
+            $this->data['masterData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         }
 
         $this->load->view($this->view, $this->data);
