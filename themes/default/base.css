@@ -16,7 +16,7 @@ body {
     margin-bottom: 4px;
 }
 
-.form-control {
+.userProfileBlock .form-control {
     padding: 3px;
     height: 20px;
     font-size: 8px;
