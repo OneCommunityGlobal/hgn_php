@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<main>
+<main class="container">
     <div class="row col-md-12 text-center"><h1>Project</h1></div>
 
     <div class="row">

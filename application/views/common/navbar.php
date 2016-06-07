@@ -31,8 +31,8 @@ $userName = $_SESSION["userName"];
 ?>
 
 <!-- Static navbar -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -44,13 +44,14 @@ $userName = $_SESSION["userName"];
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/home">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/user/displayProfile">Profile</a></li>
                 <li><a href="/project/home">Project</a></li>
-                <li><a href="/project/timesheet">Timesheet</a></li>
+                <li><a href="/project/task">Task</a></li>
                 <li><a href="/report">Report</a></li>
-                <?php if ($admin) { ?>
+
+                <?php if($admin){ ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin
                             <span class="caret"></span></a>

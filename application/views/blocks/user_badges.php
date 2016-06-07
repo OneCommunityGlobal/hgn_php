@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<p> User Badges Block </p>
+<p><h4>Badges</h4></p>
 <!--<img class="" src="/images/badges/no_badges.jpg" alt="No Badges Earned">-->
 <table class="tableBadges">
     <tr>

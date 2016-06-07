@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2016 at 12:53 PM
+-- Generation Time: Jun 07, 2016 at 11:12 AM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -67,7 +67,7 @@ CREATE TABLE `communities` (
 --
 
 INSERT INTO `communities` (`id`, `title`, `description`, `ownerId`) VALUES
-(1, 'One Community', 'Use for all OC related work', 1),
+(1, 'One Community', 'Use for all Personal Projects', 1),
 (4, 'Test Community', 'Test Community', 4);
 
 -- --------------------------------------------------------
@@ -138,6 +138,28 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `preferences`
+--
+
+CREATE TABLE `preferences` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `title` varchar(30) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `userId` int(11) UNSIGNED DEFAULT NULL,
+  `valueType` tinyint(2) UNSIGNED DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `preferences`
+--
+
+INSERT INTO `preferences` (`id`, `title`, `description`, `userId`, `valueType`, `value`) VALUES
+(1, 'test1', 'test pref', 1, 1, 'test_value');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `projects`
 --
 
@@ -165,8 +187,9 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `title`, `description`, `communityId`, `ownerId`, `type`, `priority`, `status`, `startDateEstimate`, `startDateActual`, `endDateEstimate`, `endDateActual`, `timeRequiredEstimate`, `timeRequiredActual`, `percentComplete`, `active`) VALUES
-(1, 'Project1', 'Project 1', 1, 4, 1, 1, 2, '2016-04-02', '2016-04-03', '2016-04-04', '2016-04-05', '10.01', '15.02', '50.03', 1),
-(2, 'Project2', 'Project 2', 1, 1, 1, 1, 1, '2016-04-01', '2016-04-01', '2016-04-01', '2016-04-01', '10.00', '15.00', '50.00', 1);
+(1, 'Project1', 'Project 1', 1, 4, 2, 1, 2, '2016-04-02', '2016-04-03', '2016-04-04', '2016-04-05', '10.01', '15.02', '50.03', 1),
+(2, 'Project2', 'Project 2', 1, 1, 2, 1, 1, '2016-04-01', '2016-04-01', '2016-04-01', '2016-04-01', '10.00', '15.00', '50.00', 1),
+(3, 'User Personal', 'User\'s personal project', 1, 4, 1, 1, 3, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0.00', '0.00', '0.00', 1);
 
 -- --------------------------------------------------------
 
@@ -492,6 +515,7 @@ CREATE TABLE `system_lookup_values` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `sequence` tinyint(3) UNSIGNED NOT NULL,
   `systemLookupId` int(11) UNSIGNED NOT NULL,
   `value` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -500,34 +524,36 @@ CREATE TABLE `system_lookup_values` (
 -- Dumping data for table `system_lookup_values`
 --
 
-INSERT INTO `system_lookup_values` (`id`, `title`, `description`, `systemLookupId`, `value`) VALUES
-(1, 'Lookup Table', 'Lookup values in the lookup table', 1, 1),
-(2, 'System Table', 'Lookup values in system table', 1, 2),
-(3, 'User ', 'User Role ', 5, 1),
-(4, 'Manager ', 'Manager Role ', 5, 2),
-(5, 'Integer', 'Integer Data Type', 9, 1),
-(6, 'Tinyint', 'Tiny Integer Data Type', 9, 2),
-(7, 'Varchar', 'Varchar Data Type', 9, 3),
-(8, 'Decimal', 'Decimal Data Type', 9, 4),
-(9, 'Date', 'Date Data Type', 9, 5),
-(10, 'Datetime', 'DateTime Data Type', 9, 6),
-(11, 'Text', 'Text Data Type', 9, 7),
-(12, 'Personal', 'Personal Project for User', 13, 1),
-(13, 'Complete', 'Project is Completed', 14, 1),
-(14, 'Ttype 1', 'Task Type 1', 15, 1),
-(15, 'Ttype 2', 'Task Type 2', 15, 2),
-(16, 'Education', 'Education', 16, 1),
-(17, 'Everything Else', 'Everything Else', 16, 2),
-(18, 'Tpri 1', 'Task Priority 1', 17, 1),
-(19, 'Tpri 2', 'Task Priority 2', 17, 2),
-(20, 'Active', 'Task Is Active', 18, 1),
-(21, 'Low', 'Low Priority', 19, 1),
-(22, 'High', 'High Priority', 19, 2),
-(23, 'Planning', 'Project is in Planning Stage', 14, 2),
-(24, 'Funding & Partnership Building', 'Funding & Partnership Building', 16, 3),
-(25, 'Infrastructure & Planning', 'Infrastructure & Planning', 16, 4),
-(26, 'Interviews & Hospitality', 'Interviews & Hospitality', 16, 5),
-(27, 'Marketing & Promotion', 'Marketing & Promotion', 16, 6);
+INSERT INTO `system_lookup_values` (`id`, `title`, `description`, `sequence`, `systemLookupId`, `value`) VALUES
+(1, 'Lookup Table', 'Lookup values in the lookup table', 1, 1, 1),
+(2, 'System Table', 'Lookup values in system table', 2, 1, 2),
+(3, 'User ', 'User Role ', 1, 5, 1),
+(4, 'Manager ', 'Manager Role ', 2, 5, 2),
+(5, 'Integer', 'Integer Data Type', 1, 9, 1),
+(6, 'Tinyint', 'Tiny Integer Data Type', 2, 9, 2),
+(7, 'Varchar', 'Varchar Data Type', 3, 9, 3),
+(8, 'Decimal', 'Decimal Data Type', 4, 9, 4),
+(9, 'Date', 'Date Data Type', 5, 9, 5),
+(10, 'Datetime', 'DateTime Data Type', 6, 9, 6),
+(11, 'Text', 'Text Data Type', 7, 9, 7),
+(12, 'Personal', 'Personal Project for User', 1, 13, 1),
+(13, 'Complete', 'Project is Completed', 3, 14, 1),
+(14, 'Personal', 'Personal Task Type', 1, 15, 1),
+(15, 'Work', 'Work Task Type', 2, 15, 2),
+(16, 'Education', 'Education', 1, 16, 1),
+(17, 'Everything Else', 'Everything Else', 2, 16, 2),
+(18, 'Low', 'Low Task priority', 1, 17, 1),
+(19, 'High', 'High Task Priority', 2, 17, 2),
+(20, 'Active', 'Task Is Active', 1, 18, 1),
+(21, 'Low', 'Low Project Priority', 1, 19, 1),
+(22, 'High', 'High Project Priority', 2, 19, 2),
+(23, 'Planning', 'Project is in Planning Stage', 1, 14, 2),
+(24, 'Funding & Partnership Building', 'Funding & Partnership Building', 3, 16, 3),
+(25, 'Infrastructure & Planning', 'Infrastructure & Planning', 4, 16, 4),
+(26, 'Interviews & Hospitality', 'Interviews & Hospitality', 5, 16, 5),
+(27, 'Marketing & Promotion', 'Marketing & Promotion', 6, 16, 6),
+(28, 'Active', 'Project Status is Active', 2, 14, 3),
+(29, 'Community', 'Community Type : Community', 2, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -1062,29 +1088,19 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `title`, `description`, `userName`, `password`, `type`, `firstName`, `lastName`, `email`, `phoneHome`, `phoneMobile`, `language`, `timezone`, `role`, `disableNotifications`, `disableLogin`, `admin`, `active`, `photoProfile`, `photoThumb`, `avatar`) VALUES
 (1, 'Joe Admin', 'Admin user', 'admin', 'admin', 1, 'Admin', 'User', 'admin@oc.org', '415555-1212', '415555-1213', '1', '1', 2, 1, 1, 1, 1, '1_profile.jpg', '1_thumb.jpg', 'halloween-1.jpg'),
-(4, 'Fred User', 'Sample User', 'user', 'user', 3, 'Fred', 'User', 'fred@none.com', '415 555-1212', '415 555-1213', '0', '0', 0, 0, 0, 0, 1, '9_profile.jpg', '9_profile.jpg', 'halloween-1.jpg');
+(4, 'Fred User', 'Sample User', 'user', 'user', 3, 'Fred', 'User', 'fred@none.com', '415 555-1212', '415 555-1213', '0', '0', 0, 1, 0, 0, 1, '9_profile.jpg', '9_profile.jpg', 'halloween-1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_preferences`
+-- Table structure for table `user_to_preferences`
 --
 
-CREATE TABLE `user_preferences` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(30) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `userId` int(11) UNSIGNED DEFAULT NULL,
-  `valueType` tinyint(2) UNSIGNED DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user_preferences`
---
-
-INSERT INTO `user_preferences` (`id`, `title`, `description`, `userId`, `valueType`, `value`) VALUES
-(1, 'test1', 'test pref', 1, 1, 'test_value');
+CREATE TABLE `user_to_preferences` (
+  `userId` int(11) UNSIGNED NOT NULL,
+  `preferenceId` int(11) UNSIGNED NOT NULL,
+  `userModify` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -1141,6 +1157,13 @@ ALTER TABLE `files`
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `project_id` (`projectId`,`notificationType`);
+
+--
+-- Indexes for table `preferences`
+--
+ALTER TABLE `preferences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_preferences_users1_idx` (`userId`);
 
 --
 -- Indexes for table `projects`
@@ -1273,13 +1296,6 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_username_idx` (`title`);
 
 --
--- Indexes for table `user_preferences`
---
-ALTER TABLE `user_preferences`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_user_preferences_users1_idx` (`userId`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1319,10 +1335,15 @@ ALTER TABLE `files`
 ALTER TABLE `notifications`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `preferences`
+--
+ALTER TABLE `preferences`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `project_acl`
 --
@@ -1357,7 +1378,7 @@ ALTER TABLE `system_lookups`
 -- AUTO_INCREMENT for table `system_lookup_values`
 --
 ALTER TABLE `system_lookup_values`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `system_modules`
 --
@@ -1417,15 +1438,16 @@ ALTER TABLE `timesheets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `user_preferences`
---
-ALTER TABLE `user_preferences`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `preferences`
+--
+ALTER TABLE `preferences`
+  ADD CONSTRAINT `fk_user_preferences_users1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `projects`
@@ -1438,12 +1460,6 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `tasks`
   ADD CONSTRAINT `fk_tasks_projects1` FOREIGN KEY (`projectId`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `user_preferences`
---
-ALTER TABLE `user_preferences`
-  ADD CONSTRAINT `fk_user_preferences_users1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

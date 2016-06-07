@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                class="form-control input-sm" placeholder="Password">
     </div>
     <div class="col-lg-2">
-        <button type="submit" class="btn btn-sm btn-default pull-left" tabindex="3">Log In</button>
+        <button type="submit" class="btn btn-sm btn-primary pull-left" tabindex="3">Log In</button>
     </div>
 
     <div class="col-lg-6">

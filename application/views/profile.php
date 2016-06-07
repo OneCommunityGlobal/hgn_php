@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<main>
+<main class="container">
     <div class="col-md-3">
         <div class="row"><?php $this->load->view('blocks/user_thumb', $masterData); ?></div>
         <div class="row"><?php $this->load->view('blocks/user_photo', $masterData); ?></div>

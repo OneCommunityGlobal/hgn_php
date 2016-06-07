@@ -82,9 +82,10 @@ class System_model extends CI_Model {
             $sql .= ' sl.*';
             $sql .= ' ,slv.id as `slv.id`, slv.title as `slv.title`, slv.description as `slv.description`';
             $sql .= ' ,slv.value';
-            $sql .= ' FROM system_lookups as sl';
+            $sql .= ' FROM system_lookups AS sl';
             $sql .= ' LEFT JOIN system_lookup_values as slv on slv.systemLookupId = sl.id';
-            $sql .= ' where sl.id = "' . $mv['systemLookupId'] . '"';
+            $sql .= ' WHERE sl.id = "' . $mv['systemLookupId'] . '"';
+            $sql .= ' ORDER BY sequence';
             $result = $this->db->query($sql);
             if(!$result->num_rows() > 0) return false;
             foreach($result->result_array() as $row) {
@@ -120,41 +121,4 @@ class System_model extends CI_Model {
         }
         return $tableData;
     }
-
-    //Select a single row from a table.
-    public function sampleReadSingleRow($table, $lookupColumn = null, $lookupValue = null) {
-        if(!$lookupColumn or ! $lookupValue) return false;
-        $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
-        $result = $this->db->query($sql);
-        $row = $result->row_array();
-        return ($result->num_rows() > 0) ? $row : false;
-    }
-
-    //Returns multiple rows from a table
-    public function sampleReadMultiRow($table, $tableColumn = null, $columnValue = null) {
-        $sql = 'SELECT * ';
-        $sql .= ' FROM ' . $table;
-        if($tableColumn and $columnValue){
-            $sql .= ' where ' . $tableColumn . ' = "' . $table . '"';
-        }
-        $result = $this->db->query($sql);
-        if(!$result->num_rows() > 0) return false;
-        foreach($result->result_array() as $row) {
-            $tableRows[$row['id']] = $row;
-        }
-        return $tableRows;
-    }
-
-    //Returns all rows from a table
-    public function sampleReadAll($table, $columns = null) {
-        $sql = 'SELECT * ';
-        $sql .= ' FROM ' . $table;
-        $result = $this->db->query($sql);
-        if(!$result->num_rows() > 0) return false;
-        foreach($result->result_array() as $row) {
-            $tableRows[$row['id']] = $row;
-        }
-        return $tableRows;
-    }
-
 }

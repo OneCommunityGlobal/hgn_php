@@ -25,8 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<main class="col-md-12">
-    <div class="row col-md-12 text-center"><h1><?php echo ucfirst($module) . ' ' ?>Admin Page</h1></div>
+<main class="container">
+    <div class="row col-md-12 text-center"><h1><?php echo ucfirst($module) . ' ' ?></h1></div>
     <div class="row">
         <div class="col-md-3"></div>
         <div id="selectorDiv" class="col-md-5">

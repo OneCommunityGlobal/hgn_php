@@ -26,20 +26,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 
-<main class="adminMain col-sm-6">
-    <div id="titleDiv" class="row text-center"><h1><?php echo $moduleRecord['label'] . ' - '?>Admin Page</h1></div>
-    <div id="buttonsDiv" class="row text-right">
-        <button id="addButton" type="button" title="Add" onclick="hgnPage.addData()">
-            <img src="/images/icons/plus_sign.jpg" alt="Add"/>
-        </button>
-        <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnPage.deleteData()">
-            <img src="/images/icons/minus_sign.jpg" alt="Delete"/>
-        </button>
+<main class="container adminMain">
+    <div id="titleDiv" class="row text-center">
+        <div class="col-md-3"></div>
+        <h1 class="col-md-6"><?php echo $moduleRecord['label'] ?></h1>
     </div>
+    
+    <div id="buttonsDiv" class="row text-right">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <button id="addButton" type="button" title="Add" onclick="hgnPage.addData()">
+                <img src="/images/icons/plus_sign.jpg" alt="Add"/>
+            </button>
+            <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnPage.deleteData()">
+                <img src="/images/icons/minus_sign.jpg" alt="Delete"/>
+            </button>
+        </div>
+    </div>
+    
     <div id="selectorDiv" class="row">
-        <form class="form-horizontal" role="form" action="/admin/display/<?php echo ucfirst($module) ?>" method="POST">
+        <div class="col-md-3"></div>
+        <form class="form-horizontal col-md-6" role="form" action="/admin/display/<?php echo ucfirst($module) ?>" method="POST">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="hgnSelect"><?php echo $moduleRecord['label'] ?>:</label>
+                <label class="control-label col-sm-3" for="hgnSelect"><?php echo $moduleRecord['label'] ?>:</label>
                 <div class="col-sm-6">
                     <select id="hgnSelect" name="hgnSelect" class="form-control" onchange='this.form.submit()'>
                         <option value="0">Select</option>
@@ -54,27 +63,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 
     <div id="dataDiv" class="row">
-        <form id="dataForm" name="dataForm" class="form-horizontal" role="form" 
+        <div class="col-md-3"></div>
+        <form id="dataForm" name="dataForm" class="form-horizontal col-md-6" role="form" 
               action="/admin/update/<?php echo ucfirst($module) ?>" method="POST">
                   <?php if($action === 'display' or $action === 'add'){ ?>
 
                 <input id="id" name="id" type="hidden" value="<?php echo $masterData['id']; ?>"/>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="title"><?php echo $tableMeta['title']['label']; ?></label>
-                    <div class="col-sm-10">
+                    <label class="control-label col-sm-3" for="title"><?php echo $tableMeta['title']['label']; ?></label>
+                    <div class="col-sm-6">
                         <input class="form-control" name="title" value="<?php echo $masterData['title']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="description"><?php echo $tableMeta['description']['label']; ?></label>
-                    <div class="col-sm-10">
+                    <label class="control-label col-sm-3" for="description"><?php echo $tableMeta['description']['label']; ?></label>
+                    <div class="col-sm-6">
                         <textarea class="form-control" name="description" rows="1" ><?php echo $masterData['description']; ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="ownerId"><?php echo $tableMeta['ownerId']['label']; ?></label>
-                    <div class="col-sm-10">
+                    <label class="control-label col-sm-3" for="ownerId"><?php echo $tableMeta['ownerId']['label']; ?></label>
+                    <div class="col-sm-6">
                         <select class="form-control" name="ownerId">
                             <option value="0">Select</option>
                             <?php
@@ -90,8 +100,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
 
-                <div id="submitDiv">
-                    <input id="dataSubmitButton" class="btn btn-default" type="submit" name="Submit" value="Submit" />
+                <div class="text-center" id="submitDiv">
+                    <input id="dataSubmitButton" class="btn btn-primary" type="submit" name="Submit" value="Submit" />
                 </div>
 
             <?php } ?>

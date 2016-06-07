@@ -45,6 +45,14 @@ class Project_model extends CI_Model {
         return $taskRows;
     }
 
+    public function readUserProject($userId) {
+        if (!$userId) return false;
+        $sql = 'SELECT id FROM projects where ownerId = "' . $userId . '" and type = "1" LIMIT 1';
+        $result = $this->db->query($sql);
+        $row = $result->row_array();
+        return ($result->num_rows() > 0) ? $row : false;
+    }
+
     public function readProjectsByUser($userId) {
         $sql = 'SELECT pr.*';
         $sql .= ' FROM projects as pr';

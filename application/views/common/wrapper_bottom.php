@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-</div> <!-- end div class=container -->
+<!--</div>  end div class=container -->
 
 <!-- Load javascript libraries at bottom of body in case they load slowly
 <!-- Jquery is required for Twitter Bootstrap -->

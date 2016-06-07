@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<p> User Profile Block </p>
+<p><h4>Profile</h4></p>
 <div class="userProfileBlock">
     <form class="userProfileForm form-horizontal" action="/user/doSomething" method="post">
         <div class="form-group">

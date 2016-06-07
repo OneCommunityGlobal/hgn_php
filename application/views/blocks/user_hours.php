@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<p> User Hours Block </p>
+<p><h4>Hours</h4></p>
 
 <!--Include the Flot graphing library-->
 <script type="text/javascript" src="/js/flot/jquery.flot.js"></script>

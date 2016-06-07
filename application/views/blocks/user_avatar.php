@@ -25,5 +25,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<p> User Avatar Block </p>
+<p><h4>Avatar</h4></p>
 <img class="" src="<?php echo AVATAR_DIR . $masterData['avatar']?>" alt="Avatar">

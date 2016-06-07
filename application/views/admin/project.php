@@ -26,8 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 
-<main class="adminMain col-sm-6">
-    <div id="titleDiv" class="row text-center"><h1><?php echo $moduleRecord['label'] . ' - '?>Admin Page</h1></div>
+<main class="container adminMain">
+    <div id="titleDiv" class="row text-center"><h1><?php echo $moduleRecord['label']?></h1></div>
     <div id="buttonsDiv" class="row text-right">
         <button id="addButton" type="button" title="Add" onclick="hgnPage.addData()">
             <img src="/images/icons/plus_sign.jpg" alt="Add"/>
@@ -209,7 +209,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
 
                 <div id="submitDiv">
-                    <input id="dataSubmitButton" class="btn btn-default" type="submit" name="Submit" value="Submit" />
+                    <input id="dataSubmitButton" class="btn btn-primary" type="submit" name="Submit" value="Submit" />
                 </div>
 
             <?php } ?>

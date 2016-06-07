@@ -115,27 +115,47 @@ class Project extends CI_Controller {
         $this->load->view('project', $this->data);
     }
 
-    public function timesheet() {
-        $this->load->model('project_model');
+    public function timesheetx() {
         $this->load->model('database_model');
         $this->load->model('system_model');
+        $this->load->model('user_model');
+        $this->load->model('project_model');
 
-        $userId = $_SESSION['userId'];
-        $table = 'timesheets';
+        $this->data['userId'] = $userId = $_SESSION['userId'];
+        $this->data['userName'] = $userName = $_SESSION['userName'];
+        
+        $this->data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
+        $this->data['projectsLookups'] = $projectsLookups = $this->system_model->readLookupAll($projectsMeta);
+        $this->data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');
+        $this->data['tasksLookups'] = $tasksLookups = $this->system_model->readLookupAll($tasksMeta);
 
         $this->data['title'] = PAGE_TITLE;
-        $this->data['userData'] = $this->project_model->read('users', 'id', $userId);
         $this->data['projectsData'] = $this->project_model->readProjectsByUser($userId);
         $this->data['tasksData'] = $this->project_model->readTasksByUser($userId);
-        $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($table);
-        $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
         $this->load->view('timesheet', $this->data);
     }
 
-    public function update() {
-        //stub needs to be filled out
-        $tmp = 1;
+    public function task() {
+        $this->load->model('database_model');
+        $this->load->model('system_model');
+        $this->load->model('user_model');
+        $this->load->model('project_model');
+        
+        $this->data['title'] = PAGE_TITLE;
+
+        $this->data['userId'] = $userId = $_SESSION['userId'];
+        $this->data['userName'] = $userName = $_SESSION['userName'];
+        
+        $this->data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
+        $this->data['projectsLookups'] = $projectsLookups = $this->system_model->readLookupAll($projectsMeta);
+        $this->data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');
+        $this->data['tasksLookups'] = $tasksLookups = $this->system_model->readLookupAll($tasksMeta);
+
+        $this->data['projectData'] = $this->project_model->readUserProject($userId);
+        $this->data['tasksData'] = $this->project_model->readTasksByUser($userId);
+
+        $this->load->view('task', $this->data);
     }
 
 }

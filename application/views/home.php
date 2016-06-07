@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<main>
+<main class="container">
     <div class="col-md-12">
 <!--        <button type="button" name="La" value ="Di" id="myButton"
                 onclick="ajax = msgAjax.getData();">Test Ajax</button>-->
