@@ -26,4 +26,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <p><h4>Avatar</h4></p>
-<img class="" src="<?php echo AVATAR_DIR . $masterData['avatar']?>" alt="Avatar">
+<img class="" src="<?php echo AVATAR_DIR . $headerData['avatar']?>" alt="Avatar">

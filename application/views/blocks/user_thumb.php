@@ -26,4 +26,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <p><h4>Small Photo</h4></p>
-<img class="" src="<?php echo PROFILE_PICS_DIR . $masterData['id'] . '_thumb.jpg'?>" alt="Profile Pic">
+<img class="" src="<?php echo PROFILE_PICS_DIR . $headerData['id'] . '_thumb.jpg'?>" alt="Profile Pic">

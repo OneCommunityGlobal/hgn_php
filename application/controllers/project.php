@@ -115,27 +115,6 @@ class Project extends CI_Controller {
         $this->load->view('project', $this->data);
     }
 
-    public function timesheetx() {
-        $this->load->model('database_model');
-        $this->load->model('system_model');
-        $this->load->model('user_model');
-        $this->load->model('project_model');
-
-        $this->data['userId'] = $userId = $_SESSION['userId'];
-        $this->data['userName'] = $userName = $_SESSION['userName'];
-        
-        $this->data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
-        $this->data['projectsLookups'] = $projectsLookups = $this->system_model->readLookupAll($projectsMeta);
-        $this->data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');
-        $this->data['tasksLookups'] = $tasksLookups = $this->system_model->readLookupAll($tasksMeta);
-
-        $this->data['title'] = PAGE_TITLE;
-        $this->data['projectsData'] = $this->project_model->readProjectsByUser($userId);
-        $this->data['tasksData'] = $this->project_model->readTasksByUser($userId);
-
-        $this->load->view('timesheet', $this->data);
-    }
-
     public function task() {
         $this->load->model('database_model');
         $this->load->model('system_model');

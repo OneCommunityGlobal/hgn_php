@@ -90,7 +90,7 @@ class User extends CI_Controller {
 
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData('users');
         $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
-        $this->data["masterData"] = $this->user_model->read('users', 'id', $userId);
+        $this->data["headerData"] = $this->user_model->read('users', 'id', $userId);
 
         $this->load->view('profile', $this->data);
     }

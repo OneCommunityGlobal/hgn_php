@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	libraries
  * @author	HGN Dev Team
  */
-class Template extends CI_Library {
+class Template_library extends CI_Library {
 
     /**
      * Short description

@@ -215,7 +215,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     hgnView.headerLookups = <?php echo json_encode($projectsLookups); ?>;
                     hgnView.detailLookups = <?php echo json_encode($tasksLookups); ?>;
                     hgnView.colArr = <?php echo json_encode($colArr); ?>;
-                    hgnView.init();
                     hgnView.renderData('table');
     </script>
 <?php } ?>

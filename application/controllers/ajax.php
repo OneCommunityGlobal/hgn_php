@@ -12,27 +12,31 @@ class Ajax extends CI_Controller {
         $module = $this->uri->segments['3'];
         $moduleRecord = $this->system_model->readModule($module);
         $model = $moduleRecord['model'];
-        $table = $moduleRecord['masterTable'];
+        $headerTable = $moduleRecord['headerTable'];
+        $detailTable = $moduleRecord['detailTable'];
         $method = $this->uri->segments['4'];
         isset($this->uri->segments['5']) ? $parms = $this->uri->segments['5'] : $parms = null;
 
         $this->load->model($model);
 
         if(isset($_POST['data']) and ( $_POST['data'])){
-            $this->data = json_decode($_POST['data'], true);
-            $responseCode = $this->$model->$method($this->data);
+            $sentData = json_decode($_POST['data'], true);
+            $responseCode = $this->$model->$method($sentData);
             if($responseCode['success']){
-                $this->data['headerData'] = $this->project_model->read('projects', 'id', 1);
-                $this->data['detailData'] = $this->project_model->readTasksByProject(1);
-                $this->data['response'] = $responseCode;
+                $headerId = $sentData['headerId'];
+                $headerMethod = $moduleRecord['headerMethod'];
+                $detailMethod = $moduleRecord['detailMethod'];
+                $data['headerData'] = $this->$model->$headerMethod($headerTable, 'id', $headerId);
+                $data['detailData'] = $this->$model->$detailMethod($headerId);
+                $data['response'] = $responseCode;
             } else {
-                $this->data['response'] = $responseCode;
+                $data['response'] = $responseCode;
             }
         } else {
-            $this->data['tableMeta'] = $this->database_model->readTableMetaData($table);
-            $this->data['tableData'] = $this->$model->$method($parms);
+            $data['tableMeta'] = $database_model->readTableMetaData($table);
+            $data['tableData'] = $this->$model->$method($parms);
         }
-        echo json_encode($this->data);
+        echo json_encode($data);
         return;
     }
 

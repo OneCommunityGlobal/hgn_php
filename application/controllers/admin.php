@@ -53,7 +53,7 @@ class Admin extends CI_Controller {
         $this->data['module'] = $this->module = $this->uri->segments['3'];
         $this->data['moduleRecord'] = $this->moduleRecord = $this->system_model->readModule($this->module);
         $this->data['model'] = $this->model = $this->moduleRecord['model'];
-        $this->data['table'] = $this->table = $this->moduleRecord['masterTable'];
+        $this->data['table'] = $this->table = $this->moduleRecord['headerTable'];
         $this->view = 'admin/' . $this->module = $this->moduleRecord['view'];
 
         $this->load->view('common/wrapper_top', $this->data);
@@ -130,7 +130,7 @@ class Admin extends CI_Controller {
         $this->data['tableMeta'] = $tableMeta = $this->database_model->readTableMetaData($this->table);
         $this->data['tableLookups'] = $this->system_model->readLookupAll($tableMeta);
 
-        $this->data['masterData'] = $this->system_model->setDefaultData($tableMeta);
+        $this->data['headerData'] = $this->system_model->setDefaultData($tableMeta);
 
         $this->load->view($this->view, $this->data);
         return;
@@ -165,10 +165,10 @@ class Admin extends CI_Controller {
 
         if(isset($_POST) and isset($_POST['hgnSelect']) and $_POST['hgnSelect']){
             $columnValue = $_POST['hgnSelect'];
-            $this->data['masterData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
+            $this->data['headerData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         } else if(isset($this->id) and $this->id){
             $columnValue = $this->id;
-            $this->data['masterData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
+            $this->data['headerData'] = $this->$model->read($this->table, $tableColumn, $columnValue);
         }
 
         $this->load->view($this->view, $this->data);

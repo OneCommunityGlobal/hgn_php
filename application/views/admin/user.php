@@ -62,30 +62,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               action="/admin/update/<?php echo ucfirst($module) ?>" method="POST">
                   <?php if($action === 'display' or $action === 'add'){ ?>
 
-                <input id="id" name="id" type="hidden" value="<?php echo $masterData['id']; ?>"/>
+                <input id="id" name="id" type="hidden" value="<?php echo $headerData['id']; ?>"/>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title"><?php echo $tableMeta['title']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="title" value="<?php echo $masterData['title']; ?>"/>
+                        <input class="form-control" name="title" value="<?php echo $headerData['title']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="description"><?php echo $tableMeta['description']['label']; ?></label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="1" ><?php echo $masterData['description']; ?></textarea>
+                        <textarea class="form-control" name="description" rows="1" ><?php echo $headerData['description']; ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="userName"><?php echo $tableMeta['userName']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="userName" value="<?php echo $masterData['userName']; ?>"/>
+                        <input class="form-control" name="userName" value="<?php echo $headerData['userName']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="password"><?php echo $tableMeta['password']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="password" name="password" value="<?php echo $masterData['password']; ?>"/>
+                        <input class="form-control" type="password" name="password" value="<?php echo $headerData['password']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -93,40 +93,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-sm-10">
                         <select class="form-control" name="type">
                             <option value="0">Select</option>
-                            <option value="1" <?php if($masterData['type'] == 1) echo 'selected="true"'; ?>>Admin</option>
-                            <option value="2" <?php if($masterData['type'] == 2) echo 'selected="true"'; ?>>Manager</option>
-                            <option value="3" <?php if($masterData['type'] == 3) echo 'selected="true"'; ?>>User</option>
+                            <option value="1" <?php if($headerData['type'] == 1) echo 'selected="true"'; ?>>Admin</option>
+                            <option value="2" <?php if($headerData['type'] == 2) echo 'selected="true"'; ?>>Manager</option>
+                            <option value="3" <?php if($headerData['type'] == 3) echo 'selected="true"'; ?>>User</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="firstName"><?php echo $tableMeta['firstName']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="firstName" value="<?php echo $masterData['firstName']; ?>"/>
+                        <input class="form-control" name="firstName" value="<?php echo $headerData['firstName']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="lastName"><?php echo $tableMeta['lastName']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="lastName" value="<?php echo $masterData['lastName']; ?>"/>
+                        <input class="form-control" name="lastName" value="<?php echo $headerData['lastName']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="email"><?php echo $tableMeta['email']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="email" value="<?php echo $masterData['email']; ?>"/>
+                        <input class="form-control" name="email" value="<?php echo $headerData['email']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="phoneHome"><?php echo $tableMeta['phoneHome']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="phoneHome" value="<?php echo $masterData['phoneHome']; ?>"/>
+                        <input class="form-control" name="phoneHome" value="<?php echo $headerData['phoneHome']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="phoneMobile"><?php echo $tableMeta['phoneMobile']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="phoneMobile" value="<?php echo $masterData['phoneMobile']; ?>"/>
+                        <input class="form-control" name="phoneMobile" value="<?php echo $headerData['phoneMobile']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -138,7 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[10];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['language'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['language'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -155,7 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[11];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['timezone'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['timezone'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[5];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['role'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['role'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -183,47 +183,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="disableNotifications"><?php echo $tableMeta['disableNotifications']['label']; ?></label>
                     <div class="radio-inline col-sm-10">
-                        <label class="radio-inline"><input type="radio" name="disableNotifications" value="0" <?php if($masterData['disableNotifications'] == 0) echo 'checked'; ?>>False</label>
-                        <label class="radio-inline"><input type="radio" name="disableNotifications" value="1" <?php if($masterData['disableNotifications'] == 1) echo 'checked'; ?>>True</label>
+                        <label class="radio-inline"><input type="radio" name="disableNotifications" value="0" <?php if($headerData['disableNotifications'] == 0) echo 'checked'; ?>>False</label>
+                        <label class="radio-inline"><input type="radio" name="disableNotifications" value="1" <?php if($headerData['disableNotifications'] == 1) echo 'checked'; ?>>True</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="disableLogin"><?php echo $tableMeta['disableLogin']['label']; ?></label>
                     <div class="radio-inline col-sm-10">
-                        <label class="radio-inline"><input type="radio" name="disableLogin" value="0" <?php if($masterData['disableLogin'] == 0) echo 'checked'; ?>>False</label>
-                        <label class="radio-inline"><input type="radio" name="disableLogin" value="1" <?php if($masterData['disableLogin'] == 1) echo 'checked'; ?>>True</label>
+                        <label class="radio-inline"><input type="radio" name="disableLogin" value="0" <?php if($headerData['disableLogin'] == 0) echo 'checked'; ?>>False</label>
+                        <label class="radio-inline"><input type="radio" name="disableLogin" value="1" <?php if($headerData['disableLogin'] == 1) echo 'checked'; ?>>True</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="admin"><?php echo $tableMeta['admin']['label']; ?></label>
                     <div class="radio-inline col-sm-10">
-                        <label class="radio-inline"><input type="radio" name="admin" value="0" <?php if($masterData['admin'] == 0) echo 'checked'; ?>>False</label>
-                        <label class="radio-inline"><input type="radio" name="admin" value="1" <?php if($masterData['admin'] == 1) echo 'checked'; ?>>True</label>
+                        <label class="radio-inline"><input type="radio" name="admin" value="0" <?php if($headerData['admin'] == 0) echo 'checked'; ?>>False</label>
+                        <label class="radio-inline"><input type="radio" name="admin" value="1" <?php if($headerData['admin'] == 1) echo 'checked'; ?>>True</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="active"><?php echo $tableMeta['active']['label']; ?></label>
                     <div class="radio-inline col-sm-10">
-                        <label class="radio-inline"><input type="radio" name="active" value="0" <?php if($masterData['active'] == 0) echo 'checked'; ?>>False</label>
-                        <label class="radio-inline"><input type="radio" name="active" value="1" <?php if($masterData['active'] == 1) echo 'checked'; ?>>True</label>
+                        <label class="radio-inline"><input type="radio" name="active" value="0" <?php if($headerData['active'] == 0) echo 'checked'; ?>>False</label>
+                        <label class="radio-inline"><input type="radio" name="active" value="1" <?php if($headerData['active'] == 1) echo 'checked'; ?>>True</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="photoProfile"><?php echo $tableMeta['photoProfile']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="photoProfile" value="<?php echo $masterData['photoProfile']; ?>"/>
+                        <input class="form-control" name="photoProfile" value="<?php echo $headerData['photoProfile']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="photoThumb"><?php echo $tableMeta['photoThumb']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="photoThumb" value="<?php echo $masterData['photoThumb']; ?>"/>
+                        <input class="form-control" name="photoThumb" value="<?php echo $headerData['photoThumb']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="avatar"><?php echo $tableMeta['avatar']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="avatar" value="<?php echo $masterData['avatar']; ?>"/>
+                        <input class="form-control" name="avatar" value="<?php echo $headerData['avatar']; ?>"/>
                     </div>
                 </div>
 

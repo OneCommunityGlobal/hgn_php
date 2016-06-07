@@ -34,10 +34,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--<script src="/js/<?php //echo JQUERY ?>.js"></script>-->
 
 <!-- Twitter Bootstrap -->
-<script src="/js/<?php echo BOOTSTRAP ?>.js"></script>
+<script src="/js/bootstrap/<?php echo BOOTSTRAP ?>.js"></script>
 
 <!-- Load Sparkline inline charting jquery plugin-->
-<!-- <script src="/js/<?php //echo SPARKLINE?>.js"></script>-->
+<!-- <script src="/js/jquery/<?php //echo SPARKLINE?>.js"></script>-->
 
 </body>
 </html>

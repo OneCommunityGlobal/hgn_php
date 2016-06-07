@@ -58,18 +58,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               action="/admin/update/<?php echo ucfirst($module) ?>" method="POST">
                   <?php if($action === 'display' or $action === 'add'){ ?>
 
-                <input id="id" name="id" type="hidden" value="<?php echo $masterData['id']; ?>"/>
+                <input id="id" name="id" type="hidden" value="<?php echo $headerData['id']; ?>"/>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title"><?php echo $tableMeta['title']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="title" value="<?php echo $masterData['title']; ?>"/>
+                        <input class="form-control" name="title" value="<?php echo $headerData['title']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="description"><?php echo $tableMeta['description']['label']; ?></label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="1" ><?php echo $masterData['description']; ?></textarea>
+                        <textarea class="form-control" name="description" rows="1" ><?php echo $headerData['description']; ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[12];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['communityId'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['communityId'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[8];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['ownerId'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['ownerId'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[13];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['type'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['type'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -132,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[19];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['priority'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['priority'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -149,7 +149,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $tableLookup = $tableLookups[14];
                             foreach($tableLookup as $k => $v) {
                                 echo '<option value= "' . $v["value"] . '"';
-                                if($masterData['status'] === $v["value"]) echo 'selected="true"';
+                                if($headerData['status'] === $v["value"]) echo 'selected="true"';
                                 echo '>' . $v['title'];
                                 echo '</option>';
                             }
@@ -160,51 +160,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="startDateEstimate"><?php echo $tableMeta['startDateEstimate']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="startDateEstimate" value="<?php echo $masterData['startDateEstimate']; ?>"/>
+                        <input class="form-control" name="startDateEstimate" value="<?php echo $headerData['startDateEstimate']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="startDateActual"><?php echo $tableMeta['startDateActual']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="startDateActual" value="<?php echo $masterData['startDateActual']; ?>"/>
+                        <input class="form-control" name="startDateActual" value="<?php echo $headerData['startDateActual']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="endDateEstimate"><?php echo $tableMeta['endDateEstimate']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="endDateEstimate" value="<?php echo $masterData['endDateEstimate']; ?>"/>
+                        <input class="form-control" name="endDateEstimate" value="<?php echo $headerData['endDateEstimate']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="endDateActual"><?php echo $tableMeta['endDateActual']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="endDateActual" value="<?php echo $masterData['endDateActual']; ?>"/>
+                        <input class="form-control" name="endDateActual" value="<?php echo $headerData['endDateActual']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="timeRequiredEstimate"><?php echo $tableMeta['timeRequiredEstimate']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="timeRequiredEstimate" value="<?php echo $masterData['timeRequiredEstimate']; ?>"/>
+                        <input class="form-control" name="timeRequiredEstimate" value="<?php echo $headerData['timeRequiredEstimate']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="timeRequiredActual"><?php echo $tableMeta['timeRequiredActual']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="timeRequiredActual" value="<?php echo $masterData['timeRequiredActual']; ?>"/>
+                        <input class="form-control" name="timeRequiredActual" value="<?php echo $headerData['timeRequiredActual']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="percentComplete"><?php echo $tableMeta['percentComplete']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="percentComplete" value="<?php echo $masterData['percentComplete']; ?>"/>
+                        <input class="form-control" name="percentComplete" value="<?php echo $headerData['percentComplete']; ?>"/>
                     </div>
                 </div>
 
                 <div class="form-group form-inline">
                     <label class="control-label col-sm-2" for="active"><?php echo $tableMeta['active']['label']; ?></label>
                     <div class="radio-inline col-sm-10">
-                        <label class="radio-inline"><input type="radio" name="active" value="0" <?php if($masterData['active'] == 0) echo 'checked'; ?>>No</label>
-                        <label class="radio-inline"><input type="radio" name="active" value="1" <?php if($masterData['active'] == 1) echo 'checked'; ?>>Yes</label>
+                        <label class="radio-inline"><input type="radio" name="active" value="0" <?php if($headerData['active'] == 0) echo 'checked'; ?>>No</label>
+                        <label class="radio-inline"><input type="radio" name="active" value="1" <?php if($headerData['active'] == 1) echo 'checked'; ?>>Yes</label>
                     </div>
                 </div>
 

@@ -47,10 +47,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <!-- May have to load jquery here instead of bottom wrapper is some plugin needs it -->
         <!-- This should be loaded in wrapper bottom but flot doesn't work -->
-        <script src="/js/<?php echo JQUERY ?>.js"></script>
+        <script src="/js/jquery/<?php echo JQUERY ?>.js"></script>
 
         <!-- Load Sparkline inline charting jquery plugin-->
-        <script src="/js/<?php echo SPARKLINE ?>.js"></script>
+        <script src="/js/jquery/<?php echo SPARKLINE ?>.js"></script>
 
         <!-- Load Base JS Library-->
         <script src="/js/page.js"></script>
@@ -63,4 +63,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             hgnPage = new Page();
             hgnAjax = new Ajax();
         </script>
-<!--        <div id="wrapper" class="container">-->

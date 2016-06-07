@@ -57,18 +57,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               action="/admin/update/<?php echo ucfirst($module) ?>" method="POST">
                   <?php if($action === 'display' or $action === 'add'){ ?>
 
-                <input id="id" name="id" type="hidden" value="<?php echo $masterData['id']; ?>"/>
+                <input id="id" name="id" type="hidden" value="<?php echo $headerData['id']; ?>"/>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title"><?php echo $tableMeta['title']['label']; ?></label>
                     <div class="col-sm-10">
-                        <input class="form-control" name="title" value="<?php echo $masterData['title']; ?>"/>
+                        <input class="form-control" name="title" value="<?php echo $headerData['title']; ?>"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="description"><?php echo $tableMeta['description']['label']; ?></label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="1" ><?php echo $masterData['description']; ?></textarea>
+                        <textarea class="form-control" name="description" rows="1" ><?php echo $headerData['description']; ?></textarea>
                     </div>
                 </div>
 

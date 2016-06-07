@@ -27,9 +27,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <main class="container">
     <div class="col-md-3">
-        <div class="row"><?php $this->load->view('blocks/user_thumb', $masterData); ?></div>
-        <div class="row"><?php $this->load->view('blocks/user_photo', $masterData); ?></div>
-        <div class="row"><?php $this->load->view('blocks/user_avatar', $masterData); ?></div>
+        <div class="row"><?php $this->load->view('blocks/user_thumb', $headerData); ?></div>
+        <div class="row"><?php $this->load->view('blocks/user_photo', $headerData); ?></div>
+        <div class="row"><?php $this->load->view('blocks/user_avatar', $headerData); ?></div>
     </div>
-    <div class="col-md-6"><?php $this->load->view('blocks/user_profile', $masterData); ?></div>
+    <div class="col-md-6"><?php $this->load->view('blocks/user_profile', $headerData); ?></div>
 </main>

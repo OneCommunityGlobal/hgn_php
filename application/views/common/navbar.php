@@ -44,7 +44,6 @@ $userName = $_SESSION["userName"];
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/home">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/user/displayProfile">Profile</a></li>
                 <li><a href="/project/home">Project</a></li>
