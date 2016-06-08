@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2016 at 11:12 AM
+-- Generation Time: Jun 08, 2016 at 01:34 PM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -568,24 +568,26 @@ CREATE TABLE `system_modules` (
   `label` varchar(30) NOT NULL,
   `model` varchar(30) NOT NULL,
   `view` varchar(30) NOT NULL,
-  `masterTable` varchar(30) NOT NULL,
-  `masterTableCol` varchar(30) NOT NULL,
+  `headerTable` varchar(30) NOT NULL,
+  `headerTableCol` varchar(30) NOT NULL,
+  `headerMethod` varchar(30) NOT NULL,
   `detailTable` varchar(30) NOT NULL,
-  `detailTableCol` varchar(30) NOT NULL
+  `detailTableCol` varchar(30) NOT NULL,
+  `detailMethod` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `system_modules`
 --
 
-INSERT INTO `system_modules` (`id`, `title`, `description`, `label`, `model`, `view`, `masterTable`, `masterTableCol`, `detailTable`, `detailTableCol`) VALUES
-(1, 'project', 'Project Module', 'Project', 'project_model', 'project', 'projects', 'id', 'tasks', 'projectId'),
-(2, 'community', 'Community Module', 'Community', 'community_model', 'community', 'communities', 'id', '', ''),
-(3, 'user', 'User Module', 'User', 'user_model', 'user', 'users', 'id', '', ''),
-(4, 'user_preference', 'User Preference Module', 'Preference', 'user_model', 'user_preference', 'user_preferences', 'id', '', ''),
-(5, 'system_lookup', 'System Lookup Module', 'Lookup', 'system_model', 'system_lookup', 'system_lookups', 'id', 'system_lookup_values', 'systemLookupId'),
-(6, 'system_table', 'System Table Module ', 'Table', 'database_model', 'system_table', 'system_tables', 'id', 'system_table_columns', 'systemTableId'),
-(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', ' ');
+INSERT INTO `system_modules` (`id`, `title`, `description`, `label`, `model`, `view`, `headerTable`, `headerTableCol`, `headerMethod`, `detailTable`, `detailTableCol`, `detailMethod`) VALUES
+(1, 'project', 'Project Module', 'Project', 'project_model', 'project', 'projects', 'id', 'read', 'tasks', 'projectId', 'readTasksByProject'),
+(2, 'community', 'Community Module', 'Community', 'community_model', 'community', 'communities', 'id', '', '', '', ''),
+(3, 'user', 'User Module', 'User', 'user_model', 'user', 'users', 'id', '', '', '', ''),
+(4, 'user_preference', 'User Preference Module', 'Preference', 'user_model', 'user_preference', 'user_preferences', 'id', '', '', '', ''),
+(5, 'system_lookup', 'System Lookup Module', 'Lookup', 'system_model', 'system_lookup', 'system_lookups', 'id', '', 'system_lookup_values', 'systemLookupId', ''),
+(6, 'system_table', 'System Table Module ', 'Table', 'database_model', 'system_table', 'system_tables', 'id', '', 'system_table_columns', 'systemTableId', ''),
+(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', '', ' ', '');
 
 -- --------------------------------------------------------
 
@@ -806,7 +808,7 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (122, 'type', 'type', 12, 18, 'Type', 'Type', 0, 1, 1, 2, 0, 3, '', 'varchar(32)'),
 (123, 'id', 'id', 1, 19, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (124, 'title', 'title', 2, 19, 'Title', 'Title', 0, 1, 1, 20, 0, 3, '', 'varchar(30)'),
-(125, 'description', 'description', 3, 19, 'Description', 'Description', 0, 1, 1, 30, 0, 3, '', 'varchar(255)'),
+(125, 'description', 'description', 3, 19, 'Description', 'Description', 0, 1, 2, 30, 0, 3, '', 'varchar(255)'),
 (126, 'projectId', 'projectId', 4, 19, 'Project ID', 'Project ID', 0, 1, 1, 2, 0, 1, '0', 'int(11)'),
 (127, 'creatorId', 'creatorId', 5, 19, 'Creator ID', 'Creator', 0, 1, 5, 2, 8, 1, '0', 'int(11)'),
 (128, 'ownerId', 'ownerId', 6, 19, 'Owner ID', 'Owner', 0, 1, 5, 2, 8, 1, '0', 'int(11)'),
@@ -940,19 +942,19 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `title`, `description`, `projectId`, `creatorId`, `ownerId`, `parentId`, `position`, `type`, `categoryId`, `priority`, `startDateEstimate`, `startDateActual`, `endDateEstimate`, `endDateActual`, `dueDate`, `status`, `active`, `timeRequiredEstimate`, `timeRequiredActual`) VALUES
-(1, 'TaskHeader2', 'TH2', 1, 1, 1, 0, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(2, 'SubTask3', 'ST3', 1, 1, 1, 1, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(3, 'SubTask2', 'ST2', 1, 1, 1, 5, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(4, 'SubTask4', 'ST4', 1, 1, 1, 1, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(5, 'TaskHeader1', 'TH1', 1, 1, 1, 0, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(6, 'SubTask1', 'ST1', 1, 1, 1, 5, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(7, 'SubSub3', 'SS3', 1, 1, 1, 4, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(8, 'SubSub1', 'SS1', 1, 1, 1, 6, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(9, 'SubSub2', 'SS2', 1, 1, 1, 4, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(10, 'SubSub4', 'SS4', 1, 1, 1, 6, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(11, 'TaskHeader1', 'TH1', 2, 1, 1, 0, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(12, 'SubTask2', 'ST2', 2, 1, 1, 11, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00'),
-(13, 'SubTask1', 'ST1', 2, 1, 1, 11, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00');
+(1, 'TaskHeader2', 'TH2', 1, 1, 1, 0, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(2, 'SubTask3', 'ST3', 1, 1, 1, 1, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(3, 'SubTask2', 'ST2', 1, 1, 1, 5, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(4, 'SubTask4', 'ST4', 1, 1, 1, 1, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(5, 'TaskHeader1', 'TH1', 1, 1, 1, 0, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(6, 'SubTask1', 'ST1', 1, 1, 1, 5, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(7, 'SubSub3', 'SS3', 1, 1, 1, 4, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(8, 'SubSub1', 'SS1', 1, 1, 1, 6, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(9, 'SubSub2', 'SS2', 1, 1, 1, 4, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(10, 'SubSub4', 'SS4', 1, 1, 1, 6, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(11, 'Lay Pipe', 'Lay down pipe', 2, 1, 1, 0, 2, 1, 1, 1, '2016-01-02', '2016-01-03', '2016-01-04', '2016-01-15', '2016-01-17', 1, 1, '10.01', '10.02'),
+(12, 'SubTask2', 'ST2', 2, 1, 1, 11, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(13, 'SubTask1', 'ST1', 2, 1, 1, 11, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00');
 
 -- --------------------------------------------------------
 
