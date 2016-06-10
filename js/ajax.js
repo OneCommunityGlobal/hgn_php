@@ -36,8 +36,8 @@ Ajax.prototype = {
     },
     sendData : function(module, method, data) {
         var myAjax = new Ajax();
-        var cbObject = hgntest;
-        var cbMethod = hgntest.callBack;
+        var cbObject = hgnView;
+        var cbMethod = hgnView.callBack;
         var phpUri = '/ajax/index/' + module + '/' + method;
         data = JSON.stringify(data);
         hgnAjax.sendJsonData(cbObject, cbMethod, phpUri, data);

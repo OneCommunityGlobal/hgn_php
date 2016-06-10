@@ -69,3 +69,7 @@ body {
 .tableBadges tr td img {
     width: 100%;
 }
+
+/*This gets overriden by Bootstrap in some instances. Any way around that? */
+@media (min-width: 768px) {
+}

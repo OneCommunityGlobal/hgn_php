@@ -173,9 +173,9 @@ class CI_Model {
         if(count($header) > 0){
             $table = $data['headerTable'];
             foreach($detail as $k => $v) {
-                $type = $v['type'];
-                unset($v['type']);
-                switch($type) {
+                $changeType = $v['changeType'];
+                unset($v['changeType']);
+                switch($changeType) {
                     case 'u' :
                         $headerUpdated = $this->update($table, $header);
                         break;
@@ -188,9 +188,9 @@ class CI_Model {
         if(count($detail) > 0){
             $table = $data['detailTable'];
             foreach($detail as $k => $v) {
-                $type = $v['type'];
-                unset($v['type']);
-                switch($type) {
+                $changeType = $v['changeType'];
+                unset($v['changeType']);
+                switch($changeType) {
                     case 'u' :
                         $detailUpdated = $this->update($table, $v);
                         break;

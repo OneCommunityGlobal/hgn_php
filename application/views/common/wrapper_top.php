@@ -41,7 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Bootstrap core CSS -->
         <link href="/css/<?php echo BOOTSTRAP ?>.css" rel="stylesheet">
 
-        <!--TODO convert to using themes
         <!-- Site base CSS -->
         <link href="/themes/default/base.css" rel="stylesheet">
 

@@ -49,7 +49,7 @@ Project.prototype = {
 
 //***
         test.init(this.projectData, this.tasksData, this.projectsMeta, this.tasksMeta, colArr);
-        test.renderData('table');
+        test.renderData('block');
 
         return;
     }

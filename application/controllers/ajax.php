@@ -20,10 +20,10 @@ class Ajax extends CI_Controller {
         $this->load->model($model);
 
         if(isset($_POST['data']) and ( $_POST['data'])){
-            $sentData = json_decode($_POST['data'], true);
-            $responseCode = $this->$model->$method($sentData);
+            $postData = json_decode($_POST['data'], true);
+            $responseCode = $this->$model->$method($postData);
             if($responseCode['success']){
-                $headerId = $sentData['headerId'];
+                $headerId = $postData['headerId'];
                 $headerMethod = $moduleRecord['headerMethod'];
                 $detailMethod = $moduleRecord['detailMethod'];
                 $data['headerData'] = $this->$model->$headerMethod($headerTable, 'id', $headerId);

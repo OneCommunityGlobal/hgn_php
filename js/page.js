@@ -51,6 +51,13 @@ Page.prototype = {
         }
         return;
     },
+    clearSection : function (sectionId) {
+        var oldSection = document.getElementById(sectionId);
+        if(oldSection) {
+            oldSection.parentNode.removeChild(oldSection);
+        }
+        return;
+    },
     /**
      * Hide an element
      * 
