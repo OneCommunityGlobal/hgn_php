@@ -1,11 +1,11 @@
-var Timesheet = function() {
+var Task = function() {
     this.hoursDisplay = document.getElementById("hours");
     this.minutesDisplay = document.getElementById("minutes");
     this.secondsDisplay = document.getElementById("seconds");
     this.recording = false;
 };
 
-Timesheet.prototype = {
+Task.prototype = {
     startTimer : function() {
         this.setTimespace(undefined, new Date());
         this.startRecord();

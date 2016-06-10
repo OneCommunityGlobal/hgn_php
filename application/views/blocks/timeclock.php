@@ -24,17 +24,17 @@
     </span>
 </div>
 <div id = "timerButtons" class = "row col-md-12">
-    <button id = "timerStart" class = "" type = "button" title = "Start" onclick = "hgnTimesheet.startTimer()">
+    <button id = "timerStart" class = "" type = "button" title = "Start" onclick = "hgnTask.startTimer()">
         <img src = "/images/icons/timer_start.jpg" alt = "Start Timer"/></button>
-    <button id = "timerStop" class = "" type = "button" title = "Stop" onclick = "hgnTimesheet.stopTimer()">
+    <button id = "timerStop" class = "" type = "button" title = "Stop" onclick = "hgnTask.stopTimer()">
         <img src = "/images/icons/timer_stop.jpg" alt = "Stop Timer"/></button>
 </div>
 
 <div>
-    <button type = "button" class = "btn btn-primary btn-block" onClick = "hgnTimesheet.toggleTimer">Hide Stopwatch</button>
+    <button type = "button" class = "btn btn-primary btn-block" onClick = "hgnTask.toggleTimer">Hide Stopwatch</button>
 </div>
 
-<script type="text/javascript" src="/js/timesheet.js"></script>
+<script type="text/javascript" src="/js/task.js"></script>
 <script type="text/javascript">
-    hgnTimesheet = new Timesheet();
+    hgnTask = new Task();
 </script>
