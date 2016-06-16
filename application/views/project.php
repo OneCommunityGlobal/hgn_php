@@ -47,33 +47,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="buttonsDiv" class="col-md-4">
             <button id="addButton" class="" type="button" title="Add" onclick="hgnView.createNewRecord()">
                 <img src="/images/icons/plus_sign.jpg" alt="Add"/></button>
-            <?php if(isset($tableData)){ ?>
-                <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnView.deleteRecord()">
-                    <img src="/images/icons/minus_sign.jpg" alt="Delete"/></button>
-            <?php } ?>
+            <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnView.deleteRecord()">
+                <img src="/images/icons/minus_sign.jpg" alt="Delete"/></button>
         </div>
     </div>
 
     <div id="headerDiv">
         <form id="headerForm" class="form-inline" role="form">
-            </div>-->
-        </form>
-    </div>
+    </div>-->
+</form>
+</div>
 
-    <div id="messageArea" class="row col-md-12 text-center"></div>
-    <div id="detailDiv" style="width:1900px;">
-        <form id="detailForm" class="form-inline" role="form">
-        </form>            
-    </div>
+<div id="messageArea" class="row col-md-12 text-center"></div>
+<div id="detailDiv" style="width:1900px;">
+    <form id="detailForm" class="form-inline" role="form">
+    </form>            
+</div>
 </main>
-    <script src="/js/view.js"></script>
-    <script type="text/javascript">
-        var hgnView = new View();
-        hgnView.headerMeta = <?php echo json_encode($projectsMeta); ?>;
-        hgnView.detailMeta = <?php echo json_encode($tasksMeta); ?>;
-        hgnView.headerLookups = <?php echo json_encode($projectsLookups); ?>;
-        hgnView.detailLookups = <?php echo json_encode($tasksLookups); ?>;
-    </script>
+<script src="/js/view.js"></script>
+<script type="text/javascript">
+                var hgnView = new View();
+                hgnView.headerMeta = <?php echo json_encode($projectsMeta); ?>;
+                hgnView.detailMeta = <?php echo json_encode($tasksMeta); ?>;
+                hgnView.headerLookups = <?php echo json_encode($projectsLookups); ?>;
+                hgnView.detailLookups = <?php echo json_encode($tasksLookups); ?>;
+</script>
 
 <?php if($action !== 'home'){ ?>
     <script type="text/javascript">
