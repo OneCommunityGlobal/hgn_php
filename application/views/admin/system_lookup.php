@@ -25,130 +25,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 ?>
-<main class="container adminMain">
-    <div id="titleDiv" class="row text-center"><h1><?php echo $moduleRecord['label']?></h1></div>
-    <div id="buttonsDiv" class="row text-right">
-        <button id="addButton" type="button" title="Add" onclick="hgnPage.addData()">
-            <img src="/images/icons/plus_sign.jpg" alt="Add"/>
-        </button>
-        <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnPage.deleteData()">
-            <img src="/images/icons/minus_sign.jpg" alt="Delete"/>
-        </button>
-    </div>
-    <div id="selectorDiv" class="row">
-        <form class="form-horizontal" role="form" action="/admin/display/<?php echo ucfirst($module) ?>" method="POST">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="hgnSelect"><?php echo $moduleRecord['label'] ?>:</label>
-                <div class="col-sm-6">
-                    <select id="hgnSelect" name="hgnSelect" class="form-control" onchange='this.form.submit()'>
-                        <option value="0">Select</option>
+<main class="container">
+    <div class="row col-md-12 text-center"><h1>System Lookups</h1></div>
+
+    <div class="row">
+        <div id="selectorDiv" class="col-md-5">
+            <form  class="form-inline" role="form" action="/project/display" method="POST">
+                <div class="form-group">
+                    <label for="hgnSelect">Select Project:</label>
+                    <select id="hgnSelect" name="hgnSelect" class="form-control"
+                            onchange='this.form.submit()'> <?php echo $model ?>
+                        <option value="0">---</option>
                         <?php foreach($tableSelectors as $tsk => $tsv) { ?>
                             <option value="<?php echo $tsv['value'] ?>">
                                 <?php echo $tsv['title'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
-            </div>
+            </form>
+        </div>
+        <div id="buttonsDiv" class="col-md-4">
+            <button id="addButton" class="" type="button" title="Add" onclick="hgnView.addData()">
+                <img src="/images/icons/plus_sign.jpg" alt="Add"/></button>
+            <?php if(isset($tableData)){ ?>
+                <button id="deleteButton" class="" type="button" title="Delete" onclick="hgnView.deleteData()">
+                    <img src="/images/icons/minus_sign.jpg" alt="Delete"/></button>
+            <?php } ?>
+        </div>
+    </div>
+
+    <div id="headerDiv">
+        <form id="headerForm" class="form-inline" role="form">
+            </div>-->
         </form>
     </div>
 
-    <div id="dataDiv">
-        <form id="dataForm" name="dataForm" class="form-horizontal" role="form" 
-              action="/admin/update/<?php echo ucfirst($module) ?>" method="POST">
-                  <?php if($action === 'display' or $action === 'add'){ ?>
-
-                <input id="id" name="id" type="hidden" value="<?php echo $headerData['id']; ?>"/>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="title"><?php echo $tableMeta['title']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <input class="form-control" name="title" value="<?php echo $headerData['title']; ?>"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="description"><?php echo $tableMeta['description']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" name="description" rows="1" ><?php echo $headerData['description']; ?></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="lookupType"><?php echo $tableMeta['lookupType']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="lookupType">
-                            <option value="0">Select</option>
-                            <?php
-                            $tableLookup = $tableLookups[1];
-                            foreach($tableLookup as $k => $v) {
-                                echo '<option value= "' . $v["value"] . '"';
-                                if($headerData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                echo '>' . $v['title'];
-                                echo '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="lookupTable"><?php echo $tableMeta['lookupTable']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="lookupTable">
-                            <option value="0">Select</option>
-                            <?php
-                            $tableLookup = $tableLookups[2];
-                            foreach($tableLookup as $k => $v) {
-                                echo '<option value= "' . $v["value"] . '"';
-                                if($headerData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                echo '>' . $v['title'];
-                                echo '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="valueColumn"><?php echo $tableMeta['valueColumn']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="valueColumn">
-                            <option value="0">Select</option>
-                            <?php
-                            $tableLookup = $tableLookups[3];
-                            foreach($tableLookup as $k => $v) {
-                                echo '<option value= "' . $v["value"] . '"';
-                                if($headerData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                echo '>' . $v['title'];
-                                echo '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="titleColumn"><?php echo $tableMeta['titleColumn']['label']; ?></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="titleColumn">
-                            <option value="0">Select</option>
-                            <?php
-                            $tableLookup = $tableLookups[4];
-                            foreach($tableLookup as $k => $v) {
-                                echo '<option value= "' . $v["value"] . '"';
-                                if($headerData['lookupType'] == $v["value"]) echo 'selected="true"';
-                                echo '>' . $v['title'];
-                                echo '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="submitDiv">
-                    <input id="dataSubmitButton" class="btn btn-primary" type="submit" name="Submit" value="Submit" />
-                </div>
-
-            <?php } ?>
-        </form>
+    <div id="messageArea" class="row col-md-12 text-center"></div>
+    <div id="detailDiv" style="width:1900px;">
+        <form id="detailForm" class="form-inline" role="form">
+        </form>            
     </div>
 </main>
-<script type="text/javascript">
-    hgnPage.module = "<?php echo $module; ?>";
-    hgnPage.init();
-</script>
+    <script src="/js/view.js"></script>
+    <script type="text/javascript">
+        var hgnView = new View();
+    </script>
+
+<?php if($action !== 'home'){ ?>
+    <script type="text/javascript">
+        hgnView.headerColArr = <?php echo json_encode($headerColArr); ?>;
+        hgnView.detailColArr = <?php echo json_encode($detailColArr); ?>;
+        hgnView.headerData = <?php echo json_encode($projectData); ?>;
+        hgnView.detailData = <?php echo json_encode($tasksData); ?>;
+        hgnView.headerMeta = <?php echo json_encode($projectsMeta); ?>;
+        hgnView.detailMeta = <?php echo json_encode($tasksMeta); ?>;
+        hgnView.headerLookups = <?php echo json_encode($projectsLookups); ?>;
+        hgnView.detailLookups = <?php echo json_encode($tasksLookups); ?>;
+        hgnView.renderData('table');
+    </script>
+<?php } ?>

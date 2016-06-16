@@ -2,8 +2,8 @@
 -- version 4.6.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 08, 2016 at 01:34 PM
+-- Host: localhost
+-- Generation Time: Jun 16, 2016 at 10:58 AM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -188,7 +188,7 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`id`, `title`, `description`, `communityId`, `ownerId`, `type`, `priority`, `status`, `startDateEstimate`, `startDateActual`, `endDateEstimate`, `endDateActual`, `timeRequiredEstimate`, `timeRequiredActual`, `percentComplete`, `active`) VALUES
 (1, 'Project1', 'Project 1', 1, 4, 2, 1, 2, '2016-04-02', '2016-04-03', '2016-04-04', '2016-04-05', '10.01', '15.02', '50.03', 1),
-(2, 'Project2', 'Project 2', 1, 1, 2, 1, 1, '2016-04-01', '2016-04-01', '2016-04-01', '2016-04-01', '10.00', '15.00', '50.00', 1),
+(2, 'Project2', 'Project2', 1, 1, 2, 1, 1, '2016-04-01', '2016-04-01', '2016-04-01', '2016-04-01', '10.00', '15.00', '50.00', 1),
 (3, 'User Personal', 'User\'s personal project', 1, 4, 1, 1, 3, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0.00', '0.00', '0.00', 1);
 
 -- --------------------------------------------------------
@@ -581,7 +581,7 @@ CREATE TABLE `system_modules` (
 --
 
 INSERT INTO `system_modules` (`id`, `title`, `description`, `label`, `model`, `view`, `headerTable`, `headerTableCol`, `headerMethod`, `detailTable`, `detailTableCol`, `detailMethod`) VALUES
-(1, 'project', 'Project Module', 'Project', 'project_model', 'project', 'projects', 'id', 'read', 'tasks', 'projectId', 'readTasksByProject'),
+(1, 'project', 'Project Module', 'Project', 'project_model', 'project', 'projects', 'id', 'readById', 'tasks', 'projectId', 'readTasksByProject'),
 (2, 'community', 'Community Module', 'Community', 'community_model', 'community', 'communities', 'id', '', '', '', ''),
 (3, 'user', 'User Module', 'User', 'user_model', 'user', 'users', 'id', '', '', '', ''),
 (4, 'user_preference', 'User Preference Module', 'Preference', 'user_model', 'user_preference', 'user_preferences', 'id', '', '', '', ''),
@@ -745,20 +745,20 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (59, 'message', 'message', 6, 10, 'Message', 'Message', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
 (60, 'id', 'id', 1, 11, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (61, 'title', 'title', 2, 11, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
-(62, 'description', 'description', 3, 11, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
-(63, 'communityId', 'communityId', 4, 11, 'Community ID', 'Community ID', 0, 1, 1, 2, 12, 1, '0', 'int(11)'),
-(64, 'ownerId', 'ownerId', 5, 11, 'Owner ID', 'Owner ID', 0, 1, 1, 2, 8, 1, '0', 'int(11)'),
-(65, 'type', 'type', 6, 11, 'Type', 'Type', 0, 1, 1, 2, 13, 2, '0', 'tinyint(2)'),
-(66, 'priority', 'priority', 7, 11, 'Priority', 'Priority', 0, 1, 1, 2, 19, 2, '0', 'tinyint(1)'),
-(67, 'status', 'status', 8, 11, 'Status', 'Status', 0, 1, 1, 2, 14, 2, '0', 'tinyint(1)'),
-(68, 'startDateEstimate', 'startDateEstimate', 9, 11, 'Start Date Est.', 'Start Date Est.', 0, 1, 1, 2, 0, 5, '', 'date'),
-(69, 'startDateActual', 'startDateActual', 10, 11, 'Start Date Act.', 'Start Date Act.', 0, 1, 1, 2, 0, 5, '', 'date'),
-(70, 'endDateEstimate', 'endDateEstimate', 11, 11, 'End Date Est.', 'End Date Est.', 0, 1, 1, 2, 0, 5, '', 'date'),
-(71, 'endDateActual', 'endDateActual', 12, 11, 'End Date Act.', 'End Date Act.', 0, 1, 1, 2, 0, 5, '', 'date'),
+(62, 'description', 'description', 3, 11, 'Description', 'Description', 0, 1, 2, 2, 0, 3, '', 'varchar(255)'),
+(63, 'communityId', 'communityId', 4, 11, 'Community ID', 'Community ID', 0, 1, 5, 2, 12, 1, '0', 'int(11)'),
+(64, 'ownerId', 'ownerId', 5, 11, 'Owner ID', 'Owner ID', 0, 1, 5, 2, 8, 1, '0', 'int(11)'),
+(65, 'type', 'type', 6, 11, 'Type', 'Type', 0, 1, 5, 2, 13, 2, '0', 'tinyint(2)'),
+(66, 'priority', 'priority', 7, 11, 'Priority', 'Priority', 0, 1, 5, 2, 19, 2, '0', 'tinyint(1)'),
+(67, 'status', 'status', 8, 11, 'Status', 'Status', 0, 1, 5, 2, 14, 2, '0', 'tinyint(1)'),
+(68, 'startDateEstimate', 'startDateEstimate', 9, 11, 'Start Date Est.', 'Start Date Est.', 0, 1, 6, 2, 0, 5, '', 'date'),
+(69, 'startDateActual', 'startDateActual', 10, 11, 'Start Date Act.', 'Start Date Act.', 0, 1, 6, 2, 0, 5, '', 'date'),
+(70, 'endDateEstimate', 'endDateEstimate', 11, 11, 'End Date Est.', 'End Date Est.', 0, 1, 6, 2, 0, 5, '', 'date'),
+(71, 'endDateActual', 'endDateActual', 12, 11, 'End Date Act.', 'End Date Act.', 0, 1, 6, 2, 0, 5, '', 'date'),
 (72, 'timeRequiredEstimate', 'timeRequiredEstimate', 13, 11, 'Time Req. Est.', 'Time Req. Est.', 0, 1, 1, 2, 0, 4, '0', 'decimal(8,2)'),
 (73, 'timeRequiredActual', 'timeRequiredActual', 14, 11, 'Time Req. Act.', 'Time Req. Act.', 0, 1, 1, 2, 0, 4, '0', 'decimal(8,2)'),
 (74, 'percentComplete', 'percentComplete', 15, 11, 'Pct Complete', 'Pct Complete', 0, 1, 1, 2, 0, 4, '0', 'decimal(6,2)'),
-(75, 'active', 'active', 16, 11, 'Active', 'Active', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
+(75, 'active', 'active', 16, 11, 'Active', 'Active', 0, 1, 8, 2, 0, 2, '0', 'tinyint(1)'),
 (76, 'id', 'id', 1, 12, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (77, 'title', 'title', 2, 12, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
 (78, 'description', 'description', 3, 12, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
@@ -865,12 +865,12 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (179, 'language', 'language', 12, 25, 'Language', 'Language', 0, 1, 1, 2, 10, 3, '', 'varchar(20)'),
 (180, 'timezone', 'Time Zone', 13, 25, 'Time Zone', 'Time Zone', 0, 1, 1, 2, 11, 3, '', 'varchar(20)'),
 (181, 'role', 'role', 14, 25, 'Role', 'Role', 0, 1, 1, 2, 5, 2, '0', 'tinyint(2)'),
-(182, 'disableNotifications', 'disableNotifications', 15, 25, 'Notifications', 'Notifications', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
+(182, 'disableNotifications', 'disableNotifications', 15, 25, 'Disable Notifications', 'Disable Notifications', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (183, 'disableLogin', 'disableLogin', 16, 25, 'Disable Logins', 'Disable Logins', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (184, 'admin', 'admin', 17, 25, 'Admin', 'Admin', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (185, 'active', 'active', 18, 25, 'Active', 'Active', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
-(186, 'photoProfile', 'photoProfile', 19, 25, 'Photo', 'Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
-(187, 'photoThumb', 'photoThumb', 20, 25, 'Thumb', 'Thumb', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
+(186, 'photoProfile', 'photoProfile', 19, 25, 'Profile Photo', 'Profile Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
+(187, 'photoThumb', 'photoThumb', 20, 25, 'Thumb Photo', 'Thumb Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
 (188, 'avatar', 'avatar', 21, 25, 'Avatar', 'Avatar', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
 (189, 'id', 'id', 1, 26, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (190, 'title', 'title', 2, 26, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
@@ -881,11 +881,18 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (195, 'id', 'id', 1, 27, 'ID', 'ID', 0, 1, 1, 2, 0, 1, '', 'int(11) '),
 (196, 'title ', 'title ', 2, 27, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (197, 'description ', 'description ', 3, 27, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255) '),
-(198, 'model ', 'model ', 4, 27, 'Model', 'Model', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(199, 'masterTable ', 'masterTable ', 5, 27, 'Master Table', 'Master Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(200, 'masterTableCol ', 'masterTableCol ', 6, 27, 'Master Table Column', 'Master Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(201, 'detailTable ', 'detailTable ', 7, 27, 'Detail Table', 'Detail Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(202, 'detailTableCol ', 'detailTableCol ', 8, 27, 'Detail Table Column', 'Detail Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) ');
+(198, 'label', 'label', 4, 27, 'Label', 'Label', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(199, 'model ', 'model ', 5, 27, 'Model', 'Model', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(200, 'view', 'view', 6, 27, 'View', 'View', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(201, 'headerTable ', 'headerTable ', 7, 27, 'Header Table', 'Header Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(202, 'headerTableCol ', 'headerTableCol ', 8, 27, 'Header Table Column', 'Header Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(203, 'headerMethod', 'headerMethod', 9, 27, 'Header Method', 'Header Method', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(204, 'detailTable ', 'detailTable ', 10, 27, 'Detail Table', 'Detail Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(205, 'detailTableCol ', 'detailTableCol ', 11, 27, 'Detail Table Column', 'Detail Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(206, 'detailMethod', 'detailMethod', 12, 27, 'Detail Method', 'Detail Method', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(207, 'userId', 'userId', 1, 28, 'User Id', 'User Id', 0, 1, 5, 2, 8, 1, '', 'int(11) '),
+(208, 'preferenceId', 'preferenceId', 2, 28, 'Preference Id', 'Preference Id', 0, 1, 5, 2, 0, 1, '', 'int(11) '),
+(209, 'userModify', 'userModify', 3, 28, 'User Can Modify', 'User Can Modify', 0, 1, 8, 2, 0, 2, '0', 'tinyint(2)');
 
 -- --------------------------------------------------------
 
@@ -946,15 +953,15 @@ INSERT INTO `tasks` (`id`, `title`, `description`, `projectId`, `creatorId`, `ow
 (2, 'SubTask3', 'ST3', 1, 1, 1, 1, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (3, 'SubTask2', 'ST2', 1, 1, 1, 5, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (4, 'SubTask4', 'ST4', 1, 1, 1, 1, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
-(5, 'TaskHeader1', 'TH1', 1, 1, 1, 0, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(5, 'TaskHeader1', 'TH1', 1, 4, 1, 0, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (6, 'SubTask1', 'ST1', 1, 1, 1, 5, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (7, 'SubSub3', 'SS3', 1, 1, 1, 4, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (8, 'SubSub1', 'SS1', 1, 1, 1, 6, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (9, 'SubSub2', 'SS2', 1, 1, 1, 4, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
 (10, 'SubSub4', 'SS4', 1, 1, 1, 6, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
-(11, 'Lay Pipe', 'Lay down pipe', 2, 1, 1, 0, 2, 1, 1, 1, '2016-01-02', '2016-01-03', '2016-01-04', '2016-01-15', '2016-01-17', 1, 1, '10.01', '10.02'),
-(12, 'SubTask2', 'ST2', 2, 1, 1, 11, 2, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
-(13, 'SubTask1', 'ST1', 2, 1, 1, 11, 1, 1, 1, 1, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00');
+(11, 'Lay Pipes Down', 'Lay down pipes again', 2, 4, 1, 0, 1, 1, 2, 1, '2016-02-02', '2016-01-03', '2016-01-04', '2016-01-15', '2016-01-17', 0, 1, '10.00', '10.00'),
+(12, 'SubTask3', 'ST2', 2, 1, 1, 11, 2, 2, 1, 1, '2016-01-00', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 1, '10.00', '10.00'),
+(13, 'SubTask02', 'ST1', 2, 1, 4, 11, 1, 1, 1, 2, '2016-01-01', '2016-01-01', '2016-01-10', '2016-01-10', '2016-01-10', 1, 0, '10.00', '10.00');
 
 -- --------------------------------------------------------
 
@@ -1400,7 +1407,7 @@ ALTER TABLE `system_tables`
 -- AUTO_INCREMENT for table `system_table_columns`
 --
 ALTER TABLE `system_table_columns`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 --
 -- AUTO_INCREMENT for table `system_timezones`
 --

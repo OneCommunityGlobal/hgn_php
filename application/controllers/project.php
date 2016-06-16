@@ -70,17 +70,26 @@ class Project extends CI_Controller {
     }
 
     public function home() {
+        $this->load->model('database_model');
         $this->load->model('system_model');
 
         $this->data['title'] = PAGE_TITLE . ' - Projects';
         $this->data['action'] = $action = 'home';
 
+        $this->data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
+        $this->data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');
+        $this->data['projectsLookups'] = $this->system_model->readLookupAll($projectsMeta);
+        $this->data['tasksLookups'] = $this->system_model->readLookupAll($tasksMeta);
         $this->data['tableSelectors'] = $tableSelectors = $this->system_model->readSelectors('projects');
 
         $this->load->view('project', $this->data);
         return;
     }
 
+    public function createProject() {
+        $temp = 1;
+    }
+    
     public function display($projectId = null) {
         $this->data['action'] = $action = 'display';
         
@@ -94,7 +103,12 @@ class Project extends CI_Controller {
             $projectId = $_POST['hgnSelect'];
         }
 
-        $colArr = [
+        $headerColArr = [
+            "title", "description",
+            "communityId", "ownerId", "type", "active"
+        ];
+
+        $detailColArr = [
             "position", "title", "description",
             "creatorId", "ownerId", "type", "categoryId",
             "priority", "startDateEstimate", "startDateActual", "endDateEstimate",
@@ -103,8 +117,9 @@ class Project extends CI_Controller {
         ];
 
         $this->data['title'] = PAGE_TITLE;
-        $this->data['colArr'] = $colArr;
-        $this->data['projectData'] = $this->project_model->read('projects', 'id', $projectId);
+        $this->data['headerColArr'] = $headerColArr;
+        $this->data['detailColArr'] = $detailColArr;
+        $this->data['projectData'] = $this->project_model->readById('projects', 'id', $projectId);
         $this->data['tasksData'] = $this->project_model->readTasksByProject($projectId);
         $this->data['projectsMeta'] = $projectsMeta = $this->database_model->readTableMetaData('projects');
         $this->data['tasksMeta'] = $tasksMeta = $this->database_model->readTableMetaData('tasks');

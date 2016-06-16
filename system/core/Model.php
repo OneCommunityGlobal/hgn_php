@@ -87,12 +87,21 @@ class CI_Model {
         return $result ? $inserted_id : false;
     }
 
-    //Select a single row from a table.
-    public function read($table, $lookupColumn = null, $lookupValue = null) {
-        if(!$lookupColumn or ! $lookupValue) return false;
+    //Select a single row from a table and return as array of columns
+    public function read($table, $lookupColumn = 'id', $lookupValue = null) {
+        if(!$lookupValue) return false;
         $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
         $result = $this->db->query($sql);
         $row = $result->row_array();
+        return ($result->num_rows() > 0) ? $row : false;
+    }
+
+    //Select a single row from a table and return as array indexed by ID
+    public function readById($table, $lookupColumn = 'id', $lookupValue = null) {
+        if(!$lookupValue) return false;
+        $sql = 'SELECT * FROM ' . $table . ' where ' . $lookupColumn . ' = "' . $lookupValue . '" LIMIT 1';
+        $result = $this->db->query($sql);
+        $row[$lookupValue] = $result->row_array();
         return ($result->num_rows() > 0) ? $row : false;
     }
 
@@ -172,12 +181,12 @@ class CI_Model {
 
         if(count($header) > 0){
             $table = $data['headerTable'];
-            foreach($detail as $k => $v) {
+            foreach($header as $k => $v) {
                 $changeType = $v['changeType'];
                 unset($v['changeType']);
                 switch($changeType) {
                     case 'u' :
-                        $headerUpdated = $this->update($table, $header);
+                        $headerUpdated = $this->update($table, $v);
                         break;
                     default :
                         break;

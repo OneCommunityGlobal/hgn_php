@@ -22,6 +22,7 @@
  * @category	javascript libraries
  * @author	HGN Dev Team
  */
+'use strict';
 var Ajax = function() {
     var data = null;
 };

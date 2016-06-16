@@ -40,6 +40,7 @@ class Home extends CI_Controller {
     public function _remap($method, $params = array()) {
         //Check to see if user is already logged in.
         $this->load->model('user_model');
+        
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
         if (!$this->loggedIn) {

@@ -24,6 +24,7 @@
  * @category	javascript
  * @author	HGN Dev Team
  */
+'use strict';
 var Page = function() {
     this.originalData = new Object();
 };

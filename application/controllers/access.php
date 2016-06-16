@@ -42,17 +42,17 @@ class Access extends CI_Controller {
         $this->data['loggedIn'] = $loggedIn = false;
 
         $this->load->view('common/wrapper_top', $this->data);
-        if (DISPLAY_HEADER) {
+        if(DISPLAY_HEADER){
             $this->load->view('common/header', $this->data);
         }
 
-        if (method_exists($this, $method)) {
+        if(method_exists($this, $method)){
             isset($params[0]) ? $this->$method($params[0]) : $this->$method();
         } else {
             $this->index();
         }
 
-        if (DISPLAY_FOOTER) {
+        if(DISPLAY_FOOTER){
             $this->load->view('common/footer', $this->data);
         }
         $this->load->view('common/wrapper_bottom', $this->data);
@@ -78,7 +78,7 @@ class Access extends CI_Controller {
         $this->data['title'] = PAGE_TITLE . ' - Login';
 
         //this should never be true
-        if (!isset($_POST['userName'])) {
+        if(!isset($_POST['userName'])){
             $this->load->view('login', $this->data);
             return;
         }
@@ -86,13 +86,13 @@ class Access extends CI_Controller {
         $userName = (isset($_POST['userName']) and $_POST['userName']) ? $_POST['userName'] : FALSE;
         $password = (isset($_POST['password']) and $_POST['password']) ? $_POST['password'] : FALSE;
 
-        if (!$userName or ! $password) {
+        if(!$userName or ! $password){
             $this->data['message'] = '**Username And Password Are Required**';
             $this->load->view('login', $this->data);
             return;
         }
 
-        if (!$this->user_model->validateUsernamePassword($userName, $password)) {
+        if(!$this->user_model->validateUsernamePassword($userName, $password)){
             $this->data['message'] = 'The Username Password Combination Is Not Valid';
             $this->load->view('login', $this->data);
             return;
@@ -128,4 +128,5 @@ class Access extends CI_Controller {
         header('Location: ' . BASE_URL . 'home');
         exit;
     }
+
 }

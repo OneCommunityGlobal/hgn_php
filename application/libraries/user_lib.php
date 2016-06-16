@@ -1,3 +1,5 @@
+<?php
+
 /**
  * Highest Good Network
  *
@@ -11,6 +13,7 @@
  * @version	0.8a
  * @filesource
  */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * HGN short description here
@@ -19,16 +22,11 @@
  *
  * @package     HGN
  * @subpackage	
- * @category	javascript
+ * @category	libraries
  * @author	HGN Dev Team
  */
-'use strict';
+class User_lib {
 
-var Template = function () {
-
-};
-
-Template.prototype = {
     /**
      * Short description
      * 
@@ -37,24 +35,14 @@ Template.prototype = {
      * @todo
      *
      * @access	public
-     * @global 	type    globlvarname    Documents a global variable or its use in a method
-     * @param	type    name            short description
-     * @return	type    name            short description
+     * @global 	type $globlvarname  Documents a global variable or its use in a function or method
+     * @name    global var name     Specifies an alias for a variable. For example, $GLOBALS['myvariable'] becomes $myvariable
+     * @param	type                short description
+     * @return	type                short descriptino
      */
-    method1Name : function () {
-
-    },
-    method2Name : function () {
-
+    public function myfunc() {
+        $tmp = 1;
+        return;
     }
-};
 
-//OR
-
-Template.prototype.method1Name = function() {
-    
-};
-
-Template.prototype.method2Name = function() {
-    
-};
+}
