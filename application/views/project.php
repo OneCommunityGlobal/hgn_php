@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div id="headerDiv">
         <form id="headerForm" class="form-inline" role="form">
-    </div>-->
+    </div>
 </form>
 </div>
 
@@ -64,21 +64,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </form>            
 </div>
 </main>
-<script src="/js/view.js"></script>
-<script type="text/javascript">
-                var hgnView = new View();
-                hgnView.headerMeta = <?php echo json_encode($projectsMeta); ?>;
-                hgnView.detailMeta = <?php echo json_encode($tasksMeta); ?>;
-                hgnView.headerLookups = <?php echo json_encode($projectsLookups); ?>;
-                hgnView.detailLookups = <?php echo json_encode($tasksLookups); ?>;
-</script>
-
-<?php if($action !== 'home'){ ?>
-    <script type="text/javascript">
-        hgnView.headerColArr = <?php echo json_encode($headerColArr); ?>;
-        hgnView.detailColArr = <?php echo json_encode($detailColArr); ?>;
-        hgnView.headerData = <?php echo json_encode($projectData); ?>;
-        hgnView.detailData = <?php echo json_encode($tasksData); ?>;
-        hgnView.renderData('table');
-    </script>
-<?php } ?>

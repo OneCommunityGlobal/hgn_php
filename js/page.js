@@ -52,7 +52,7 @@ Page.prototype = {
         }
         return;
     },
-    clearSection : function (sectionId) {
+    clearSection : function(sectionId) {
         var oldSection = document.getElementById(sectionId);
         if(oldSection) {
             oldSection.parentNode.removeChild(oldSection);
@@ -236,86 +236,6 @@ Page.prototype = {
         dataForm.action = '/admin/delete/' + this.module;
         dataForm.submit();
         return;
-    },
-    renderTabularData : function(elemObj, colArray, colTitleArray, colSizeArray) {
-        for(var idx in elemObj) {
-            elem = elemObj[idx];
-
-            if(elem["id"] === null) {
-                continue;
-            }
-
-            if(document.getElementById(elem["id"])) {
-                continue;
-            }
-
-            if(+(elem["parentId"]) !== 0 && !document.getElementById(elem["parentId"])) {
-                var parentElem = elemObj[elem["parentId"]];
-                renderElem(elemObj, parentElem);
-            }
-
-            var elemsTbody = document.getElementById('dataTbody');
-
-            var tempRow = document.createElement('tr');
-            tempRow.setAttribute("data-sequence", elem.position);
-            tempRow.setAttribute("id", elem["id"]);
-
-            //***
-
-            var plus = document.createElement('img');
-            plus.src = "/images/icons/small_plus.jpg";
-            var tempTd = document.createElement('td');
-            var tempElement = document.createElement('button');
-            tempElement.href = 'javascript:void(0)';
-            that = this;
-            tempElement.addEventListener("click", function(evt) {
-                evt.preventDefault();
-                that.addNewRow(that.bodyData);
-            }, false);
-            tempElement.appendChild(plus);
-            tempTd.appendChild(tempElement);
-            tempRow.appendChild(tempTd);
-
-            var minus = document.createElement('img');
-            minus.src = "/images/icons/small_minus.jpg";
-            var tempElement = document.createElement('button');
-            tempElement.href = 'javascript:void(0)';
-            that = this;
-            tempElement.addEventListener("click", function(evt) {
-                evt.preventDefault();
-                that.deleteRow(that.bodyData);
-            }, false);
-            tempElement.appendChild(minus);
-            tempTd.appendChild(tempElement);
-            tempRow.appendChild(tempTd);
-
-            //***
-
-            for(var tidx in colArray) {
-                if(colArray[tidx] == "") continue;
-                var tempCol = document.createElement('td');
-                var tempInp = document.createElement("input");
-                tempInp.setAttribute('type', "text");
-                tempInp.id = elem[colArray[tidx]] + ':' + colArray[tidx];
-                tempInp.name = elem[colArray[tidx]] + ':' + colArray[tidx];
-                tempInp.value = elem[colArray[tidx]];
-                tempInp.setAttribute('size', colSizeArray[tidx]);
-                tempCol.appendChild(tempInp);
-                tempRow.appendChild(tempCol);
-            }
-
-            if(+(elem.parentId) === 0) {
-                elemsTbody.appendChild(tempRow);
-            }else {
-                var parentElement = document.getElementById(elem.parentId);
-                var parentElementId = parentElement.id;
-                var nextSequence = +(elem.position) + 1;
-                var qs1 = '[data-sequence="' + nextSequence + '"]';
-                var qs2 = '[id="' + parentElementId + '"] > [data-sequence="' + nextSequence + '"]';
-                var beforeElem = document.querySelector(qs2);
-                elemsTbody.insertBefore(tempRow, beforeElem);
-            }
-        }
-        return;
     }
+
 };
