@@ -26,6 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author	HGN Dev Team
  */
 class User_model extends CI_Model {
+    
 
     public function isLoggedIn() {
         //check if session vars are set with username/password
@@ -34,7 +35,7 @@ class User_model extends CI_Model {
             $this->session->sess_destroy();
             return false;
         }
-
+          
         $password = isset($_SESSION['password']) ? $_SESSION['password'] : FALSE;
         if ($userName and $password) {
             if (!$this->validateUsernamePassword($userName, $password)) {
@@ -48,11 +49,19 @@ class User_model extends CI_Model {
         return true;
     }
 
+      
+    
+    
+    
     public function validateUsernamePassword($userName = NULL, $password = NULL) {
+        //$this->load->library('Passwordhash');
         $sql = 'SELECT * from `users`';
         $sql .= ' where userName = "' . strtolower($userName) . '"';
         $result = $this->db->query($sql);
 //TODO  Add password hashing
+        //$actual_password = $result->row_array()['password'];
+        //$check = $this->check_password($password,$actual_password);
+        
         if (isset($result->row_array()['password']) and $result->row_array()['password'] === $password) {
             foreach ($result->row_array() as $k => $v) {
                 //this->set is in parent
@@ -63,6 +72,56 @@ class User_model extends CI_Model {
             return false;
         }
     }
+    
+     public function validateUsername($userName = NULL) {
+        //$this->load->library('Passwordhash');
+        $sql = 'SELECT * from `users`';
+        $sql .= ' where userName = "' . strtolower($userName) . '"';
+        $result = $this->db->query($sql);
+//
+        
+        if($result->num_rows() > 0)
+        {
+          return false;
+        }
+        else 
+        {
+            return true;
+        }
+       
+    }
+//    
+    
+    
+    /**
+     * Create new user
+     * 
+     * 
+     * 
+     */
+    public function createUser($userData = array()){
+        $title = $userData['firstName']." ".$userData['lastName'];
+        $userName = $userData['userName'];
+        $password = md5($userData['password']);
+        $firstName = $userData['firstName'];
+        $lastName = $userData['lastName'];
+        $email = $userData['email'];
+        $phoneHome = $userData['homePhone'];
+        $phoneMobile = $userData['mobilePhone'];
+        
+        $sql = 'INSERT into `users` ';
+        $sql .= '(title , userName, password, firstName, lastName,email,phoneHome, phoneMobile,';
+        $sql .= 'language, timezone) VALUES ("'.$title.'", "'.$userName.'", "';
+        $sql .=  $password. '"," ' . $firstName . '", "'. $lastName.'", "'.$email .'","';
+        $sql .= $phoneHome . '", "' . $phoneMobile. '", 1,1)';
+         $result = $this->db->query($sql);
+         $inserted_id = $this->db->insert_id();
+          
+        return $result ? $inserted_id : false;
+        
+    }
+    
+    
 
     /**
      * Calculate user hours between dates
@@ -134,7 +193,7 @@ class User_model extends CI_Model {
         return $result;
     }
 
-    public function get_quant_cat($year, $week, $conn, $userId) {
+    public function get_quant_cat( $userId, $year, $week) {
         $sql = 'SELECT';
         $sql .= ' COUNT(t.categoryUserId) AS quant_cat';
         $sql .= ' FROM task AS t';

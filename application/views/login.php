@@ -45,6 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="persist">Stay Logged In</label>
             <input type="checkbox" name="persist" value="persist" id="persist" tabindex="3"  />
         </div>
+        
         <?php
         if (isset($message) and $message) {
             echo '<div class="message">';
@@ -52,13 +53,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo '</div>';
         }
         ?>
-        <div class="divCenter">
+        <div class="text-center">
             <button type="submit" name="submit" value="submit"
                     class="btn btn-lg btn-primary btn-block">Sign in</button>
-        </div>
-        <!--
-                <div class="divCenter">
+        </div
+            
+      <?php  if(ALLOW_USER_SIGNUP){?>
+        
+             <div class="text-center">                   
                     <a href="signup" class="pull-right">Sign Up</a>
-                </div>-->
+             </div>
+        
+      <?php } ?>
     </form>
 </div>

@@ -6,7 +6,7 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
-}
+  }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
@@ -38,4 +38,8 @@ body {
 
 .message {
     color: red; font-size: x-small;
+}
+
+.required-field {
+    color : red;
 }

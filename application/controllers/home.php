@@ -68,8 +68,13 @@ class Home extends CI_Controller {
 
     public function index() {
         $this->data['title'] = PAGE_TITLE;
-
+  
+       $this->load->model('user_model');
+       $this->user_model->get_quant_cat();
         $this->load->view('home', $this->data);
+        
+       
+        
     }
 
 }

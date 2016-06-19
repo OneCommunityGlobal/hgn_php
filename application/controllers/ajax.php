@@ -40,4 +40,14 @@ class Ajax extends CI_Controller {
         return;
     }
 
+    
+    public function testModule() {
+         $model = $this->uri->segments['3'];
+        $method = $this->uri->segments['4'];
+       isset($this->uri->segments['5']) ? $parms = $this->uri->segments['5'] : $parms = null;
+        $this->load->model($model);
+        $responseCode = $this->$model->$method($parms);
+        
+        
+    }
 }

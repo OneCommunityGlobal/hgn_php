@@ -48,8 +48,18 @@ define("DISPLAY_HEADER", FALSE);
 define("DISPLAY_FOOTER", TRUE);
 
 //Not used yet because users are entered by an admin, but can allow users to signup if turned on.
-define("ALLOW_USER_SIGNUP", FALSE);
+define("ALLOW_USER_SIGNUP", TRUE);
 
 //Define location of profile pictures and avatars
 define("PROFILE_PICS_DIR", BASE_URL . 'media/photos/users/');
 define("AVATAR_DIR", BASE_URL . 'media/avatars/');
+
+
+
+
+
+
+
+
+
+
