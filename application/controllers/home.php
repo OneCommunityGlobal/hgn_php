@@ -40,27 +40,27 @@ class Home extends CI_Controller {
     public function _remap($method, $params = array()) {
         //Check to see if user is already logged in.
         $this->load->model('user_model');
-        
+
         $this->data['loggedIn'] = $this->loggedIn = $this->user_model->isLoggedIn();
 
-        if (!$this->loggedIn) {
+        if(!$this->loggedIn){
             header('Location: ' . BASE_URL . 'access/login');
             exit;
         }
 
         $this->load->view('common/wrapper_top', $this->data);
-        if (DISPLAY_HEADER) {
+        if(DISPLAY_HEADER){
             $this->load->view('common/header', $this->data);
         }
         $this->load->view('common/navbar', $this->data);
 
-        if (method_exists($this, $method)) {
+        if(method_exists($this, $method)){
             isset($params[0]) ? $this->$method($params[0]) : $this->$method();
         } else {
             $this->index();
         }
 
-        if (DISPLAY_FOOTER) {
+        if(DISPLAY_FOOTER){
             $this->load->view('common/footer', $this->data);
         }
         $this->load->view('common/wrapper_bottom', $this->data);
@@ -68,13 +68,8 @@ class Home extends CI_Controller {
 
     public function index() {
         $this->data['title'] = PAGE_TITLE;
-  
-       $this->load->model('user_model');
-       $this->user_model->get_quant_cat();
+
         $this->load->view('home', $this->data);
-        
-       
-        
     }
 
 }

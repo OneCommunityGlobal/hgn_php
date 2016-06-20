@@ -103,8 +103,6 @@ class Access extends CI_Controller {
             return;
         }
 
-      
-
         if(!$this->user_model->get('approved')) {
                 $this->data['message'] = 'This account has not been approved.  Please wait for an administrator to 
                 approve it.';

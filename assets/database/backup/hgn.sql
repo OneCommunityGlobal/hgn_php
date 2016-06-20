@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2016 at 10:58 AM
+-- Generation Time: Jun 20, 2016 at 04:19 PM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -628,7 +628,6 @@ CREATE TABLE `system_tables` (
 
 INSERT INTO `system_tables` (`id`, `title`, `description`) VALUES
 (1, 'activities', 'activities'),
-(2, 'categories', 'categories'),
 (3, 'comments', 'comments'),
 (4, 'communities', 'communities'),
 (5, 'events', 'events'),
@@ -649,11 +648,13 @@ INSERT INTO `system_tables` (`id`, `title`, `description`) VALUES
 (20, 'task_to_users', 'task_to_users'),
 (21, 'teams', 'teams'),
 (22, 'team_to_users', 'team_to_users'),
-(23, 'texts', 'texts'),
 (24, 'timesheets', 'timesheets'),
 (25, 'users', 'users'),
-(26, 'user_preferences', 'user_preferences'),
-(27, 'system_modules', 'System Modules');
+(26, 'preferences', 'User Preferences'),
+(27, 'system_modules', 'System Modules'),
+(28, 'user_to_preferences', 'User to Preferences'),
+(29, 'system_languages', 'Languages'),
+(30, 'system_timezones', 'Time Zones');
 
 -- --------------------------------------------------------
 
@@ -687,9 +688,6 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (1, 'id', 'id', 1, 1, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (2, 'title', 'title', 2, 1, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(31)'),
 (3, 'description', 'description', 3, 1, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
-(4, 'id', 'id', 1, 2, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
-(5, 'title', 'title', 2, 2, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
-(6, 'description', 'description', 3, 2, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
 (7, 'id', 'id', 1, 3, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (8, 'title', 'title', 2, 3, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
 (9, 'description', 'description', 3, 3, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
@@ -835,13 +833,6 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (149, 'id', 'id', 1, 22, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (150, 'teamId', 'teamId', 2, 22, 'Team ID', 'Team ID', 0, 1, 1, 2, 0, 1, '0', 'int(11)'),
 (151, 'userId', 'userId', 3, 22, 'User ID', 'User ID', 0, 1, 1, 2, 8, 1, '0', 'int(11)'),
-(152, 'id', 'id', 1, 23, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
-(153, 'title', 'title', 2, 23, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
-(154, 'description', 'description', 3, 23, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
-(155, 'language', 'language', 4, 23, 'Language', 'Language', 0, 1, 1, 2, 0, 2, '0', 'tinyint(3)'),
-(156, 'textShort', 'textShort', 5, 23, 'Text Short', 'Text Short', 0, 1, 1, 2, 0, 3, '', 'varchar(32)'),
-(157, 'textMedium', 'textMedium', 6, 23, 'Text Medium', 'Text Medium', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
-(158, 'textLong', 'textLong', 7, 23, 'Text Long', 'Text Long', 0, 1, 1, 2, 0, 3, '', 'varchar(128)'),
 (159, 'id', 'id', 1, 24, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (160, 'title', 'title', 2, 24, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
 (161, 'description', 'description', 3, 24, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
@@ -869,9 +860,9 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (183, 'disableLogin', 'disableLogin', 16, 25, 'Disable Logins', 'Disable Logins', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (184, 'admin', 'admin', 17, 25, 'Admin', 'Admin', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (185, 'active', 'active', 18, 25, 'Active', 'Active', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
-(186, 'photoProfile', 'photoProfile', 19, 25, 'Profile Photo', 'Profile Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
-(187, 'photoThumb', 'photoThumb', 20, 25, 'Thumb Photo', 'Thumb Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
-(188, 'avatar', 'avatar', 21, 25, 'Avatar', 'Avatar', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
+(186, 'photoProfile', 'photoProfile', 20, 25, 'Profile Photo', 'Profile Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
+(187, 'photoThumb', 'photoThumb', 21, 25, 'Thumb Photo', 'Thumb Photo', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
+(188, 'avatar', 'avatar', 22, 25, 'Avatar', 'Avatar', 0, 1, 1, 2, 0, 3, '', 'varchar(64)'),
 (189, 'id', 'id', 1, 26, 'ID', 'ID', 0, 0, 1, 2, 0, 1, '0', 'int(11)'),
 (190, 'title', 'title', 2, 26, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30)'),
 (191, 'description', 'description', 3, 26, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
@@ -892,7 +883,8 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (206, 'detailMethod', 'detailMethod', 12, 27, 'Detail Method', 'Detail Method', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (207, 'userId', 'userId', 1, 28, 'User Id', 'User Id', 0, 1, 5, 2, 8, 1, '', 'int(11) '),
 (208, 'preferenceId', 'preferenceId', 2, 28, 'Preference Id', 'Preference Id', 0, 1, 5, 2, 0, 1, '', 'int(11) '),
-(209, 'userModify', 'userModify', 3, 28, 'User Can Modify', 'User Can Modify', 0, 1, 8, 2, 0, 2, '0', 'tinyint(2)');
+(209, 'userModify', 'userModify', 3, 28, 'User Can Modify', 'User Can Modify', 0, 1, 8, 2, 0, 2, '', 'tinyint(2)'),
+(210, 'approved', 'approved', 19, 25, 'Approved', 'Approved', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)');
 
 -- --------------------------------------------------------
 
@@ -1085,7 +1077,8 @@ CREATE TABLE `users` (
   `disableNotifications` tinyint(1) DEFAULT '0',
   `disableLogin` tinyint(1) DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  `active` tinyint(1) DEFAULT '1',
+  `active` tinyint(1) DEFAULT '0',
+  `approved` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `photoProfile` varchar(64) DEFAULT NULL,
   `photoThumb` varchar(64) DEFAULT NULL,
   `avatar` varchar(64) DEFAULT NULL
@@ -1095,9 +1088,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `title`, `description`, `userName`, `password`, `type`, `firstName`, `lastName`, `email`, `phoneHome`, `phoneMobile`, `language`, `timezone`, `role`, `disableNotifications`, `disableLogin`, `admin`, `active`, `photoProfile`, `photoThumb`, `avatar`) VALUES
-(1, 'Joe Admin', 'Admin user', 'admin', 'admin', 1, 'Admin', 'User', 'admin@oc.org', '415555-1212', '415555-1213', '1', '1', 2, 1, 1, 1, 1, '1_profile.jpg', '1_thumb.jpg', 'halloween-1.jpg'),
-(4, 'Fred User', 'Sample User', 'user', 'user', 3, 'Fred', 'User', 'fred@none.com', '415 555-1212', '415 555-1213', '0', '0', 0, 1, 0, 0, 1, '9_profile.jpg', '9_profile.jpg', 'halloween-1.jpg');
+INSERT INTO `users` (`id`, `title`, `description`, `userName`, `password`, `type`, `firstName`, `lastName`, `email`, `phoneHome`, `phoneMobile`, `language`, `timezone`, `role`, `disableNotifications`, `disableLogin`, `admin`, `active`, `approved`, `photoProfile`, `photoThumb`, `avatar`) VALUES
+(1, 'Joe Admin', 'Admin user', 'admin', 'admin', 1, 'Admin', 'User', 'admin@oc.org', '415555-1212', '415555-1213', '1', '1', 2, 1, 1, 1, 1, 1, '1_profile.jpg', '1_thumb.jpg', 'halloween-1.jpg'),
+(4, 'Fred User', 'Sample User', 'user', 'user', 3, 'Fred', 'User', 'fred@none.com', '415 555-1212', '415 555-1213', '0', '0', 0, 1, 0, 0, 1, 1, '9_profile.jpg', '9_profile.jpg', 'halloween-1.jpg');
 
 -- --------------------------------------------------------
 
@@ -1402,12 +1395,12 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `system_tables`
 --
 ALTER TABLE `system_tables`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `system_table_columns`
 --
 ALTER TABLE `system_table_columns`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 --
 -- AUTO_INCREMENT for table `system_timezones`
 --

@@ -209,6 +209,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="approved"><?php echo $tableMeta['approved']['label']; ?></label>
+                    <div class="radio-inline col-sm-10">
+                        <label class="radio-inline"><input type="radio" name="approved" value="0" <?php if($headerData['approved'] == 0) echo 'checked'; ?>>False</label>
+                        <label class="radio-inline"><input type="radio" name="approved" value="1" <?php if($headerData['approved'] == 1) echo 'checked'; ?>>True</label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-sm-2" for="photoProfile"><?php echo $tableMeta['photoProfile']['label']; ?></label>
                     <div class="col-sm-10">
                         <input class="form-control" name="photoProfile" value="<?php echo $headerData['photoProfile']; ?>"/>

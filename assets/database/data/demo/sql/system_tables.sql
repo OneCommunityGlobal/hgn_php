@@ -1,7 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0; TRUNCATE system_tables; ALTER TABLE system_tables AUTO_INCREMENT = 1; INSERT INTO system_tables VALUES
 
 ("1","activities","activities"),
-("2","categories","categories"),
 ("3","comments","comments"),
 ("4","communities","communities"),
 ("5","events","events"),
@@ -22,8 +21,10 @@ SET FOREIGN_KEY_CHECKS = 0; TRUNCATE system_tables; ALTER TABLE system_tables AU
 ("20","task_to_users","task_to_users"),
 ("21","teams","teams"),
 ("22","team_to_users","team_to_users"),
-("23","texts","texts"),
 ("24","timesheets","timesheets"),
 ("25","users","users"),
-("26","user_preferences","user_preferences"),
-("27","system_modules","System Modules")
+("26","preferences","User Preferences"),
+("27","system_modules","System Modules"),
+("28","user_to_preferences","User to Preferences"),
+("29","system_languages","Languages"),
+("30","system_timezones","Time Zones")
