@@ -288,8 +288,9 @@ class CI_Loader {
 		{
 			load_class('Model', 'core');
 		}
-
-		$model = ucfirst(strtolower($model));
+                //Removed by Sen ucfirst from model nanme
+                // $model = ucfirst(strtolower($model));
+		$model = strtolower($model);
 
 		foreach ($this->_ci_model_paths as $mod_path)
 		{

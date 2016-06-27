@@ -19,7 +19,8 @@
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARR
+ * ANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -221,7 +222,9 @@ if (file_exists(APPPATH . 'core/' . $CFG->config['subclass_prefix'] . 'Controlle
  */
 
 $e404 = FALSE;
-$class = ucfirst($RTR->class);
+//Removed by Sen ucfirst from class name
+// $class = ucfirst($RTR->class);
+$class = $RTR->class;
 $method = $RTR->method;
 //here
 if (empty($class) OR ! file_exists(APPPATH . 'controllers/' . $RTR->directory . $class . '.php')) {
