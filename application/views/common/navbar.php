@@ -58,10 +58,12 @@ $userName = $_SESSION["userName"];
                             <li class="dropdown-header">Master Data</li>
                             <li><a href="/admin/home/community">Manage Communities</a></li>
                             <li><a href="/admin/home/project">Manage Projects</a></li>
+                            <li><a href="/admin/home/team">Manage Teams</a></li>
                             <li><a href="/admin/home/user">Manage Users</a></li>
                             <li><a href="/admin/home/user_preference">Manage User Preferences</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">System Data</li>
+                            <li><a href="/admin/home/system_module">System Module</a></li>
                             <li><a href="/admin/home/system_lookup">Manage Lookups</a></li>
                             <li><a href="/admin/home/system_table">Manage Tables</a></li>
                             <li><a href="/admin/home/system_setting">Manage System Settings</a></li>
