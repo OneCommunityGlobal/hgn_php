@@ -66,7 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <form id="dataForm" name="dataForm" class="form-horizontal col-md-6" role="form" 
               action="/admin/update/<?php echo $module ?>" method="POST">
                   <?php if($action === 'display' or $action === 'add'){ ?>
-
+<?php
+$var = 1;
+?>
                 <input id="id" name="id" type="hidden" value="<?php if(isset($headerData['id'])) echo $headerData['id']; ?>"/>
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="title"><?php if(isset($tableMeta['title']['label']))echo$tableMeta['title']['label']; ?></label>
@@ -75,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3" for="description"><?php if(isset($tableMeta['description']['label']))echo$tableMeta['description']['label']; ?></label>
+                    <label class="control-label col-sm-3" for="description"><?php if(isset($tableMeta['description']['label']))echo $tableMeta['description']['label']; ?></label>
                     <div class="col-sm-6">
                         <textarea class="form-control" name="description" rows="1" ><?php if(isset($headerData['description']))echo $headerData['description']; ?></textarea>
                     </div>

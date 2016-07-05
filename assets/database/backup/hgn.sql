@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2016 at 04:19 PM
+-- Generation Time: Jul 04, 2016 at 06:01 PM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -31,6 +31,13 @@ CREATE TABLE `activities` (
   `title` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `activities`
+--
+
+INSERT INTO `activities` (`id`, `title`, `description`) VALUES
+(2, 'Test Activity 01', 'Test Activity 01');
 
 -- --------------------------------------------------------
 
@@ -145,17 +152,9 @@ CREATE TABLE `preferences` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `userId` int(11) UNSIGNED DEFAULT NULL,
-  `valueType` tinyint(2) UNSIGNED DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL
+  `valueType` tinyint(2) UNSIGNED NOT NULL,
+  `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `preferences`
---
-
-INSERT INTO `preferences` (`id`, `title`, `description`, `userId`, `valueType`, `value`) VALUES
-(1, 'test1', 'test pref', 1, 1, 'test_value');
 
 -- --------------------------------------------------------
 
@@ -587,7 +586,11 @@ INSERT INTO `system_modules` (`id`, `title`, `description`, `label`, `model`, `v
 (4, 'user_preference', 'User Preference Module', 'Preference', 'user_model', 'user_preference', 'user_preferences', 'id', '', '', '', ''),
 (5, 'system_lookup', 'System Lookup Module', 'Lookup', 'system_model', 'system_lookup', 'system_lookups', 'id', '', 'system_lookup_values', 'systemLookupId', ''),
 (6, 'system_table', 'System Table Module ', 'Table', 'database_model', 'system_table', 'system_tables', 'id', '', 'system_table_columns', 'systemTableId', ''),
-(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', '', ' ', '');
+(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', '', ' ', ''),
+(8, 'activity', 'Activity Module', 'Activity', 'activity_model', 'activity', 'activities', 'id', '', '', '', ''),
+(9, 'preferences', 'Preference Module', 'Preferences', 'preference_model', 'preferences', 'preferences', 'id', '', '', '', ''),
+(10, 'team', 'Team Module', 'Team', 'team_model', 'team', 'teams', 'id', '', '', '', ''),
+(11, 'system_module', 'System Module Module', 'System_module', 'system_model', 'system_module', 'system_modules', 'id', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -854,7 +857,7 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (177, 'phoneHome', 'phoneHome', 10, 25, 'Home Phone', 'Home Phone', 0, 1, 1, 2, 0, 3, '', 'varchar(15)'),
 (178, 'phoneMobile', 'phoneMobile', 11, 25, 'Mobile Phone', 'Mobile Phone', 0, 1, 1, 2, 0, 3, '', 'varchar(15)'),
 (179, 'language', 'language', 12, 25, 'Language', 'Language', 0, 1, 1, 2, 10, 3, '', 'varchar(20)'),
-(180, 'timezone', 'Time Zone', 13, 25, 'Time Zone', 'Time Zone', 0, 1, 1, 2, 11, 3, '', 'varchar(20)'),
+(180, 'timezone', 'TimeZone', 13, 25, 'Time Zone', 'Time Zone', 0, 1, 1, 2, 11, 3, '', 'varchar(20)'),
 (181, 'role', 'role', 14, 25, 'Role', 'Role', 0, 1, 1, 2, 5, 2, '0', 'tinyint(2)'),
 (182, 'disableNotifications', 'disableNotifications', 15, 25, 'Disable Notifications', 'Disable Notifications', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
 (183, 'disableLogin', 'disableLogin', 16, 25, 'Disable Logins', 'Disable Logins', 0, 1, 1, 2, 0, 2, '0', 'tinyint(1)'),
@@ -870,16 +873,16 @@ INSERT INTO `system_table_columns` (`id`, `title`, `description`, `position`, `s
 (193, 'valueType', 'valueType', 5, 26, 'Value Type', 'Value Type', 0, 1, 1, 2, 9, 2, '0', 'tinyint(2)'),
 (194, 'value', 'value', 6, 26, 'Value', 'Value', 0, 1, 1, 2, 0, 3, '', 'varchar(255)'),
 (195, 'id', 'id', 1, 27, 'ID', 'ID', 0, 1, 1, 2, 0, 1, '', 'int(11) '),
-(196, 'title ', 'title ', 2, 27, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(197, 'description ', 'description ', 3, 27, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255) '),
+(196, 'title', 'title', 2, 27, 'Title', 'Title', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(197, 'description', 'description', 3, 27, 'Description', 'Description', 0, 1, 1, 2, 0, 3, '', 'varchar(255) '),
 (198, 'label', 'label', 4, 27, 'Label', 'Label', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(199, 'model ', 'model ', 5, 27, 'Model', 'Model', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(199, 'model', 'model', 5, 27, 'Model', 'Model', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (200, 'view', 'view', 6, 27, 'View', 'View', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(201, 'headerTable ', 'headerTable ', 7, 27, 'Header Table', 'Header Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(202, 'headerTableCol ', 'headerTableCol ', 8, 27, 'Header Table Column', 'Header Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(201, 'headerTable', 'headerTable', 7, 27, 'Header Table', 'Header Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(202, 'headerTableCol', 'headerTableCol', 8, 27, 'Header Table Column', 'Header Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (203, 'headerMethod', 'headerMethod', 9, 27, 'Header Method', 'Header Method', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(204, 'detailTable ', 'detailTable ', 10, 27, 'Detail Table', 'Detail Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
-(205, 'detailTableCol ', 'detailTableCol ', 11, 27, 'Detail Table Column', 'Detail Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(204, 'detailTable', 'detailTable', 10, 27, 'Detail Table', 'Detail Table', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
+(205, 'detailTableCol', 'detailTableCol', 11, 27, 'Detail Table Column', 'Detail Table Column', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (206, 'detailMethod', 'detailMethod', 12, 27, 'Detail Method', 'Detail Method', 0, 1, 1, 2, 0, 3, '', 'varchar(30) '),
 (207, 'userId', 'userId', 1, 28, 'User Id', 'User Id', 0, 1, 5, 2, 8, 1, '', 'int(11) '),
 (208, 'preferenceId', 'preferenceId', 2, 28, 'Preference Id', 'Preference Id', 0, 1, 5, 2, 0, 1, '', 'int(11) '),
@@ -987,6 +990,13 @@ CREATE TABLE `teams` (
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`id`, `title`, `description`) VALUES
+(3, 'team 2', 'team 2');
+
 -- --------------------------------------------------------
 
 --
@@ -1064,7 +1074,7 @@ CREATE TABLE `users` (
   `title` varchar(30) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `userName` varchar(16) NOT NULL,
-  `password` varchar(16) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
   `type` tinyint(2) DEFAULT NULL,
   `firstName` varchar(30) DEFAULT NULL,
   `lastName` varchar(30) DEFAULT NULL,
@@ -1164,8 +1174,7 @@ ALTER TABLE `notifications`
 -- Indexes for table `preferences`
 --
 ALTER TABLE `preferences`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_user_preferences_users1_idx` (`userId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `projects`
@@ -1305,7 +1314,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -1340,7 +1349,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `preferences`
 --
 ALTER TABLE `preferences`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -1385,7 +1394,7 @@ ALTER TABLE `system_lookup_values`
 -- AUTO_INCREMENT for table `system_modules`
 --
 ALTER TABLE `system_modules`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `system_settings`
 --
@@ -1420,7 +1429,7 @@ ALTER TABLE `task_to_users`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `team_to_users`
 --
@@ -1444,12 +1453,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `preferences`
---
-ALTER TABLE `preferences`
-  ADD CONSTRAINT `fk_user_preferences_users1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `projects`
