@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2016 at 05:57 PM
+-- Generation Time: Jun 20, 2016 at 04:19 PM
 -- Server version: 5.7.10
 -- PHP Version: 5.6.16
 
@@ -31,13 +31,6 @@ CREATE TABLE `activities` (
   `title` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `activities`
---
-
-INSERT INTO `activities` (`id`, `title`, `description`) VALUES
-(2, 'Test Activity 01', 'Test Activity 01');
 
 -- --------------------------------------------------------
 
@@ -152,9 +145,17 @@ CREATE TABLE `preferences` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `valueType` tinyint(2) UNSIGNED NOT NULL,
-  `value` varchar(255) NOT NULL
+  `userId` int(11) UNSIGNED DEFAULT NULL,
+  `valueType` tinyint(2) UNSIGNED DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `preferences`
+--
+
+INSERT INTO `preferences` (`id`, `title`, `description`, `userId`, `valueType`, `value`) VALUES
+(1, 'test1', 'test pref', 1, 1, 'test_value');
 
 -- --------------------------------------------------------
 
@@ -586,11 +587,7 @@ INSERT INTO `system_modules` (`id`, `title`, `description`, `label`, `model`, `v
 (4, 'user_preference', 'User Preference Module', 'Preference', 'user_model', 'user_preference', 'user_preferences', 'id', '', '', '', ''),
 (5, 'system_lookup', 'System Lookup Module', 'Lookup', 'system_model', 'system_lookup', 'system_lookups', 'id', '', 'system_lookup_values', 'systemLookupId', ''),
 (6, 'system_table', 'System Table Module ', 'Table', 'database_model', 'system_table', 'system_tables', 'id', '', 'system_table_columns', 'systemTableId', ''),
-(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', '', ' ', ''),
-(8, 'activity', 'Activity Module', 'Activity', 'activity_model', 'activity', 'activities', 'id', '', '', '', ''),
-(9, 'preferences', 'Preference Module', 'Preferences', 'preference_model', 'preferences', 'preferences', 'id', '', '', '', ''),
-(10, 'team', 'Team Module', 'Team', 'team_model', 'team', 'teams', 'id', '', '', '', ''),
-(11, 'system_module', 'System Module Module', 'System_module', 'system_module_model', 'system_module', 'system_modules', 'id', '', '', '', '');
+(7, 'system_setting', 'System Settings Module', 'Setting', 'system_model', 'system_setting', 'system_settings', 'id', '', '', ' ', '');
 
 -- --------------------------------------------------------
 
@@ -990,13 +987,6 @@ CREATE TABLE `teams` (
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `teams`
---
-
-INSERT INTO `teams` (`id`, `title`, `description`) VALUES
-(2, 'Team 1', 'Team 1');
-
 -- --------------------------------------------------------
 
 --
@@ -1074,7 +1064,7 @@ CREATE TABLE `users` (
   `title` varchar(30) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `userName` varchar(16) NOT NULL,
-  `password` varchar(32) DEFAULT NULL,
+  `password` varchar(16) DEFAULT NULL,
   `type` tinyint(2) DEFAULT NULL,
   `firstName` varchar(30) DEFAULT NULL,
   `lastName` varchar(30) DEFAULT NULL,
@@ -1174,7 +1164,8 @@ ALTER TABLE `notifications`
 -- Indexes for table `preferences`
 --
 ALTER TABLE `preferences`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_preferences_users1_idx` (`userId`);
 
 --
 -- Indexes for table `projects`
@@ -1314,7 +1305,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -1349,7 +1340,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `preferences`
 --
 ALTER TABLE `preferences`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `projects`
 --
@@ -1394,7 +1385,7 @@ ALTER TABLE `system_lookup_values`
 -- AUTO_INCREMENT for table `system_modules`
 --
 ALTER TABLE `system_modules`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `system_settings`
 --
@@ -1429,7 +1420,7 @@ ALTER TABLE `task_to_users`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `team_to_users`
 --
@@ -1453,6 +1444,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `preferences`
+--
+ALTER TABLE `preferences`
+  ADD CONSTRAINT `fk_user_preferences_users1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `projects`
