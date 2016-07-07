@@ -28,11 +28,37 @@ var Ajax = function() {
 };
 
 Ajax.prototype = {
+    callBack : function(httpResponse) {
+        this.messageArea = document.getElementById('messageArea');
+        var data = {};
+        try {
+            data = JSON.parse(httpResponse);
+            var response = data['response'];
+        } catch (err) {
+            this.messageArea.innerHTML = 'Failed';
+            return;
+        }
+        if(response['success']) {
+            var cbObject = window[response['cbObject']];
+            var cbMethod = response['cbMethod'];
+            this.messageArea.innerHTML = 'Success';
+            cbObject[cbMethod]();
+        }else {
+            this.messageArea.innerHTML = 'Failed';
+        }
+        return;
+    },
+    getDataById : function(cbObject, cbMethod, table, id) {
+        if(!id || id === null) return false;
+        var uri = '/ajax/readById/' + cbObject + '/' + cbMethod + '/' + table + '/' + id + '/parm1/parm2/parm3';
+        var data = this.getJsonData(this, this.callBack, uri);
+        return;
+    },
     getData : function(model, method, table, lookupColumn, lookupValue) {
 //TODO  Make this logic better (string vs numeric)
         if(!lookupValue || lookupValue == 'null') return;
         var cbMethod = this.callBack;
-        var data = msgAjax.getJsonData(this, cbMethod, '/ajax/index/' + model + '/' + method + '/' + table + '/' + lookupColumn + '/' + lookupValue);
+        var data = hgnAjax.getJsonData(this, cbMethod, '/ajax/index/' + model + '/' + method + '/' + table + '/' + lookupColumn + '/' + lookupValue);
         return;
     },
     sendData : function(module, method, data) {
@@ -43,7 +69,7 @@ Ajax.prototype = {
         data = JSON.stringify(data);
         hgnAjax.sendJsonData(cbObject, cbMethod, phpUri, data);
         return;
-    }, 
+    },
     /**
      * Get data using AJAX
      * 
@@ -56,7 +82,7 @@ Ajax.prototype = {
      * @param string model which is a php mvc model in the form "/ajax/index/model/method/table/lookupColumn/lookupValue"
      * @returns mixed JSON encoded data
      */
-    getJsonData : function(callBackObject, callBackMethod, model) {
+    getJsonData : function(callBackObject, callBackMethod, uri) {
         var httpRequest;
         httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
@@ -66,8 +92,7 @@ Ajax.prototype = {
             }
         };
         ;
-
-        httpRequest.open("POST", model, true);
+        httpRequest.open("POST", uri, true);
         httpRequest.send();
     },
     /**
