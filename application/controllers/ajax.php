@@ -4,8 +4,27 @@
 
 class Ajax extends CI_Controller {
 
+    public function readById() {
+        $this->load->model('database_model');
+        $this->load->model('system_model');
+        $this->load->model('ajax_model');
+
+        $cbObject = $this->uri->segments['3'];
+        $cbMethod = $this->uri->segments['4'];
+        $table = $this->uri->segments['5'];
+        $id = $this->uri->segments['6'];
+//        isset($this->uri->segments['5']) ? $parms = $this->uri->segments['5'] : $parms = null;
+//        $data['tableMeta'] = $this->database_model->readTableMetaData($table);
+        $result = $data['tableData'] = $this->ajax_model->readById($table, $id);
+        $result ? $data['response']['success'] = true : $data['response']['success'] = false;
+        $data['response']['cbObject'] = $cbObject;
+        $data['response']['cbMethod'] = $cbMethod;
+
+        echo json_encode($data);
+        return;
+    }
+
     public function index() {
-//TODO improve logic
         $this->load->model('database_model');
         $this->load->model('system_model');
 
@@ -40,14 +59,4 @@ class Ajax extends CI_Controller {
         return;
     }
 
-    
-    public function testModule() {
-         $model = $this->uri->segments['3'];
-        $method = $this->uri->segments['4'];
-       isset($this->uri->segments['5']) ? $parms = $this->uri->segments['5'] : $parms = null;
-        $this->load->model($model);
-        $responseCode = $this->$model->$method($parms);
-        
-        
-    }
 }
