@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 //paths
-defined("BASE_URL") or define("BASE_URL", "http://hgn.loc/");
-defined("BASE_SURL") or define("BASE_SURL", "https://hgn.loc/");
+defined("BASE_URL") or define("BASE_URL", "http://hgn_dev.loc/");
+defined("BASE_SURL") or define("BASE_SURL", "https://hgn_dev.loc/");
 
 //not currently used: alternate method to indicate system is down for repair. Use .htaccess instead.
 defined("SYSTEM_DOWN") or define("SYSTEM_DOWN", TRUE);
